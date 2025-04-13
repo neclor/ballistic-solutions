@@ -15,7 +15,7 @@ Vector4 calculate_velocity_from_time_vector4(time_to_hit: float, to_target: Vect
 ```
 
 ## Dependencies
-[RES - Real Equation Solver](https://github.com/neclor/real-equation-solver-godot)
+[RES - Real Equation Solver](https://github.com/neclor/godot-real-equation-solver)
 
 ## How it works?
 [Formula](docs/Formula.md)
