@@ -46,7 +46,7 @@ func shoot(target: CharacterBody2D) -> void:
 ```
 
 ## Demo
-You can test the add-on using the included demo scene.
+You can test the add-on using the included demo scene.  
 ![Demo Screenshot](docs/screenshot.png)
 
 ## Dependencies
