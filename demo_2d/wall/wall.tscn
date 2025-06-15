@@ -5,7 +5,7 @@ a = Vector2(-2310, -20)
 b = Vector2(2310, -20)
 
 [node name="Wall" type="StaticBody2D" groups=["wall"]]
-collision_mask = 6
+collision_mask = 0
 
 [node name="Line2D" type="Line2D" parent="."]
 position = Vector2(0, -10)

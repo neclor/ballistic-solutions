@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcidp3ukia16q"]
+
+[ext_resource type="Script" uid="uid://cckxbr7c3r5s0" path="res://demo_2d/turret/turret_2d.gd" id="1_0yiue"]
+
+[node name="Turret2D" type="Node2D"]
+script = ExtResource("1_0yiue")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, -10, -10, 0, 0, 10, 10, 0)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

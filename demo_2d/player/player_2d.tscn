@@ -1,13 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://c561j8bdsy66w"]
 
-[ext_resource type="Script" uid="uid://ctx1een1qyugb" path="res://demo_2d/player/player_2d.gd" id="1_5p4ya"]
-[ext_resource type="Script" uid="uid://dmx02vsbo0f4g" path="res://demo_2d/player/camera_2d.gd" id="2_6es6y"]
+[ext_resource type="Script" uid="uid://gtu0uts376rc" path="res://demo_2d/player/player_2d.gd" id="1_5p4ya"]
+[ext_resource type="Script" uid="uid://53q0r758o7t3" path="res://demo_2d/player/camera_2d.gd" id="2_6es6y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fjdt4"]
 
 [node name="Player2D" type="CharacterBody2D" groups=["player"]]
 z_index = 1
 collision_layer = 4
+motion_mode = 1
 script = ExtResource("1_5p4ya")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]

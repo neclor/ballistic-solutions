@@ -10,11 +10,11 @@ config_version=5
 
 [application]
 
-config/name="Ballistic Deflection Calculator"
-config/version="2.0.0"
-run/main_scene="res://demo_2d/demo_scene/demo_scene_2d.tscn"
-config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="uid://bqu0oh2pobqea"
+config/name="BDC - Ballistic Deflection Calculator"
+config/version="2.1.0"
+config/tags=PackedStringArray("addon")
+config/features=PackedStringArray("4.5", "Forward Plus")
+config/icon="uid://dxwiw0jxw7mul"
 
 [display]
 
@@ -22,7 +22,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/bdc/plugin.cfg", "res://addons/res/plugin.cfg")
 
 [input]
 

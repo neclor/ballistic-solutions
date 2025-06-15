@@ -1,5 +1,4 @@
-class_name RES
-extends Object
+class_name RES extends Object
 
 
 ## Equation solver for finding real roots of equations up to 4th degree for Godot.
@@ -13,6 +12,7 @@ extends Object
 
 
 ## Returns the cube root of [param x].
+##
 ## [codeblock lang=gdscript]
 ## RES.cbrt(64) # Returns 4
 ## RES.cbrt(-27) # Returns -3
@@ -22,10 +22,13 @@ static func cbrt(x: float) -> float:
 
 
 ## Returns a real root of an equation of the form: [u][param a] * x + [param b] = 0[/u]
+##
 ## [codeblock lang=gdscript]
 ## RES.solve_linear(5, -10) # Returns 2
 ## RES.solve_linear(0, 1) # Returns NAN
 ## [/codeblock]
+##
+## [br]
 ## [url=https://en.wikipedia.org/wiki/Linear_equation]See Linear equation.[/url] 
 static func solve_linear(a: float, b: float) -> float:
 	if is_zero_approx(a): return NAN
@@ -33,9 +36,12 @@ static func solve_linear(a: float, b: float) -> float:
 
 
 ## Returns a sorted array of real roots of an equation of the form: [u][param a] * x^2 + [param b] * x + [param c] = 0[/u]
+##
 ## [codeblock lang=gdscript]
 ## RES.solve_quadratic(1, 1, -6) # Returns [-3, 2]
 ## [/codeblock]
+##
+## [br]
 ## [url=https://en.wikipedia.org/wiki/Quadratic_equation]See Quadratic equation.[/url] 
 static func solve_quadratic(a: float, b: float, c: float) -> Array[float]:
 	if is_zero_approx(a):
@@ -62,10 +68,13 @@ static func solve_quadratic(a: float, b: float, c: float) -> Array[float]:
 
 
 ## Returns a sorted array of real roots of an equation of the form: [u][param a] * x^3 + [param b] * x^2 + [param c] * x + [param d] = 0[/u]
+##
 ## [codeblock lang=gdscript]
 ## RES.solve_cubic(2, -11, 12, 9) # Returns [-0.5, 3]
 ## [/codeblock]
-## [color=yellow]Warning:[/color] For large argument values, answers may be inaccurate or incorrect.[br]
+##
+## [b][color=GOLD]Warning:[/color][/b] For large argument values, answers may be inaccurate or incorrect. [br]
+## [br]
 ## [url=https://en.wikipedia.org/wiki/Cubic_equation]See Cubic equation.[/url][br]
 ## [url=https://ru.wikipedia.org/wiki/%D0%A2%D1%80%D0%B8%D0%B3%D0%BE%D0%BD%D0%BE%D0%BC%D0%B5%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F_%D1%84%D0%BE%D1%80%D0%BC%D1%83%D0%BB%D0%B0_%D0%92%D0%B8%D0%B5%D1%82%D0%B0]See Vieta's trigonometric formula.[/url]
 static func solve_cubic(a: float, b: float, c: float, d: float) -> Array[float]:
@@ -115,10 +124,13 @@ static func solve_cubic(a: float, b: float, c: float, d: float) -> Array[float]:
 
 
 ## Returns a sorted array of real roots of an equation of the form: [u][param a] * x^4 + [param b] * x^3 + [param c] * x^2 + [param d] * x + [param e] = 0[/u]
+##
 ## [codeblock lang=gdscript]
 ## RES.solve_quartic(1, -10, 35, -50, 24) # Returns [1, 2, 3, 4]
 ## [/codeblock]
-## [color=yellow]Warning:[/color] For large argument values, answers may be inaccurate or incorrect.[br]
+##
+## [b][color=GOLD]Warning:[/color][/b] For large argument values, answers may be inaccurate or incorrect.[br]
+## [br]
 ## [url=https://en.wikipedia.org/wiki/Quartic_equation]See Quartic equation.[/url][br]
 ## [url=https://ru.wikipedia.org/wiki/%D0%9C%D0%B5%D1%82%D0%BE%D0%B4_%D0%A4%D0%B5%D1%80%D1%80%D0%B0%D1%80%D0%B8]See Ferrari's solution.[/url]
 static func solve_quartic(a: float, b: float, c: float, d: float, e: float) -> Array[float]:
