@@ -1,4 +1,4 @@
-# Ballistic Deflection Calculator
+# BDC - Ballistic Deflection Calculator
 Ballistic deflection calculator is a tool for calculating the shot vector considering speeds and accelerations for Godot.
 
 ## Methods
