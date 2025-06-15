@@ -6,10 +6,11 @@
 script = ExtResource("1_0yiue")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.25
 autostart = true
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(0, -10, -10, 0, 0, 10, 10, 0)
+polygon = PackedVector2Array(0, -16, -16.000008, 0, 0, 15.999999, 16, 2.9802322e-07)
+uv = PackedVector2Array(0, -10, -10, 0, 0, 10, 10, 0)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

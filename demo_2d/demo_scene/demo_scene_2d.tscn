@@ -28,11 +28,10 @@ rotation = 1.5708
 
 [node name="Player2D" parent="." instance=ExtResource("3_e1cyj")]
 unique_name_in_owner = true
-position = Vector2(0, 100)
+position = Vector2(0, 256)
 
 [node name="Turret2D" parent="." instance=ExtResource("2_kwcv7")]
 unique_name_in_owner = true
-position = Vector2(500, 0)
 
 [node name="Menu" type="CanvasLayer" parent="."]
 script = ExtResource("5_kwcv7")

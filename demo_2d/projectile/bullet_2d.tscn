@@ -7,7 +7,7 @@ collision_layer = 2
 script = ExtResource("1_00n6v")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(0, -5, -5, 0, 0, 5, 5, 0)
+polygon = PackedVector2Array(0, -16, -16.000015, 0, 0, 16.000004, 16.00001, 0)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(0, -5, -5, 0, 0, 5, 5, 0)
+polygon = PackedVector2Array(0, -16, -16, 0, 0, 16, 16, 0)
