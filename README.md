@@ -6,9 +6,11 @@ Ballistic deflection calculator is a tool for calculating the shot vector consid
 Array[float] times_to_hit_vector2(projectile_speed: float, to_target: Vector2, target_velocity: Vector2 = Vector2(0, 0), projectile_acceleration: Vector2 = Vector2(0, 0), target_acceleration: Vector2 = Vector2(0, 0)) static
 Array[float] times_to_hit_vector3(projectile_speed: float, to_target: Vector3, target_velocity: Vector3 = Vector3(0, 0, 0), projectile_acceleration: Vector3 = Vector3(0, 0, 0), target_acceleration: Vector3 = Vector3(0, 0, 0)) static
 Array[float] times_to_hit_vector4(projectile_speed: float, to_target: Vector4, target_velocity: Vector4 = Vector4(0, 0, 0, 0), projectile_acceleration: Vector4 = Vector4(0, 0, 0, 0), target_acceleration: Vector4 = Vector4(0, 0, 0, 0)) static
+
 Array[Vector2] velocities_vector2(projectile_speed: float, to_target: Vector2, target_velocity: Vector2 = Vector2(0, 0), projectile_acceleration: Vector2 = Vector2(0, 0), target_acceleration: Vector2 = Vector2(0, 0)) static
 Array[Vector3] velocities_vector3(projectile_speed: float, to_target: Vector3, target_velocity: Vector3 = Vector3(0, 0, 0), projectile_acceleration: Vector3 = Vector3(0, 0, 0), target_acceleration: Vector3 = Vector3(0, 0, 0)) static
 Array[Vector4] velocities_vector4(projectile_speed: float, to_target: Vector4, target_velocity: Vector4 = Vector4(0, 0, 0, 0), projectile_acceleration: Vector4 = Vector4(0, 0, 0, 0), target_acceleration: Vector4 = Vector4(0, 0, 0, 0)) static
+
 Vector2 velocity_from_time_to_hit_vector2(time_to_hit: float, to_target: Vector2, target_velocity: Vector2 = Vector2(0, 0), projectile_acceleration: Vector2 = Vector2(0, 0), target_acceleration: Vector2 = Vector2(0, 0)) static
 Vector3 velocity_from_time_to_hit_vector3(time_to_hit: float, to_target: Vector3, target_velocity: Vector3 = Vector3(0, 0, 0), projectile_acceleration: Vector3 = Vector3(0, 0, 0), target_acceleration: Vector3 = Vector3(0, 0, 0)) static
 Vector4 velocity_from_time_to_hit_vector4(time_to_hit: float, to_target: Vector4, target_velocity: Vector4 = Vector4(0, 0, 0, 0), projectile_acceleration: Vector4 = Vector4(0, 0, 0, 0), target_acceleration: Vector4 = Vector4(0, 0, 0, 0)) static
