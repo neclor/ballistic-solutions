@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="BDC - Ballistic Deflection Calculator"
-config/version="2.1.0"
+config/version="2.1.1"
 config/tags=PackedStringArray("addon")
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="uid://dxwiw0jxw7mul"

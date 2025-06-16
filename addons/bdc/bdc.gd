@@ -207,8 +207,8 @@ static func velocity_from_time_to_hit_vector4(
 #endregion
 #endregion
 
-#region Private
 
+#region Private
 static func _vector2_from_vector4(from: Vector4) -> Vector2:
 	return Vector2(from.x, from.y)
 
@@ -223,5 +223,4 @@ static func _vector4_from_vector2(from: Vector2) -> Vector4:
 
 static func _vector4_from_vector3(from: Vector3) -> Vector4:
 	return Vector4(from.x, from.y, from.z, 0)
-
 #endregion
