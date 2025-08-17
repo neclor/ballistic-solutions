@@ -1,0 +1,107 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyeydvona6yuj"]
+
+[ext_resource type="Script" uid="uid://tlh53obxgwso" path="res://demo/demo_2d/menu/menu.gd" id="1_e2ln2"]
+
+[node name="Menu" type="CanvasLayer"]
+script = ExtResource("1_e2ln2")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Player speed"
+horizontal_alignment = 1
+
+[node name="PlayerSpeed" type="VSlider" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 1
+min_value = 10.0
+max_value = 500.0
+value = 100.0
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Player
+accelerate vector"
+horizontal_alignment = 1
+
+[node name="PlayerAccelerateVectorX" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+placeholder_text = "X"
+
+[node name="PlayerAccelerateVectorY" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+placeholder_text = "Y"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Bullet speed"
+
+[node name="ProjectileSpeed" type="VSlider" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 1
+min_value = 10.0
+max_value = 1000.0
+value = 200.0
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer4"]
+layout_mode = 2
+text = "Bullet
+accelerate vector"
+horizontal_alignment = 1
+
+[node name="ProjectileAccelerateVectorX" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer4"]
+layout_mode = 2
+placeholder_text = "X"
+
+[node name="ProjectileAccelerateVectorY" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer4"]
+layout_mode = 2
+placeholder_text = "Y"
+
+[node name="ShowHideUi" type="Button" parent="MarginContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Show / Hide"
+
+[connection signal="pressed" from="MarginContainer/ShowHideUi" to="." method="_on_show_hide_ui_pressed"]

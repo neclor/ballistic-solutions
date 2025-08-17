@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyhohsn75nnvd"]
+
+[ext_resource type="Script" uid="uid://rbl0qlykahow" path="res://demo/demo_2d/turret/CSharp/Turret2DCSharp.cs" id="1_lrn2v"]
+[ext_resource type="PackedScene" uid="uid://bat5rjq1i0q0p" path="res://demo/demo_2d/projectile/projectile_2d.tscn" id="2_h805a"]
+
+[node name="Turret2DCSharp" type="Node2D"]
+script = ExtResource("1_lrn2v")
+ProjectilePackedScene = ExtResource("2_h805a")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, -16, -16.000008, 0, 0, 15.999999, 16, 2.9802322e-07)
+uv = PackedVector2Array(0, -10, -10, 0, 0, 10, 10, 0)
+
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]
