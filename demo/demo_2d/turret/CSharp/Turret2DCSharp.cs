@@ -19,11 +19,8 @@ public partial class Turret2DCSharp : Node2D {
 		if (Player is null) return;
 
 		Vector2 toTarget = (Vector2)Player.Get("global_position") - GlobalPosition;
-		GD.Print(toTarget);
 		Vector2 targetVelocity = Player.Velocity;
-		GD.Print(targetVelocity);
 		Vector2 targetAcceleration = (Vector2)Player.Get("current_acceleration");
-		GD.Print(targetAcceleration);
 
 		Vector2[] projectileVelocities = Bdc.Velocities(
 			ProjectileSpeed,
@@ -32,10 +29,6 @@ public partial class Turret2DCSharp : Node2D {
 			ProjectileAcceleration,
 			targetAcceleration
 		);
-
-		//GD.Print(string.Join(", ", projectileVelocities));
-		//GD.Print(string.Join(", ", projectileVelocities.Select((Vector2 vel) => vel.Length()).ToArray()));
-		//GD.Print(ProjectileSpeed);
 
 		foreach (Vector2 projectileVelocity in projectileVelocities) {
 			CreateProjectile(projectileVelocity);
