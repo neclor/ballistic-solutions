@@ -44,7 +44,7 @@ Vector4 velocity_from_time_to_hit_vector4(time_to_hit: float, to_target: Vector4
 
 ### C#
 ```csharp 
-BallisticDeflectionCalculator.Bdc
+BallisticDeflectionCalculator.Bdc;
 
 
 // Times To Hit
