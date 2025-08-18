@@ -2,7 +2,7 @@ using Godot;
 using BallisticDeflectionCalculator;
 
 
-namespace BallisticDeflectionCalculatora.Demo.Demo2D;
+namespace BallisticDeflectionCalculator.Demo.Demo2D;
 
 
 [GlobalClass]
@@ -18,7 +18,7 @@ public partial class Turret2DCSharp : Node2D {
 	public void CreateProjectiles() {
 		if (Player is null) return;
 
-		Vector2 toTarget = (Vector2)Player.Get("global_position") - GlobalPosition;
+		Vector2 toTarget = Player.GlobalPosition - GlobalPosition;
 		Vector2 targetVelocity = Player.Velocity;
 		Vector2 targetAcceleration = (Vector2)Player.Get("current_acceleration");
 

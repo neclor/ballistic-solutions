@@ -34,7 +34,8 @@ rotation = 1.5708
 unique_name_in_owner = true
 position = Vector2(0, 256)
 
-[node name="Turret2DGDScript" parent="." instance=ExtResource("2_kwcv7")]
+[node name="Turret2DGDScript" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_kwcv7")]
+player = NodePath("../Player2D")
 
 [node name="Turret2DCSharp" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("5_reg2c")]
 Player = NodePath("../Player2D")

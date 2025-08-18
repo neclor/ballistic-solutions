@@ -13,13 +13,13 @@
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
 
-    <RootNamespace>BallisticDeflectionCalculatora.Demo</RootNamespace>
+    <RootNamespace>BallisticDeflectionCalculator.Demo</RootNamespace>
 
     <Version></Version>
     <AssemblyVersion></AssemblyVersion>
     <FileVersion></FileVersion>
     <Company></Company>
-    <Authors>Neclor</Authors>
+    <Authors>neclor</Authors>
     <Product>BallisticDeflectionCalculatorDemo</Product>
     <Description></Description>
     <Copyright></Copyright>
@@ -31,11 +31,12 @@
   </ItemGroup>
   
   <ItemGroup>
+    <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <Reference Include="BallisticDeflectionCalculator">
       <HintPath>addons\BallisticDeflectionCalculatorCSharp\BallisticDeflectionCalculator.dll</HintPath>
-    </Reference>
-    <Reference Include="MathNet.Numerics">
-      <HintPath>addons\BallisticDeflectionCalculatorCSharp\MathNet.Numerics.dll</HintPath>
     </Reference>
   </ItemGroup>
     

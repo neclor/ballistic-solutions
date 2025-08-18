@@ -21,10 +21,12 @@
     <AssemblyVersion>3.0.0.0</AssemblyVersion>
     <FileVersion>3.0.0.0</FileVersion>
     <Company></Company>
-    <Authors>Neclor</Authors>
+    <Authors>neclor</Authors>
     <Product>BallisticDeflectionCalculator</Product>
     <Description>Ballistic deflection calculator is a tool for calculating the shot vector considering speeds and accelerations for Godot.</Description>
     <Copyright></Copyright>
+    
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

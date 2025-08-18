@@ -2,6 +2,8 @@ class_name Bdc extends Object
 
 
 ## Ballistic deflection calculator is a tool for calculating the shot vector considering speeds and accelerations for Godot.
+##
+## @tutorial(BDC - Ballistic Deflection Calculator): https://github.com/neclor/godot-ballistic-deflection-calculator/blob/main/README.md
 
 
 #region Public

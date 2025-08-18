@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BallisticDeflectionCalculator</name>
+    </assembly>
+    <members>
+        <member name="T:BallisticDeflectionCalculator.Bdc">
+            <summary>
+            Provides static methods for ballistic deflection calculations, including interception times and lead velocities
+            for projectiles targeting moving objects in 2D and 3D space. Supports scenarios with constant speed and optional
+            acceleration for both projectile and target. All methods are generic and work with floating-point types.
+            </summary>
+        </member>
+        <member name="M:BallisticDeflectionCalculator.Bdc.TimesToHit``1(``0,Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2)">
+            <summary>
+            Calculates the possible times at which a projectile, fired with a given speed and optional acceleration, can intercept a moving target.
+            </summary>
+            <typeparam name="T">A floating-point numeric type (e.g., float, double) implementing <see cref="T:System.Numerics.IFloatingPoint`1"/>.</typeparam>
+            <param name="projectileSpeed">The speed of the projectile.</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            An array of positive time values (sorted ascending) representing the moments when the projectile can hit the target.
+            If no valid interception is possible, returns an empty array.
+            </returns>
+            <remarks>
+            This method solves the quartic equation for interception, accounting for both projectile and target movement and acceleration.
+            </remarks>
+        </member>
+        <member name="M:BallisticDeflectionCalculator.Bdc.TimesToHit``1(``0,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
+            <summary>
+            Calculates the possible times at which a projectile, fired with a given speed and optional acceleration, can intercept a moving target.
+            </summary>
+            <typeparam name="T">A floating-point numeric type (e.g., float, double) implementing <see cref="T:System.Numerics.IFloatingPoint`1"/>.</typeparam>
+            <param name="projectileSpeed">The speed of the projectile.</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            An array of positive time values (sorted ascending) representing the moments when the projectile can hit the target.
+            If no valid interception is possible, returns an empty array.
+            </returns>
+            <remarks>
+            This method solves the quartic equation for interception, accounting for both projectile and target movement and acceleration.
+            </remarks>
+        </member>
+        <member name="M:BallisticDeflectionCalculator.Bdc.TimesToHit``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Calculates the possible times at which a projectile, fired with a given speed and optional acceleration, can intercept a moving target.
+            </summary>
+            <typeparam name="T">A floating-point numeric type (e.g., float, double) implementing <see cref="T:System.Numerics.IFloatingPoint`1"/>.</typeparam>
+            <param name="projectileSpeed">The speed of the projectile.</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            An array of positive time values (sorted ascending) representing the moments when the projectile can hit the target.
+            If no valid interception is possible, returns an empty array.
+            </returns>
+            <remarks>
+            This method solves the quartic equation for interception, accounting for both projectile and target movement and acceleration.
+            </remarks>
+        </member>
+        <member name="M:BallisticDeflectionCalculator.Bdc.Velocities``1(``0,Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2)">
+            <summary>
+            Calculates all possible velocity vectors for a projectile to intercept a moving target, given the projectile's speed and acceleration.
+            </summary>
+            <typeparam name="T">A floating-point numeric type (e.g., float, double) implementing <see cref="T:System.Numerics.IFloatingPoint`1"/>.</typeparam>
+            <param name="projectileSpeed">The speed of the projectile.</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            An array of velocity vectors (sorted by time to hit) that allow the projectile to intercept the target.
+            If interception is not possible, returns an empty array.
+            </returns>
+            <remarks>
+            This method computes all valid lead velocities by first determining possible interception times and then calculating the corresponding velocity vectors.
+            </remarks>
+        </member>
+        <member name="M:BallisticDeflectionCalculator.Bdc.Velocities``1(``0,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
+            <summary>
+            Calculates all possible velocity vectors for a projectile to intercept a moving target, given the projectile's speed and acceleration.
+            </summary>
+            <typeparam name="T">A floating-point numeric type (e.g., float, double) implementing <see cref="T:System.Numerics.IFloatingPoint`1"/>.</typeparam>
+            <param name="projectileSpeed">The speed of the projectile.</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            An array of velocity vectors (sorted by time to hit) that allow the projectile to intercept the target.
+            If interception is not possible, returns an empty array.
+            </returns>
+            <remarks>
+            This method computes all valid lead velocities by first determining possible interception times and then calculating the corresponding velocity vectors.
+            </remarks>
+        </member>
+        <member name="M:BallisticDeflectionCalculator.Bdc.Velocities``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Calculates all possible velocity vectors for a projectile to intercept a moving target, given the projectile's speed and acceleration.
+            </summary>
+            <typeparam name="T">A floating-point numeric type (e.g., float, double) implementing <see cref="T:System.Numerics.IFloatingPoint`1"/>.</typeparam>
+            <param name="projectileSpeed">The speed of the projectile.</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            An array of velocity vectors (sorted by time to hit) that allow the projectile to intercept the target.
+            If interception is not possible, returns an empty array.
+            </returns>
+            <remarks>
+            This method computes all valid lead velocities by first determining possible interception times and then calculating the corresponding velocity vectors.
+            </remarks>
+        </member>
+        <member name="M:BallisticDeflectionCalculator.Bdc.VelocityFromTimeToHit``1(``0,Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2)">
+            <summary>
+            Calculates the required velocity vector for a projectile to intercept a moving target at a specified time.
+            </summary>
+            <typeparam name="T">A floating-point numeric type (e.g., float, double) implementing <see cref="T:System.Numerics.IFloatingPoint`1"/>.</typeparam>
+            <param name="timeToHit">The time until interception (must be positive).</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            The velocity vector the projectile must have to hit the target at the specified time.
+            Returns <see cref="P:Godot.Vector4.Zero"/> if <paramref name="timeToHit"/> is not positive.
+            </returns>
+            <remarks>
+            This method accounts for the relative acceleration between the projectile and the target, and computes the lead velocity required for interception.
+            </remarks>
+        </member>
+        <member name="M:BallisticDeflectionCalculator.Bdc.VelocityFromTimeToHit``1(``0,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
+            <summary>
+            Calculates the required velocity vector for a projectile to intercept a moving target at a specified time.
+            </summary>
+            <typeparam name="T">A floating-point numeric type (e.g., float, double) implementing <see cref="T:System.Numerics.IFloatingPoint`1"/>.</typeparam>
+            <param name="timeToHit">The time until interception (must be positive).</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            The velocity vector the projectile must have to hit the target at the specified time.
+            Returns <see cref="P:Godot.Vector4.Zero"/> if <paramref name="timeToHit"/> is not positive.
+            </returns>
+            <remarks>
+            This method accounts for the relative acceleration between the projectile and the target, and computes the lead velocity required for interception.
+            </remarks>
+        </member>
+        <member name="M:BallisticDeflectionCalculator.Bdc.VelocityFromTimeToHit``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Calculates the required velocity vector for a projectile to intercept a moving target at a specified time.
+            </summary>
+            <typeparam name="T">A floating-point numeric type (e.g., float, double) implementing <see cref="T:System.Numerics.IFloatingPoint`1"/>.</typeparam>
+            <param name="timeToHit">The time until interception (must be positive).</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            The velocity vector the projectile must have to hit the target at the specified time.
+            Returns <see cref="P:Godot.Vector4.Zero"/> if <paramref name="timeToHit"/> is not positive.
+            </returns>
+            <remarks>
+            This method accounts for the relative acceleration between the projectile and the target, and computes the lead velocity required for interception.
+            </remarks>
+        </member>
+    </members>
+</doc>
