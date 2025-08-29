@@ -6,8 +6,8 @@
     <members>
         <member name="T:BallisticSolutions.Bsc">
             <summary>
-            Bsc - Ballistic Solutions Calculator
-            
+            Bsc - Ballistic Solutions Calculator. Provides methods for calculating projectile interception with moving targets.
+            It computes interception times, impact positions, and required firing velocities while accounting for both projectile and target velocities and accelerations.
             </summary>
         </member>
         <member name="M:BallisticSolutions.Bsc.Position``1(``0,Godot.Vector4,Godot.Vector4)">
@@ -39,7 +39,7 @@
             <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
             <param name="targetAcceleration">The acceleration vector of the target.</param>
             <returns>
-            The impact position vector. Returns Vector.Inf if interception is impossible.
+            The impact position vector. Returns Vector.NaN if interception is impossible.
             </returns>
         </member>
         <member name="M:BallisticSolutions.Bsc.BestImpactPosition``1(``0,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
@@ -119,7 +119,7 @@
             <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
             <param name="targetAcceleration">The acceleration vector of the target.</param>
             <returns>
-            The required firing velocity vector. Returns Vector.Zero if <paramref name="impactTime"/> ≤ 0.
+            The required firing velocity vector. Returns Vector.NaN if <paramref name="impactTime"/> ≤ 0.
             </returns>
         </member>
         <member name="M:BallisticSolutions.Bsc.FiringVelocity``1(``0,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
@@ -139,7 +139,7 @@
             <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
             <param name="targetAcceleration">The acceleration vector of the target.</param>
             <returns>
-            The required firing velocity vector. Returns Vector4.Zero if interception is impossible.
+            The required firing velocity vector. Returns Vector.NaN if interception is impossible.
             </returns>
         </member>
         <member name="M:BallisticSolutions.Bsc.BestFiringVelocity``1(``0,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">

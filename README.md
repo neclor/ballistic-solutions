@@ -19,11 +19,10 @@ taking into account the velocities and accelerations of both projectile and targ
 1. Install the addon in Godot or reference the DLL in your C# project.
 2. In your scene, compute the vector to the target:
     ```gdscript
-    to_target = target.global_position - shooter.global_position
+    to_target = target.global_position - global_position
     ```
-3. Call `velocities` to get possible initial projectile velocities.
-4. If the result array is empty, hitting the target is impossible with given parameters.
-5. Instantiate your projectile and assign `velocity` and `acceleration`.
+3. Call `best_firing_velocity` to get initial projectile velocity.
+4. Instantiate your projectile and assign `velocity` and `acceleration`.
 
 ---
 
