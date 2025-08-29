@@ -13,21 +13,12 @@
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
 
-    <RootNamespace>BallisticDeflectionCalculator.Demo</RootNamespace>
-
-    <Version></Version>
-    <AssemblyVersion></AssemblyVersion>
-    <FileVersion></FileVersion>
-    <Company></Company>
-    <Authors>neclor</Authors>
-    <Product>BallisticDeflectionCalculatorDemo</Product>
-    <Description></Description>
-    <Copyright></Copyright>
+    <RootNamespace>BallisticSolutions.Demo</RootNamespace>
   </PropertyGroup>
   
   <ItemGroup>
-    <Compile Remove="Src\**" />
-    <EmbeddedResource Remove="Src\**" />
+    <Compile Remove="BallisticSolutions\**" />
+    <EmbeddedResource Remove="BallisticSolutions\**" />
   </ItemGroup>
   
   <ItemGroup>
@@ -35,8 +26,8 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Reference Include="BallisticDeflectionCalculator">
-      <HintPath>addons\BallisticDeflectionCalculatorCSharp\BallisticDeflectionCalculator.dll</HintPath>
+    <Reference Include="BallisticSolutions">
+      <HintPath>addons\BallisticSolutionsCSharp\BallisticSolutions.dll</HintPath>
     </Reference>
   </ItemGroup>
     

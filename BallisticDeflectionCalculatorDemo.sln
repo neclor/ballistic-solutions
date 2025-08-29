@@ -5,7 +5,7 @@ VisualStudioVersion = 17.14.36408.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BallisticDeflectionCalculatorDemo", "BallisticDeflectionCalculatorDemo.csproj", "{09F0D154-93C0-4635-AD66-AADC20A44E1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BallisticDeflectionCalculator", "Src\BallisticDeflectionCalculator\BallisticDeflectionCalculator.csproj", "{BDAB9698-C455-8ADD-4216-4A587541BA63}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BallisticSolutions", "BallisticSolutions\BallisticSolutions.csproj", "{CABCDB97-4B7C-C957-471E-8EFE3A6FF19B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,12 +20,12 @@ Global
 		{09F0D154-93C0-4635-AD66-AADC20A44E1D}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
 		{09F0D154-93C0-4635-AD66-AADC20A44E1D}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
 		{09F0D154-93C0-4635-AD66-AADC20A44E1D}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
-		{BDAB9698-C455-8ADD-4216-4A587541BA63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BDAB9698-C455-8ADD-4216-4A587541BA63}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BDAB9698-C455-8ADD-4216-4A587541BA63}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
-		{BDAB9698-C455-8ADD-4216-4A587541BA63}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
-		{BDAB9698-C455-8ADD-4216-4A587541BA63}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
-		{BDAB9698-C455-8ADD-4216-4A587541BA63}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{CABCDB97-4B7C-C957-471E-8EFE3A6FF19B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CABCDB97-4B7C-C957-471E-8EFE3A6FF19B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CABCDB97-4B7C-C957-471E-8EFE3A6FF19B}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{CABCDB97-4B7C-C957-471E-8EFE3A6FF19B}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{CABCDB97-4B7C-C957-471E-8EFE3A6FF19B}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{CABCDB97-4B7C-C957-471E-8EFE3A6FF19B}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

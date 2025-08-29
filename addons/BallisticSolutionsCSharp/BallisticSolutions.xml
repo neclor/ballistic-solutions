@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BallisticSolutions</name>
+    </assembly>
+    <members>
+        <member name="T:BallisticSolutions.Bsc">
+            <summary>
+            Bsc - Ballistic Solutions Calculator
+            
+            </summary>
+        </member>
+        <member name="M:BallisticSolutions.Bsc.Position``1(``0,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Computes displacement under constant acceleration.
+            </summary>
+            <typeparam name="T">A floating-point numeric type (e.g., float, double) implementing <see cref="T:System.Numerics.IFloatingPointIeee754`1"/>.</typeparam>
+            <param name="time">Elapsed time.</param>
+            <param name="velocity">Initial velocity vector.</param>
+            <param name="acceleration">Constant acceleration vector.</param>
+            <returns>
+            The displacement vector after <paramref name="time"/> has elapsed.
+            </returns>
+        </member>
+        <member name="M:BallisticSolutions.Bsc.Position``1(``0,Godot.Vector3,Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.Bsc.Position``1(``0,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.Bsc.Position``1(``0,Godot.Vector2,Godot.Vector2)">
+            <inheritdoc cref="M:BallisticSolutions.Bsc.Position``1(``0,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.Bsc.BestImpactPosition``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Computes the impact position of the earliest valid interception.
+            </summary>
+            <typeparam name="T">A floating-point numeric type (e.g., float, double) implementing <see cref="T:System.Numerics.IFloatingPointIeee754`1"/>.</typeparam>
+            <param name="projectileSpeed">The speed of the projectile.</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            The impact position vector. Returns Vector.Inf if interception is impossible.
+            </returns>
+        </member>
+        <member name="M:BallisticSolutions.Bsc.BestImpactPosition``1(``0,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.Bsc.BestImpactPosition``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.Bsc.BestImpactPosition``1(``0,Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2)">
+            <inheritdoc cref="M:BallisticSolutions.Bsc.BestImpactPosition``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.Bsc.ImpactPositions``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Computes all possible impact positions corresponding to valid interception times.
+            </summary>
+            <typeparam name="T">A floating-point numeric type (e.g., float, double) implementing <see cref="T:System.Numerics.IFloatingPointIeee754`1"/>.</typeparam>
+            <param name="projectileSpeed">The speed of the projectile.</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            An array of vectors representing all valid impact positions.
+            </returns>
+        </member>
+        <member name="M:BallisticSolutions.Bsc.ImpactPositions``1(``0,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.Bsc.ImpactPositions``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.Bsc.ImpactPositions``1(``0,Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2)">
+            <inheritdoc cref="M:BallisticSolutions.Bsc.ImpactPositions``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.Bsc.BestImpactTime``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Computes the earliest positive interception time between a projectile and a moving target.
+            </summary>
+            <typeparam name="T">A floating-point numeric type (e.g., float, double) implementing <see cref="T:System.Numerics.IFloatingPointIeee754`1"/>.</typeparam>
+            <param name="projectileSpeed">The speed of the projectile.</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            The earliest interception time (t > 0). Returns <see cref="P:System.Numerics.IFloatingPointIeee754`1.NaN"/> if no interception is possible.
+            </returns>
+        </member>
+        <member name="M:BallisticSolutions.Bsc.BestImpactTime``1(``0,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.Bsc.BestImpactTime``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.Bsc.BestImpactTime``1(``0,Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2)">
+            <inheritdoc cref="M:BallisticSolutions.Bsc.BestImpactTime``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.Bsc.ImpactTimes``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Computes all possible interception times between a projectile and a moving target.
+            </summary>
+            <typeparam name="T">A floating-point numeric type (e.g., float, double) implementing <see cref="T:System.Numerics.IFloatingPointIeee754`1"/>.</typeparam>
+            <param name="projectileSpeed">The speed of the projectile.</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            A sorted array of all valid interception times (t > 0). Empty if interception is impossible.
+            </returns>
+        </member>
+        <member name="M:BallisticSolutions.Bsc.ImpactTimes``1(``0,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.Bsc.ImpactTimes``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.Bsc.ImpactTimes``1(``0,Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2)">
+            <inheritdoc cref="M:BallisticSolutions.Bsc.ImpactTimes``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.Bsc.FiringVelocity``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Computes the firing velocity required to hit the target at a given interception time.
+            </summary>
+            <typeparam name="T">A floating-point numeric type (e.g., float, double) implementing <see cref="T:System.Numerics.IFloatingPointIeee754`1"/>.</typeparam>
+            <param name="impactTime">The time until interception (must be positive).</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            The required firing velocity vector. Returns Vector.Zero if <paramref name="impactTime"/> ≤ 0.
+            </returns>
+        </member>
+        <member name="M:BallisticSolutions.Bsc.FiringVelocity``1(``0,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.Bsc.FiringVelocity``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.Bsc.FiringVelocity``1(``0,Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2)">
+            <inheritdoc cref="M:BallisticSolutions.Bsc.FiringVelocity``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.Bsc.BestFiringVelocity``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Computes the firing velocity required for the earliest valid interception.
+            </summary>
+            <typeparam name="T">A floating-point numeric type (e.g., float, double) implementing <see cref="T:System.Numerics.IFloatingPointIeee754`1"/>.</typeparam>
+            <param name="projectileSpeed">The speed of the projectile.</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            The required firing velocity vector. Returns Vector4.Zero if interception is impossible.
+            </returns>
+        </member>
+        <member name="M:BallisticSolutions.Bsc.BestFiringVelocity``1(``0,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.Bsc.BestFiringVelocity``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.Bsc.BestFiringVelocity``1(``0,Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2)">
+            <inheritdoc cref="M:BallisticSolutions.Bsc.BestFiringVelocity``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.Bsc.FiringVelocities``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Computes firing velocities for all valid interception times.
+            </summary>
+            <typeparam name="T">A floating-point numeric type (e.g., float, double) implementing <see cref="T:System.Numerics.IFloatingPointIeee754`1"/>.</typeparam>
+            <param name="projectileSpeed">The speed of the projectile.</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            An array of firing velocity vectors, one for each valid interception time.
+            </returns>
+        </member>
+        <member name="M:BallisticSolutions.Bsc.FiringVelocities``1(``0,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.Bsc.FiringVelocities``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.Bsc.FiringVelocities``1(``0,Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2)">
+            <inheritdoc cref="M:BallisticSolutions.Bsc.FiringVelocities``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+    </members>
+</doc>

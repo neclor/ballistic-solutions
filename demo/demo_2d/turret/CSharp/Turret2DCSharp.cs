@@ -12,6 +12,13 @@ public partial class Turret2DCSharp : Node2D {
 	[Export]
 	public CharacterBody2D? Player { get; set; }
 
+
+	[Export]
+	public Polygon2D? Crosshair1 { get; set; }
+	[Export]
+	public Polygon2D? Crosshair2 { get; set; }
+
+
 	public float ProjectileSpeed { get; set; } = 200;
 	public Vector2 ProjectileAcceleration { get; set; } = Vector2.Zero;
 

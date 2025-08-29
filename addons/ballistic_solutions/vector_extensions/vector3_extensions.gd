@@ -1,6 +1,14 @@
-class_name BdcVector3Extensions extends Object
+class_name BallisticSolutionsVector3Extensions extends BallisticSolutions
 
 
+## Extension for [Vector3].
+
+
+## [Vector3] whose elements are equal to [constant NAN].
+const NAN_VECTOR: Vector3 = Vector3(NAN, NAN, NAN)
+
+
+## Converts any vector to [Vector3].
 static func from_vector(from: Variant, z: float = 0) -> Vector3:
 	var type: Variant.Type = typeof(from)
 	match type:
@@ -14,21 +22,25 @@ static func from_vector(from: Variant, z: float = 0) -> Vector3:
 			return from_vector4(from)
 
 		_:
-			assert(false, "Unsupported type: " + type_string(type))
-			return Vector3()
+			_error("`BallisticSolutionsVector3Extensions.from_vector`: Unsupported type `" + type_string(type) + "`. Returning NAN_VECTOR.")
+			return NAN_VECTOR
 
 
+## Converts [Vector2] to [Vector3].
 static func from_vector2(from: Vector2, z: float = 0) -> Vector3:
 	return Vector3(from.x, from.y, z)
 
 
+## Converts [Vector4] to [Vector3].
 static func from_vector4(from: Vector4) -> Vector3:
 	return Vector3(from.x, from.y, from.z)
 
 
+## Converts [Vector3] to [Vector2].
 static func to_vector2(from: Vector3) -> Vector2:
-	return Vector2(from.x, from.y)
+	return BallisticSolutionsVector2Extensions.from_vector3(from)
 
 
+## Converts [Vector3] to [Vector4].
 static func to_vector4(from: Vector3, w: float = 0) -> Vector4:
-	return Vector4(from.x, from.y, from.z, w)
+	return BallisticSolutionsVector4Extensions.from_vector3(from, w)

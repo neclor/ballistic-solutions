@@ -1,0 +1,59 @@
+﻿<Project Sdk="Godot.NET.Sdk/4.5.0-beta.5">
+
+  <PropertyGroup>
+    <DefineConstants>GODOT</DefineConstants>
+
+    <OutputType>Library</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <LangVersion>preview</LangVersion>
+
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+
+    <RootNamespace>BallisticSolutions</RootNamespace>
+
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+
+    <Version>4.0.0.0</Version>
+    <AssemblyVersion>4.0.0.0</AssemblyVersion>
+    <FileVersion>4.0.0.0</FileVersion>
+
+    <Authors>neclor</Authors>
+    
+    <Product>BallisticSolutions</Product>
+    <Title>BallisticSolutions</Title>
+    <Description>Library for calculating interception times, impact positions, and firing vectors, taking into account the velocities and accelerations of both projectile and target.</Description>
+
+    <PackageTags>godot;</PackageTags>
+
+    <PackageProjectUrl>https://github.com/neclor/ballistic-solutions</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/neclor/ballistic-solutions</RepositoryUrl>
+
+    <PackageReadmeFile>README_SCHARP.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ExportRelease|AnyCPU'">
+    <Optimize>True</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README_SCHARP.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
+  </ItemGroup>
+</Project>

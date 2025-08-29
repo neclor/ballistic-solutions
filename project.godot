@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Ballistic Deflection Calculator Demo"
-config/version="3.0.0"
+config/name="Ballistic Solutions Demo"
+config/version="4.0.0"
 config/tags=PackedStringArray("addon")
 run/main_scene="uid://ly3tkljwfa8m"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
@@ -27,7 +27,7 @@ project/assembly_name="BallisticDeflectionCalculatorDemo"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/BallisticDeflectionCalculatorCSharp/plugin.cfg", "res://addons/ballistic_deflection_calculator_gdscript/plugin.cfg", "res://addons/real_equation_solver/plugin.cfg")
+enabled=PackedStringArray("res://addons/real_equation_solver/plugin.cfg")
 
 [input]
 
