@@ -1,6 +1,6 @@
 # RES - Real Equation Solver
 
-**Real Equation Solver** - Equation solver and generator for real-valued polynomial equations up to 4th degree."
+**Real Equation Solver** - Equation solver and generator for real-valued polynomial equations up to 4th degree.
 
 ---
 
