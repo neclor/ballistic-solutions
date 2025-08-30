@@ -3,9 +3,11 @@
 [ext_resource type="Script" uid="uid://cckxbr7c3r5s0" path="res://demo/demo_2d/turret/gdscript/turret_2d_gdscript.gd" id="1_fkk01"]
 [ext_resource type="PackedScene" uid="uid://bat5rjq1i0q0p" path="res://demo/demo_2d/projectile/projectile_2d.tscn" id="2_nri8u"]
 
-[node name="Turret2DGDScript" type="Node2D"]
+[node name="Turret2DGDScript" type="Node2D" node_paths=PackedStringArray("crosshair_1", "crosshair_2")]
 script = ExtResource("1_fkk01")
 projectile_packed_scene = ExtResource("2_nri8u")
+crosshair_1 = NodePath("Crosshair")
+crosshair_2 = NodePath("Crosshair2")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.25
@@ -17,12 +19,12 @@ uv = PackedVector2Array(0, -10, -10, 0, 0, 10, 10, 0)
 
 [node name="Crosshair" type="Polygon2D" parent="."]
 color = Color(1, 0, 0, 1)
-polygon = PackedVector2Array(-0.9574748, -9.007351, 0.98088855, -9.000372, 1.003152, -0.9275409, 9.019384, -0.9510341, 9.0196295, 1.071192, 0.9834863, 1.0111294, 0.99966836, 9.037572, -0.967069, 9.014847, -0.9626515, 1.0345669, -9.027163, 1.0497998, -8.996485, -0.99128926, -0.9923743, -0.9857218)
+polygon = PackedVector2Array(-1.9665084, -8.907094, 1.8190197, -8.957524, 2.0422144, -2.1515856, 9.049893, -2.1463745, 9.050138, 2.0674694, 2.1373668, 1.9787023, 1.9526174, 8.967887, -1.9473981, 9.146093, -1.971685, 2.1169577, -9.004493, 1.9295442, -8.959085, -1.946244, -2.0564415, -2.0290563)
 uv = PackedVector2Array(0, 4.0000005)
 
 [node name="Crosshair2" type="Polygon2D" parent="."]
 color = Color(1, 0, 0, 1)
-polygon = PackedVector2Array(-0.9574748, -9.007351, 0.98088855, -9.000372, 1.003152, -0.9275409, 9.019384, -0.9510341, 9.0196295, 1.071192, 0.9834863, 1.0111294, 0.99966836, 9.037572, -0.967069, 9.014847, -0.9626515, 1.0345669, -9.027163, 1.0497998, -8.996485, -0.99128926, -0.9923743, -0.9857218)
+polygon = PackedVector2Array(-1.9353187, -8.84544, 2.0815046, -9.051966, 2.013495, -2.0636797, 9.101722, -1.8548474, 9.018811, 1.8474543, 1.9677343, 2.1005316, 1.8534415, 9.063622, -2.0256968, 9.145277, -1.9690893, 2.123969, -9.1790085, 2.034822, -9.074664, -1.8713799, -2.051002, -1.9652905)
 uv = PackedVector2Array(0, 4.0000005)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

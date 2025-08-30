@@ -122,7 +122,7 @@ T[] ImpactTimes<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity =
 Computes displacement under constant acceleration.  
 Overloads for `Vector2`, `Vector3`, `Vector4`.
 ```csharp
-Vector4 Position<T>(T time, Vector4 velocity, Vector4 acceleration) where T : IFloatingPointIeee754<T>;
+Vector4 Displacement<T>(T time, Vector4 velocity, Vector4 acceleration = default) where T : IFloatingPointIeee754<T>;
 ```
 
 Computes the impact position of the earliest valid interception.  

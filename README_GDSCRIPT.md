@@ -78,7 +78,7 @@ Array[float] impact_times(projectile_speed: float, to_target: Variant, target_ve
 Computes displacement under constant acceleration.  
 Versions for `Variant`, `Vector2`, `Vector3`, `Vector4`.
 ```gdscript
-Variant position(time: float, velocity: Variant, acceleration: Variant = Vector4.ZERO) static
+Variant displacement(time: float, velocity: Variant, acceleration: Variant = Vector4.ZERO) static
 ```
 
 Computes the impact position of the earliest valid interception.  

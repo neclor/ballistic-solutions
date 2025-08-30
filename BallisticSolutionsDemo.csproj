@@ -17,7 +17,9 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <Compile Remove="BallisticSolutionsTest\**" />
     <Compile Remove="BallisticSolutions\**" />
+    <EmbeddedResource Remove="BallisticSolutionsTest\**" />
     <EmbeddedResource Remove="BallisticSolutions\**" />
   </ItemGroup>
   

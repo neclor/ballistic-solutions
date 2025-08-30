@@ -28,19 +28,19 @@ public static partial class Bsc {
 	/// <returns>
 	/// The displacement vector after <paramref name="time"/> has elapsed.
 	/// </returns>
-	public static Vector4 Position<T>(T time, Vector4 velocity, Vector4 acceleration) where T : IFloatingPointIeee754<T> {
+	public static Vector4 Displacement<T>(T time, Vector4 velocity, Vector4 acceleration = default) where T : IFloatingPointIeee754<T> {
 		float timeFloat = float.CreateSaturating(time);
 		return timeFloat * (velocity + acceleration * timeFloat / 2);
 	}
 
-	/// <inheritdoc cref="Position{T}(T, Vector4, Vector4)"/>
-	public static Vector3 Position<T>(T time, Vector3 velocity, Vector3 acceleration) where T : IFloatingPointIeee754<T> {
-		return Position(time, velocity.ToVector4(), acceleration.ToVector4()).ToVector3();
+	/// <inheritdoc cref="Displacement{T}(T, Vector4, Vector4)"/>
+	public static Vector3 Displacement<T>(T time, Vector3 velocity, Vector3 acceleration = default) where T : IFloatingPointIeee754<T> {
+		return Displacement(time, velocity.ToVector4(), acceleration.ToVector4()).ToVector3();
 	}
 
-	/// <inheritdoc cref="Position{T}(T, Vector4, Vector4)"/>
-	public static Vector2 Position<T>(T time, Vector2 velocity, Vector2 acceleration) where T : IFloatingPointIeee754<T> {
-		return Position(time, velocity.ToVector4(), acceleration.ToVector4()).ToVector2();
+	/// <inheritdoc cref="Displacement{T}(T, Vector4, Vector4)"/>
+	public static Vector2 Displacement<T>(T time, Vector2 velocity, Vector2 acceleration = default) where T : IFloatingPointIeee754<T> {
+		return Displacement(time, velocity.ToVector4(), acceleration.ToVector4()).ToVector2();
 	}
 
 	/// <summary>
@@ -58,10 +58,7 @@ public static partial class Bsc {
 	public static Vector4 BestImpactPosition<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
 		if (projectileSpeed < T.Zero) Warning("`Bsc.BestImpactPosition`: Negative `projectileSpeed`.");
 
-		Vector4[] impactPositions = ImpactPositions(projectileSpeed, toTarget, targetVelocity, projectileAcceleration, targetAcceleration);
-		if (impactPositions.Length == 0) return Vector4.NaN;
-
-		return impactPositions[0];
+		return toTarget + Displacement(BestImpactTime(projectileSpeed, toTarget, targetVelocity, projectileAcceleration, targetAcceleration), targetVelocity, targetAcceleration);
 	}
 
 	/// <inheritdoc cref="BestImpactPosition{T}(T, Vector4, Vector4, Vector4, Vector4)"/>
@@ -90,7 +87,7 @@ public static partial class Bsc {
 		if (projectileSpeed < T.Zero) Warning("`Bsc.ImpactPositions`: Negative `projectileSpeed`.");
 
 		return ImpactTimes(projectileSpeed, toTarget, targetVelocity, projectileAcceleration, targetAcceleration)
-			.Select((T impactTime) => toTarget + Position(impactTime, targetVelocity, targetAcceleration))
+			.Select((T impactTime) => toTarget + Displacement(impactTime, targetVelocity, targetAcceleration))
 			.ToArray();
 	}
 

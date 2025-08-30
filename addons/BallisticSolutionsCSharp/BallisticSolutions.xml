@@ -10,7 +10,7 @@
             It computes interception times, impact positions, and required firing velocities while accounting for both projectile and target velocities and accelerations.
             </summary>
         </member>
-        <member name="M:BallisticSolutions.Bsc.Position``1(``0,Godot.Vector4,Godot.Vector4)">
+        <member name="M:BallisticSolutions.Bsc.Displacement``1(``0,Godot.Vector4,Godot.Vector4)">
             <summary>
             Computes displacement under constant acceleration.
             </summary>
@@ -22,11 +22,11 @@
             The displacement vector after <paramref name="time"/> has elapsed.
             </returns>
         </member>
-        <member name="M:BallisticSolutions.Bsc.Position``1(``0,Godot.Vector3,Godot.Vector3)">
-            <inheritdoc cref="M:BallisticSolutions.Bsc.Position``1(``0,Godot.Vector4,Godot.Vector4)"/>
+        <member name="M:BallisticSolutions.Bsc.Displacement``1(``0,Godot.Vector3,Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.Bsc.Displacement``1(``0,Godot.Vector4,Godot.Vector4)"/>
         </member>
-        <member name="M:BallisticSolutions.Bsc.Position``1(``0,Godot.Vector2,Godot.Vector2)">
-            <inheritdoc cref="M:BallisticSolutions.Bsc.Position``1(``0,Godot.Vector4,Godot.Vector4)"/>
+        <member name="M:BallisticSolutions.Bsc.Displacement``1(``0,Godot.Vector2,Godot.Vector2)">
+            <inheritdoc cref="M:BallisticSolutions.Bsc.Displacement``1(``0,Godot.Vector4,Godot.Vector4)"/>
         </member>
         <member name="M:BallisticSolutions.Bsc.BestImpactPosition``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
             <summary>

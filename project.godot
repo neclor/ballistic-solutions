@@ -23,7 +23,7 @@ window/stretch/mode="canvas_items"
 
 [dotnet]
 
-project/assembly_name="BallisticDeflectionCalculatorDemo"
+project/assembly_name="BallisticSolutionsDemo"
 
 [editor_plugins]
 

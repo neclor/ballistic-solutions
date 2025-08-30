@@ -101,36 +101,36 @@ static func impact_times_vector2(projectile_speed: float, to_target: Vector2, ta
 #region Position
 ## Computes displacement under constant acceleration. [br]
 ## Returns: The displacement vector after [param time] has elapsed.
-static func position(time: float, velocity: Variant, acceleration: Variant = Vector4.ZERO) -> Variant:
+static func displacement(time: float, velocity: Variant, acceleration: Variant = Vector4.ZERO) -> Variant:
 	var type: Variant.Type = typeof(velocity)
 	match type:
 		Variant.Type.TYPE_VECTOR2, Variant.Type.TYPE_VECTOR2I:
-			return position_vector2(time, velocity, BallisticSolutionsVector2Extensions.from_vector(acceleration))
+			return displacement_vector2(time, velocity, BallisticSolutionsVector2Extensions.from_vector(acceleration))
 
 		Variant.Type.TYPE_VECTOR3, Variant.Type.TYPE_VECTOR3I:
-			return position_vector3(time, velocity, BallisticSolutionsVector3Extensions.from_vector(acceleration))
+			return displacement_vector3(time, velocity, BallisticSolutionsVector3Extensions.from_vector(acceleration))
 
 		Variant.Type.TYPE_VECTOR4, Variant.Type.TYPE_VECTOR4I:
-			return position_vector4(time, velocity, BallisticSolutionsVector4Extensions.from_vector(acceleration))
+			return displacement_vector4(time, velocity, BallisticSolutionsVector4Extensions.from_vector(acceleration))
 
 		_:
-			_error("`Bsc.position`: Unsupported type `" + type_string(type) + "`. Returning null.")
+			_error("`Bsc.displacement`: Unsupported type `" + type_string(type) + "`. Returning null.")
 			return null
 
 
-## See [method position].
-static func position_vector4(time: float, velocity: Vector4, acceleration: Vector4 = Vector4.ZERO) -> Vector4:
+## See [method displacement].
+static func displacement_vector4(time: float, velocity: Vector4, acceleration: Vector4 = Vector4.ZERO) -> Vector4:
 	return time * (velocity + acceleration * time / 2)
 
 
-## See [method position].
-static func position_vector3(time: float, velocity: Vector3, acceleration: Vector3 = Vector3.ZERO) -> Vector3:
-	return BallisticSolutionsVector3Extensions.from_vector4(position_vector4(time, BallisticSolutionsVector4Extensions.from_vector3(velocity), BallisticSolutionsVector4Extensions.from_vector3(acceleration)))
+## See [method displacement].
+static func displacement_vector3(time: float, velocity: Vector3, acceleration: Vector3 = Vector3.ZERO) -> Vector3:
+	return BallisticSolutionsVector3Extensions.from_vector4(displacement_vector4(time, BallisticSolutionsVector4Extensions.from_vector3(velocity), BallisticSolutionsVector4Extensions.from_vector3(acceleration)))
 
 
-## See [method position].
-static func position_vector2(time: float, velocity: Vector2, acceleration: Vector2 = Vector2.ZERO) -> Vector2:
-	return BallisticSolutionsVector2Extensions.from_vector4(position_vector4(time, BallisticSolutionsVector4Extensions.from_vector2(velocity), BallisticSolutionsVector4Extensions.from_vector2(acceleration)))
+## See [method displacement].
+static func displacement_vector2(time: float, velocity: Vector2, acceleration: Vector2 = Vector2.ZERO) -> Vector2:
+	return BallisticSolutionsVector2Extensions.from_vector4(displacement_vector4(time, BallisticSolutionsVector4Extensions.from_vector2(velocity), BallisticSolutionsVector4Extensions.from_vector2(acceleration)))
 
 
 ## Computes the impact position of the earliest valid interception. [br]
@@ -156,10 +156,7 @@ static func best_impact_position(projectile_speed: float, to_target: Variant, ta
 static func best_impact_position_vector4(projectile_speed: float, to_target: Vector4, target_velocity: Vector4 = Vector4.ZERO, projectile_acceleration: Vector4 = Vector4.ZERO, target_acceleration: Vector4 = Vector4.ZERO) -> Vector4:
 	if projectile_speed < 0: _warning("`Bsc.best_impact_position`: Negative `projectile_speed`.");
 
-	var impact_positions: Array[Vector4] = impact_positions_vector4(projectile_speed, to_target, target_velocity, projectile_acceleration, target_acceleration);
-	if impact_positions.size() == 0: return BallisticSolutionsVector4Extensions.NAN_VECTOR
-
-	return impact_positions[0];
+	return to_target + displacement_vector4(best_impact_time_vector4(projectile_speed, to_target, target_velocity, projectile_acceleration, target_acceleration), target_velocity, target_acceleration)
 
 
 ## See [method best_impact_position].
@@ -197,7 +194,7 @@ static func impact_positions_vector4(projectile_speed: float, to_target: Vector4
 
 	return Array(
 		impact_times_vector4(projectile_speed, to_target, target_velocity, projectile_acceleration, target_acceleration)
-			.map(func(impact_time: float) -> Vector4: return to_target + position_vector4(impact_time, target_velocity, target_acceleration)),
+			.map(func(impact_time: float) -> Vector4: return to_target + displacement_vector4(impact_time, target_velocity, target_acceleration)),
 		TYPE_VECTOR4,
 		"",
 		null
@@ -289,10 +286,7 @@ static func best_firing_velocity(projectile_speed: float, to_target: Variant, ta
 static func best_firing_velocity_vector4(projectile_speed: float, to_target: Vector4, target_velocity: Vector4 = Vector4.ZERO, projectile_acceleration: Vector4 = Vector4.ZERO, target_acceleration: Vector4 = Vector4.ZERO) -> Vector4:
 	if projectile_speed < 0: _warning("`Bsc.best_firing_velocity`: Negative `projectile_speed`.")
 
-	var firing_velocities: Array[Vector4] = firing_velocities_vector4(projectile_speed, to_target, target_velocity, projectile_acceleration, target_acceleration)
-	if firing_velocities.size() == 0: return BallisticSolutionsVector4Extensions.NAN_VECTOR;
-
-	return firing_velocities[0];
+	return firing_velocity_vector4(best_impact_time_vector4(projectile_speed, to_target, target_velocity, projectile_acceleration, target_acceleration), to_target, target_velocity, projectile_acceleration, target_acceleration)
 
 
 ## See [method best_firing_velocity].

@@ -65,10 +65,7 @@ public static partial class Bsc {
 	public static Vector4 BestFiringVelocity<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
 		if (projectileSpeed < T.Zero) Warning("`Bsc.BestFiringVelocity`: Negative `projectileSpeed`.");
 
-		Vector4[] firingVelocities = FiringVelocities(projectileSpeed, toTarget, targetVelocity, projectileAcceleration, targetAcceleration);
-		if (firingVelocities.Length == 0) return Vector4.NaN;
-
-		return firingVelocities[0];
+		return FiringVelocity(BestImpactTime(projectileSpeed, toTarget, targetVelocity, projectileAcceleration, targetAcceleration), toTarget, targetVelocity, projectileAcceleration, targetAcceleration);
 	}
 
 	/// <inheritdoc cref="BestFiringVelocity{T}(T, Vector4, Vector4, Vector4, Vector4)"/>

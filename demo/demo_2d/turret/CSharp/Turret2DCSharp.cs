@@ -1,8 +1,8 @@
 using Godot;
-using BallisticDeflectionCalculator;
+using BallisticSolutions;
 
 
-namespace BallisticDeflectionCalculator.Demo.Demo2D;
+namespace BallisticSolutions.Demo.Demo2D;
 
 
 [GlobalClass]
@@ -22,23 +22,43 @@ public partial class Turret2DCSharp : Node2D {
 	public float ProjectileSpeed { get; set; } = 200;
 	public Vector2 ProjectileAcceleration { get; set; } = Vector2.Zero;
 
+
+	float[] ImpactTimes { get; set; } = [];
+	Vector2 ToTarget { get; set; }
+	Vector2 TargetVelocity { get; set; }
+	Vector2 TargetAcceleration { get; set; }
+
+
+	public override void _PhysicsProcess(double delta) {
+		if (Player is null) return;
+
+		ToTarget = Player.GlobalPosition - GlobalPosition;
+		TargetVelocity = Player.Velocity;
+		TargetAcceleration = (Vector2)Player.Get("current_acceleration");
+
+		ImpactTimes = Bsc.ImpactTimes(ProjectileSpeed, ToTarget, TargetVelocity, ProjectileAcceleration, TargetAcceleration);
+
+		switch (ImpactTimes.Length) {
+			case 0:
+				Crosshair1?.Position = Vector2.Zero;
+				Crosshair2?.Position = Vector2.Zero;
+				break;
+			case 1:
+				Crosshair1?.Position = ToTarget + Bsc.Displacement(ImpactTimes[0], TargetVelocity, TargetAcceleration);
+				Crosshair2?.Position = Vector2.Zero;
+				break;
+			case 2:
+				Crosshair1?.Position = ToTarget + Bsc.Displacement(ImpactTimes[0], TargetVelocity, TargetAcceleration);
+				Crosshair2?.Position = ToTarget + Bsc.Displacement(ImpactTimes[1], TargetVelocity, TargetAcceleration);
+				break;
+		}
+	}
+
 	public void CreateProjectiles() {
 		if (Player is null) return;
 
-		Vector2 toTarget = Player.GlobalPosition - GlobalPosition;
-		Vector2 targetVelocity = Player.Velocity;
-		Vector2 targetAcceleration = (Vector2)Player.Get("current_acceleration");
-
-		Vector2[] projectileVelocities = Bdc.Velocities(
-			ProjectileSpeed,
-			toTarget,
-			targetVelocity,
-			ProjectileAcceleration,
-			targetAcceleration
-		);
-
-		foreach (Vector2 projectileVelocity in projectileVelocities) {
-			CreateProjectile(projectileVelocity);
+		foreach (float time in ImpactTimes) {
+			CreateProjectile(Bsc.FiringVelocity(time, ToTarget, TargetVelocity, ProjectileAcceleration, TargetAcceleration));
 		}
 	}
 

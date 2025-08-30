@@ -1,0 +1,24 @@
+﻿<Project Sdk="Godot.NET.Sdk/4.5.0-beta.5">
+
+  <PropertyGroup>
+    <DefineConstants>GODOT</DefineConstants>
+
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <LangVersion>preview</LangVersion>
+
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+
+    <RootNamespace>BallisticSolutions.Test</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BallisticSolutions\BallisticSolutions.csproj" />
+  </ItemGroup>
+</Project>
