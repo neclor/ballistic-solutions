@@ -9,8 +9,9 @@ taking into account the velocities and accelerations of both projectile and targ
 1. [Quickstart](#quickstart)
 2. [GDScript](#gdscript)
 3. [C#](#csharp)
-4. [Contributing](#contributing)
-5. [How it Works ?](#how-it-works)
+4. [Demo](#demo) 
+5. [Contributing](#contributing)
+6. [How it Works ?](#how-it-works)
 
 ---
 
@@ -31,6 +32,13 @@ taking into account the velocities and accelerations of both projectile and targ
 ---
 
 ## <a name="csharp"></a>[C#](README_CSHARP.md)
+
+---
+
+## <a name="demo"></a>Demo
+You can test the addon using the included demo scene.
+
+![](docs/screenshot.png)
 
 ---
 
