@@ -27,4 +27,8 @@ static func _warning(message: String = "") -> void:
 
 static func _error(message: String = "") -> void:
 	assert(false, _message_prefix + message)
-	push_error(_message_prefix+ message)
+	push_error(_message_prefix + message)
+
+
+func _init() -> void:
+	_error("Class is static and should not be instantiated.")

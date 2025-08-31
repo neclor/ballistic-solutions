@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Ballistic Solutions Demo"
-config/version="4.0.0"
+config/version="4.0.1"
 config/tags=PackedStringArray("addon")
 run/main_scene="uid://ly3tkljwfa8m"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
