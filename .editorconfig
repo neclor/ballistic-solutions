@@ -9,6 +9,11 @@ insert_final_newline = true
 [*.md]
 trim_trailing_whitespace = false
 
+[*.{gd,gdshader}]
+indent_size = 4
+indent_style = tab
+tab_width = 4
+
 [*.{sln,slnx,csproj}]
 indent_size = 2
 indent_style = space

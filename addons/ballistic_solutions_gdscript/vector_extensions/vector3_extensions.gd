@@ -44,3 +44,7 @@ static func to_vector2(from: Vector3) -> Vector2:
 ## Converts [Vector3] to [Vector4].
 static func to_vector4(from: Vector3, w: float = 0) -> Vector4:
 	return BallisticSolutionsVector4Extensions.from_vector3(from, w)
+
+
+func _init() -> void:
+	_error("`BallisticSolutionsVector3Extensions`: Class is static and should not be instantiated.")

@@ -7,11 +7,11 @@ class_name BallisticSolutions extends Object
 
 
 ## See [BallisticSolutionsVector2Extensions].
-static var Vector2E: GDScript = BallisticSolutionsVector2Extensions
+static var Vector2Extensions: GDScript = BallisticSolutionsVector2Extensions
 ## See [BallisticSolutionsVector3Extensions].
-static var Vector3E: GDScript = BallisticSolutionsVector3Extensions
+static var Vector3Extensions: GDScript = BallisticSolutionsVector3Extensions
 ## See [BallisticSolutionsVector4Extensions].
-static var Vector4E: GDScript = BallisticSolutionsVector4Extensions
+static var Vector4Extensions: GDScript = BallisticSolutionsVector4Extensions
 
 
 ## See [Bsc].
@@ -31,4 +31,4 @@ static func _error(message: String = "") -> void:
 
 
 func _init() -> void:
-	_error("Class is static and should not be instantiated.")
+	_error("`BallisticSolutions`: Class is static and should not be instantiated.")

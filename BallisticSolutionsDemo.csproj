@@ -9,17 +9,17 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
-    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+    <AnalysisLevel>preview</AnalysisLevel>
+    <AnalysisMode>All</AnalysisMode>
+    <AnalysisModeStyle>Default</AnalysisModeStyle>
+    <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
 
     <RootNamespace>BallisticSolutions.Demo</RootNamespace>
   </PropertyGroup>
   
   <ItemGroup>
-    <Compile Remove="BallisticSolutionsTest\**" />
     <Compile Remove="BallisticSolutions\**" />
-    <EmbeddedResource Remove="BallisticSolutionsTest\**" />
     <EmbeddedResource Remove="BallisticSolutions\**" />
   </ItemGroup>
   

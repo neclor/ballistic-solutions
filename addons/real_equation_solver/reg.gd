@@ -59,3 +59,7 @@ static func quartic(r1: float, r2: float, r3: float, r4: float) -> Array[float]:
 	var d: float = -(r1 * r2 * r3 + r1 * r2 * r4 + r1 * r3 * r4 + r2 * r3 * r4)
 	var e: float = r1 * r2 * r3 * r4
 	return [1.0, b, c, d, e]
+
+
+func _init() -> void:
+	_error("`Reg`: Class is static and should not be instantiated.")

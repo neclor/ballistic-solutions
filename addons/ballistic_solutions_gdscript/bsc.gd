@@ -350,3 +350,7 @@ static func firing_velocities_vector2(projectile_speed: float, to_target: Vector
 		null
 	)
 #endregion
+
+
+func _init() -> void:
+	_error("`Bsc`: Class is static and should not be instantiated.")

@@ -12,3 +12,7 @@ class_name RealEquationSolverMath extends RealEquationSolver
 ## [/codeblock]
 static func cbrt(x: float) -> float:
 	return signf(x) * absf(x) ** (1.0 / 3.0)
+
+
+func _init() -> void:
+	_error("`RealEquationSolverMath`: Class is static and should not be instantiated.")

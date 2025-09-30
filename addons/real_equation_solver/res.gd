@@ -172,3 +172,7 @@ static func quartic(a: float, b: float, c: float, d: float, e: float) -> Array[f
 	var roots: Array[float] = Array(u_values.map(func(u: float) -> float: return u - a1_div_4), TYPE_FLOAT, "", null)
 	roots.sort()
 	return roots
+
+
+func _init() -> void:
+	_error("`Res`: Class is static and should not be instantiated.")

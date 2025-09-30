@@ -1,7 +1,5 @@
 using System.Numerics;
 using BallisticSolutions.VectorExtensions;
-
-
 #if GODOT
 using Vector2 = Godot.Vector2;
 using Vector3 = Godot.Vector3;
@@ -12,9 +10,7 @@ using Vector3 = System.Numerics.Vector3;
 using Vector4 = System.Numerics.Vector4;
 #endif
 
-
 namespace BallisticSolutions;
-
 
 public static partial class Bsc {
 
@@ -40,14 +36,12 @@ public static partial class Bsc {
 	}
 
 	/// <inheritdoc cref="BestImpactTime{T}(T, Vector4, Vector4, Vector4, Vector4)"/>
-	public static T BestImpactTime<T>(T projectileSpeed, Vector3 toTarget, Vector3 targetVelocity = default, Vector3 projectileAcceleration = default, Vector3 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
-		return BestImpactTime(projectileSpeed, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4());
-	}
+	public static T BestImpactTime<T>(T projectileSpeed, Vector3 toTarget, Vector3 targetVelocity = default, Vector3 projectileAcceleration = default, Vector3 targetAcceleration = default) where T : IFloatingPointIeee754<T> =>
+		BestImpactTime(projectileSpeed, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4());
 
 	/// <inheritdoc cref="BestImpactTime{T}(T, Vector4, Vector4, Vector4, Vector4)"/>
-	public static T BestImpactTime<T>(T projectileSpeed, Vector2 toTarget, Vector2 targetVelocity = default, Vector2 projectileAcceleration = default, Vector2 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
-		return BestImpactTime(projectileSpeed, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4());
-	}
+	public static T BestImpactTime<T>(T projectileSpeed, Vector2 toTarget, Vector2 targetVelocity = default, Vector2 projectileAcceleration = default, Vector2 targetAcceleration = default) where T : IFloatingPointIeee754<T> =>
+		BestImpactTime(projectileSpeed, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4());
 
 	/// <summary>
 	/// Computes all possible interception times between a projectile and a moving target.
@@ -72,19 +66,18 @@ public static partial class Bsc {
 		T d = T.CreateSaturating(2 * targetVelocity.Dot(toTarget));
 		T e = T.CreateSaturating(toTarget.LengthSquared());
 
-		return RealQuarticEquationSolver.Solve(a, b, c, d, e)
-			.Where((T impactTime) => impactTime > T.Zero)
-			.OrderBy((T impactTime) => impactTime)
-			.ToArray();
+		return [..
+			RealQuarticEquationSolver.Solve(a, b, c, d, e)
+				.Where(impactTime => impactTime > T.Zero)
+				.OrderBy(impactTime => impactTime)
+		];
 	}
 
 	/// <inheritdoc cref="ImpactTimes{T}(T, Vector4, Vector4, Vector4, Vector4)"/>
-	public static T[] ImpactTimes<T>(T projectileSpeed, Vector3 toTarget, Vector3 targetVelocity = default, Vector3 projectileAcceleration = default, Vector3 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
-		return ImpactTimes(projectileSpeed, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4());
-	}
+	public static T[] ImpactTimes<T>(T projectileSpeed, Vector3 toTarget, Vector3 targetVelocity = default, Vector3 projectileAcceleration = default, Vector3 targetAcceleration = default) where T : IFloatingPointIeee754<T> =>
+		ImpactTimes(projectileSpeed, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4());
 
 	/// <inheritdoc cref="ImpactTimes{T}(T, Vector4, Vector4, Vector4, Vector4)"/>
-	public static T[] ImpactTimes<T>(T projectileSpeed, Vector2 toTarget, Vector2 targetVelocity = default, Vector2 projectileAcceleration = default, Vector2 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
-		return ImpactTimes(projectileSpeed, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4());
-	}
+	public static T[] ImpactTimes<T>(T projectileSpeed, Vector2 toTarget, Vector2 targetVelocity = default, Vector2 projectileAcceleration = default, Vector2 targetAcceleration = default) where T : IFloatingPointIeee754<T> =>
+		ImpactTimes(projectileSpeed, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4());
 }

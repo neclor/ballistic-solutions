@@ -1,7 +1,5 @@
 using System.Numerics;
 using BallisticSolutions.VectorExtensions;
-
-
 #if GODOT
 using Vector2 = Godot.Vector2;
 using Vector3 = Godot.Vector3;
@@ -12,9 +10,7 @@ using Vector3 = System.Numerics.Vector3;
 using Vector4 = System.Numerics.Vector4;
 #endif
 
-
 namespace BallisticSolutions;
-
 
 public static partial class Bsc {
 
@@ -34,14 +30,12 @@ public static partial class Bsc {
 	}
 
 	/// <inheritdoc cref="Displacement{T}(T, Vector4, Vector4)"/>
-	public static Vector3 Displacement<T>(T time, Vector3 velocity, Vector3 acceleration = default) where T : IFloatingPointIeee754<T> {
-		return Displacement(time, velocity.ToVector4(), acceleration.ToVector4()).ToVector3();
-	}
+	public static Vector3 Displacement<T>(T time, Vector3 velocity, Vector3 acceleration = default) where T : IFloatingPointIeee754<T> =>
+		Displacement(time, velocity.ToVector4(), acceleration.ToVector4()).ToVector3();
 
 	/// <inheritdoc cref="Displacement{T}(T, Vector4, Vector4)"/>
-	public static Vector2 Displacement<T>(T time, Vector2 velocity, Vector2 acceleration = default) where T : IFloatingPointIeee754<T> {
-		return Displacement(time, velocity.ToVector4(), acceleration.ToVector4()).ToVector2();
-	}
+	public static Vector2 Displacement<T>(T time, Vector2 velocity, Vector2 acceleration = default) where T : IFloatingPointIeee754<T> =>
+		Displacement(time, velocity.ToVector4(), acceleration.ToVector4()).ToVector2();
 
 	/// <summary>
 	/// Computes the impact position of the earliest valid interception.
@@ -62,14 +56,12 @@ public static partial class Bsc {
 	}
 
 	/// <inheritdoc cref="BestImpactPosition{T}(T, Vector4, Vector4, Vector4, Vector4)"/>
-	public static Vector3 BestImpactPosition<T>(T projectileSpeed, Vector3 toTarget, Vector3 targetVelocity = default, Vector3 projectileAcceleration = default, Vector3 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
-		return BestImpactPosition(projectileSpeed, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4()).ToVector3();
-	}
+	public static Vector3 BestImpactPosition<T>(T projectileSpeed, Vector3 toTarget, Vector3 targetVelocity = default, Vector3 projectileAcceleration = default, Vector3 targetAcceleration = default) where T : IFloatingPointIeee754<T> =>
+		BestImpactPosition(projectileSpeed, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4()).ToVector3();
 
 	/// <inheritdoc cref="BestImpactPosition{T}(T, Vector4, Vector4, Vector4, Vector4)"/>
-	public static Vector2 BestImpactPosition<T>(T projectileSpeed, Vector2 toTarget, Vector2 targetVelocity = default, Vector2 projectileAcceleration = default, Vector2 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
-		return BestImpactPosition(projectileSpeed, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4()).ToVector2();
-	}
+	public static Vector2 BestImpactPosition<T>(T projectileSpeed, Vector2 toTarget, Vector2 targetVelocity = default, Vector2 projectileAcceleration = default, Vector2 targetAcceleration = default) where T : IFloatingPointIeee754<T> =>
+		BestImpactPosition(projectileSpeed, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4()).ToVector2();
 
 	/// <summary>
 	/// Computes all possible impact positions corresponding to valid interception times.
@@ -86,22 +78,23 @@ public static partial class Bsc {
 	public static Vector4[] ImpactPositions<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
 		if (projectileSpeed < T.Zero) Warning("`Bsc.ImpactPositions`: Negative `projectileSpeed`.");
 
-		return ImpactTimes(projectileSpeed, toTarget, targetVelocity, projectileAcceleration, targetAcceleration)
-			.Select((T impactTime) => toTarget + Displacement(impactTime, targetVelocity, targetAcceleration))
-			.ToArray();
+		return [..
+			ImpactTimes(projectileSpeed, toTarget, targetVelocity, projectileAcceleration, targetAcceleration)
+				.Select(impactTime => toTarget + Displacement(impactTime, targetVelocity, targetAcceleration))
+		];
 	}
 
 	/// <inheritdoc cref="ImpactPositions{T}(T, Vector4, Vector4, Vector4, Vector4)"/>
-	public static Vector3[] ImpactPositions<T>(T projectileSpeed, Vector3 toTarget, Vector3 targetVelocity = default, Vector3 projectileAcceleration = default, Vector3 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
-		return ImpactPositions(projectileSpeed, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4())
-			.Select((Vector4 position) => position.ToVector3())
-			.ToArray();
-	}
+	public static Vector3[] ImpactPositions<T>(T projectileSpeed, Vector3 toTarget, Vector3 targetVelocity = default, Vector3 projectileAcceleration = default, Vector3 targetAcceleration = default) where T : IFloatingPointIeee754<T> =>
+		[..
+			ImpactPositions(projectileSpeed, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4())
+				.Select(position => position.ToVector3())
+		];
 
 	/// <inheritdoc cref="ImpactPositions{T}(T, Vector4, Vector4, Vector4, Vector4)"/>
-	public static Vector2[] ImpactPositions<T>(T projectileSpeed, Vector2 toTarget, Vector2 targetVelocity = default, Vector2 projectileAcceleration = default, Vector2 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
-		return ImpactPositions(projectileSpeed, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4())
-			.Select((Vector4 position) => position.ToVector2())
-			.ToArray();
-	}
+	public static Vector2[] ImpactPositions<T>(T projectileSpeed, Vector2 toTarget, Vector2 targetVelocity = default, Vector2 projectileAcceleration = default, Vector2 targetAcceleration = default) where T : IFloatingPointIeee754<T> =>
+		[..
+			ImpactPositions(projectileSpeed, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4())
+				.Select(position => position.ToVector2())
+		];
 }

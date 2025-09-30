@@ -1,13 +1,9 @@
 using System.Diagnostics;
-
-
 #if GODOT
 using Godot;
 #endif
 
-
 namespace BallisticSolutions;
-
 
 /// <summary>
 /// Bsc - Ballistic Solutions Calculator. Provides methods for calculating projectile interception with moving targets.
@@ -15,17 +11,17 @@ namespace BallisticSolutions;
 /// </summary>
 public static partial class Bsc {
 
-	const string MessagePrefix = "[BallisticSolutions] - ";
+	private const string MessagePrefix = "[BallisticSolutions] - ";
 
-	static void Warning(string message) {
-		Trace.WriteLine("WARNING: " + MessagePrefix + message);
+	private static void Warning(string message) {
+		Trace.TraceWarning(MessagePrefix + message);
 #if GODOT
 		GD.PushWarning(MessagePrefix + message);
 #endif
 	}
 
-	static void Error(string message) {
-		Trace.WriteLine("ERROR: " + MessagePrefix + message);
+	private static void Error(string message) {
+		Trace.TraceError(MessagePrefix + message);
 #if GODOT
 		GD.PushError(MessagePrefix + message);
 #endif

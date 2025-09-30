@@ -1,7 +1,5 @@
 using System.Numerics;
 using BallisticSolutions.VectorExtensions;
-
-
 #if GODOT
 using Vector2 = Godot.Vector2;
 using Vector3 = Godot.Vector3;
@@ -12,9 +10,7 @@ using Vector3 = System.Numerics.Vector3;
 using Vector4 = System.Numerics.Vector4;
 #endif
 
-
 namespace BallisticSolutions;
-
 
 public static partial class Bsc {
 
@@ -41,14 +37,12 @@ public static partial class Bsc {
 	}
 
 	/// <inheritdoc cref="FiringVelocity{T}(T, Vector4, Vector4, Vector4, Vector4)"/>
-	public static Vector3 FiringVelocity<T>(T impactTime, Vector3 toTarget, Vector3 targetVelocity = default, Vector3 projectileAcceleration = default, Vector3 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
-		return FiringVelocity(impactTime, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4()).ToVector3();
-	}
+	public static Vector3 FiringVelocity<T>(T impactTime, Vector3 toTarget, Vector3 targetVelocity = default, Vector3 projectileAcceleration = default, Vector3 targetAcceleration = default) where T : IFloatingPointIeee754<T> =>
+		FiringVelocity(impactTime, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4()).ToVector3();
 
 	/// <inheritdoc cref="FiringVelocity{T}(T, Vector4, Vector4, Vector4, Vector4)"/>
-	public static Vector2 FiringVelocity<T>(T impactTime, Vector2 toTarget, Vector2 targetVelocity = default, Vector2 projectileAcceleration = default, Vector2 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
-		return FiringVelocity(impactTime, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4()).ToVector2();
-	}
+	public static Vector2 FiringVelocity<T>(T impactTime, Vector2 toTarget, Vector2 targetVelocity = default, Vector2 projectileAcceleration = default, Vector2 targetAcceleration = default) where T : IFloatingPointIeee754<T> =>
+		FiringVelocity(impactTime, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4()).ToVector2();
 
 	/// <summary>
 	/// Computes the firing velocity required for the earliest valid interception.
@@ -69,14 +63,12 @@ public static partial class Bsc {
 	}
 
 	/// <inheritdoc cref="BestFiringVelocity{T}(T, Vector4, Vector4, Vector4, Vector4)"/>
-	public static Vector3 BestFiringVelocity<T>(T projectileSpeed, Vector3 toTarget, Vector3 targetVelocity = default, Vector3 projectileAcceleration = default, Vector3 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
-		return BestFiringVelocity(projectileSpeed, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4()).ToVector3();
-	}
+	public static Vector3 BestFiringVelocity<T>(T projectileSpeed, Vector3 toTarget, Vector3 targetVelocity = default, Vector3 projectileAcceleration = default, Vector3 targetAcceleration = default) where T : IFloatingPointIeee754<T> =>
+		BestFiringVelocity(projectileSpeed, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4()).ToVector3();
 
 	/// <inheritdoc cref="BestFiringVelocity{T}(T, Vector4, Vector4, Vector4, Vector4)"/>
-	public static Vector2 BestFiringVelocity<T>(T projectileSpeed, Vector2 toTarget, Vector2 targetVelocity = default, Vector2 projectileAcceleration = default, Vector2 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
-		return BestFiringVelocity(projectileSpeed, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4()).ToVector2();
-	}
+	public static Vector2 BestFiringVelocity<T>(T projectileSpeed, Vector2 toTarget, Vector2 targetVelocity = default, Vector2 projectileAcceleration = default, Vector2 targetAcceleration = default) where T : IFloatingPointIeee754<T> =>
+		BestFiringVelocity(projectileSpeed, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4()).ToVector2();
 
 	/// <summary>
 	/// Computes firing velocities for all valid interception times.
@@ -93,22 +85,23 @@ public static partial class Bsc {
 	public static Vector4[] FiringVelocities<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
 		if (projectileSpeed < T.Zero) Warning("`Bsc.FiringVelocities`: Negative `projectileSpeed`.");
 
-		return ImpactTimes(projectileSpeed, toTarget, targetVelocity, projectileAcceleration, targetAcceleration)
-			.Select((T impactTime) => FiringVelocity(impactTime, toTarget, targetVelocity, projectileAcceleration, targetAcceleration))
-			.ToArray();
+		return [..
+			ImpactTimes(projectileSpeed, toTarget, targetVelocity, projectileAcceleration, targetAcceleration)
+				.Select(impactTime => FiringVelocity(impactTime, toTarget, targetVelocity, projectileAcceleration, targetAcceleration))
+		];
 	}
 
 	/// <inheritdoc cref="FiringVelocities{T}(T, Vector4, Vector4, Vector4, Vector4)"/>
-	public static Vector3[] FiringVelocities<T>(T projectileSpeed, Vector3 toTarget, Vector3 targetVelocity = default, Vector3 projectileAcceleration = default, Vector3 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
-		return FiringVelocities(projectileSpeed, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4())
-			.Select((Vector4 velocity) => velocity.ToVector3())
-			.ToArray();
-	}
+	public static Vector3[] FiringVelocities<T>(T projectileSpeed, Vector3 toTarget, Vector3 targetVelocity = default, Vector3 projectileAcceleration = default, Vector3 targetAcceleration = default) where T : IFloatingPointIeee754<T> =>
+		[..
+			FiringVelocities(projectileSpeed, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4())
+				.Select(velocity => velocity.ToVector3())
+		];
 
 	/// <inheritdoc cref="FiringVelocities{T}(T, Vector4, Vector4, Vector4, Vector4)"/>
-	public static Vector2[] FiringVelocities<T>(T projectileSpeed, Vector2 toTarget, Vector2 targetVelocity = default, Vector2 projectileAcceleration = default, Vector2 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
-		return FiringVelocities(projectileSpeed, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4())
-			.Select((Vector4 velocity) => velocity.ToVector2())
-			.ToArray();
-	}
+	public static Vector2[] FiringVelocities<T>(T projectileSpeed, Vector2 toTarget, Vector2 targetVelocity = default, Vector2 projectileAcceleration = default, Vector2 targetAcceleration = default) where T : IFloatingPointIeee754<T> =>
+		[..
+			FiringVelocities(projectileSpeed, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4())
+				.Select(velocity => velocity.ToVector2())
+		];
 }

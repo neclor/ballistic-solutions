@@ -14,3 +14,15 @@ static var Math: GDScript = RealEquationSolverMath
 static var Solver: GDScript = Res
 ## See [Reg].
 static var Generator: GDScript = Reg
+
+
+static var _message_prefix: String = "[RealEquationSolver] - "
+
+
+static func _error(message: String = "") -> void:
+	assert(false, _message_prefix + message)
+	push_error(_message_prefix + message)
+
+
+func _init() -> void:
+	_error("`RealEquationSolver`: Class is static and should not be instantiated.")

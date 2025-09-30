@@ -1,33 +1,27 @@
 using Godot;
-using BallisticSolutions;
-
 
 namespace BallisticSolutions.Demo.Demo2D;
 
-
 [GlobalClass]
 public partial class Turret2DCSharp : Node2D {
+
 	[Export]
 	public PackedScene? ProjectilePackedScene { get; set; }
 	[Export]
 	public CharacterBody2D? Player { get; set; }
-
 
 	[Export]
 	public Polygon2D? Crosshair1 { get; set; }
 	[Export]
 	public Polygon2D? Crosshair2 { get; set; }
 
-
 	public float ProjectileSpeed { get; set; } = 200;
 	public Vector2 ProjectileAcceleration { get; set; } = Vector2.Zero;
 
-
-	float[] ImpactTimes { get; set; } = [];
-	Vector2 ToTarget { get; set; }
-	Vector2 TargetVelocity { get; set; }
-	Vector2 TargetAcceleration { get; set; }
-
+	private float[] ImpactTimes { get; set; } = [];
+	private Vector2 ToTarget { get; set; }
+	private Vector2 TargetVelocity { get; set; }
+	private Vector2 TargetAcceleration { get; set; }
 
 	public override void _PhysicsProcess(double delta) {
 		if (Player is null) return;
@@ -43,13 +37,18 @@ public partial class Turret2DCSharp : Node2D {
 				Crosshair1?.Position = Vector2.Zero;
 				Crosshair2?.Position = Vector2.Zero;
 				break;
+
 			case 1:
 				Crosshair1?.Position = ToTarget + Bsc.Displacement(ImpactTimes[0], TargetVelocity, TargetAcceleration);
 				Crosshair2?.Position = Vector2.Zero;
 				break;
+
 			case 2:
 				Crosshair1?.Position = ToTarget + Bsc.Displacement(ImpactTimes[0], TargetVelocity, TargetAcceleration);
 				Crosshair2?.Position = ToTarget + Bsc.Displacement(ImpactTimes[1], TargetVelocity, TargetAcceleration);
+				break;
+
+			default:
 				break;
 		}
 	}
@@ -72,7 +71,5 @@ public partial class Turret2DCSharp : Node2D {
 		GetParent().AddChild(newProjectile);
 	}
 
-	public void OnTimerTimeout() {
-		CreateProjectiles();
-	}
+	public void OnTimerTimeout() => CreateProjectiles();
 }
