@@ -12,6 +12,8 @@ material = SubResource("StandardMaterial3D_jl0ir")
 
 [node name="Projectile3D" type="RigidBody3D"]
 collision_layer = 0
+contact_monitor = true
+max_contacts_reported = 5
 script = ExtResource("1_jl0ir")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

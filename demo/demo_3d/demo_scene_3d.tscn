@@ -19,11 +19,11 @@ mesh = SubResource("PlaneMesh_lebdu")
 
 [node name="Turret3D" parent="." node_paths=PackedStringArray("target") instance=ExtResource("1_elevi")]
 target = NodePath("../Target3D")
-projectile_speed = 40.0
+projectile_speed = 30.0
 
 [node name="Target3D" parent="." instance=ExtResource("2_y23wu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 100)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, 50)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.80581933, -0.08440202, 0.5861158, -0.00014326017, 0.9898179, 0.14233908, -0.59216166, 0.114615604, -0.79762655, 72.212105, 44.645466, -14.643908)
+transform = Transform3D(-0.70710677, -0.1227878, 0.6963642, 0, 0.9848077, 0.17364818, -0.70710677, 0.1227878, -0.6963642, 50, 25, 0)
 current = true
