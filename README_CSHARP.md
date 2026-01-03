@@ -26,29 +26,29 @@ To use this library, you need to reference the compiled `.dll` file in your proj
 #### Option 2: Edit the .csproj file directly
 
 1. Add a `<Reference>` entry for the `BallisticSolutions.dll` in `<ItemGroup>`
-    ```xml
-    <ItemGroup>
-      <Reference Include="BallisticSolutions">
-        <HintPath>addons\BallisticSolutionsCSharp\BallisticSolutions.dll</HintPath>
-      </Reference>
-    </ItemGroup>
-    ```
+	```xml
+	<ItemGroup>
+	  <Reference Include="BallisticSolutions">
+		<HintPath>addons\BallisticSolutionsCSharp\BallisticSolutions.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+	```
 
 2. Add NuGet dependencies: [MathNet.Numerics](https://www.nuget.org/packages/MathNet.Numerics/)
-    ```xml
-    <ItemGroup>
-      <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
-    </ItemGroup>
-    ```
+	```xml
+	<ItemGroup>
+	  <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
+	</ItemGroup>
+	```
 
-    **Or** Add a `<Reference>` entry for the `MathNet.Numerics.dll` in `<ItemGroup>`
-    ```xml
-    <ItemGroup>
-      <Reference Include="MathNet.Numerics">
-        <HintPath>addons\BallisticSolutionsCSharp\MathNet.Numerics.dll</HintPath>
-      </Reference>
-    </ItemGroup>
-    ```
+	**Or** Add a `<Reference>` entry for the `MathNet.Numerics.dll` in `<ItemGroup>`
+	```xml
+	<ItemGroup>
+	  <Reference Include="MathNet.Numerics">
+		<HintPath>addons\BallisticSolutionsCSharp\MathNet.Numerics.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+	```
 
 ---
 
@@ -64,42 +64,42 @@ using BallisticSolutions;
 
 // ...
 
-    [Export]
-    public PackedScene ProjectilePackedScene { get; set; }
+	[Export]
+	public PackedScene ProjectilePackedScene { get; set; }
 
-    [Export]
-    public float ProjectileSpeed { get; set; } = 200f;
-    [Export]
-    public Vector2 ProjectileAcceleration { get; set; } = Vector2.Zero;
+	[Export]
+	public float ProjectileSpeed { get; set; } = 200f;
+	[Export]
+	public Vector2 ProjectileAcceleration { get; set; } = Vector2.Zero;
 
-    public void Shoot(Target2D target) {
-        Vector2 toTarget = target.GlobalPosition - GlobalPosition;
-        Vector2 velocity = Bsc.BestFiringVelocity(ProjectileSpeed, toTarget, target.Velocity, ProjectileAcceleration, target.Acceleration);
+	public void Shoot(Target2D target) {
+		Vector2 toTarget = target.GlobalPosition - GlobalPosition;
+		Vector2 velocity = Bsc.BestFiringVelocity(ProjectileSpeed, toTarget, target.Velocity, ProjectileAcceleration, target.Acceleration);
 
-        if (float.IsNaN(velocity.X)) {
-            GD.Print("Impossible to hit the target");
-            return;
-        }
+		if (float.IsNaN(velocity.X)) {
+			GD.Print("Impossible to hit the target");
+			return;
+		}
 
-        var newProjectile = ProjectilePackedScene.Instantiate<Projectile2D>();
-        newProjectile.GlobalPosition = GlobalPosition;
-        newProjectile.Velocity = velocity;
-        newProjectile.Acceleration = ProjectileAcceleration;
-    
-        GetParent().AddChild(newProjectile);
-    }
+		var newProjectile = ProjectilePackedScene.Instantiate<Projectile2D>();
+		newProjectile.GlobalPosition = GlobalPosition;
+		newProjectile.Velocity = velocity;
+		newProjectile.Acceleration = ProjectileAcceleration;
+	
+		GetParent().AddChild(newProjectile);
+	}
 
-    public float GetBestImpactTime(Target2D target) {
-        Vector2 toTarget = target.GlobalPosition - GlobalPosition;
-        float bestImpactTime = Bsc.BestImpactTime(ProjectileSpeed, toTarget, target.Velocity, ProjectileAcceleration, target.Acceleration);
-        return bestImpactTime;
-    }
+	public float GetBestImpactTime(Target2D target) {
+		Vector2 toTarget = target.GlobalPosition - GlobalPosition;
+		float bestImpactTime = Bsc.BestImpactTime(ProjectileSpeed, toTarget, target.Velocity, ProjectileAcceleration, target.Acceleration);
+		return bestImpactTime;
+	}
 
-    public Vector2 GetBestImpactPosition(Target2D target) {
-        Vector2 toTarget = target.GlobalPosition - GlobalPosition;
-        Vector2 bestImpactPosition = GlobalPosition + Bsc.BestImpactPosition(ProjectileSpeed, toTarget, target.Velocity, ProjectileAcceleration, target.Acceleration);
-        return bestImpactPosition;
-    }
+	public Vector2 GetBestImpactPosition(Target2D target) {
+		Vector2 toTarget = target.GlobalPosition - GlobalPosition;
+		Vector2 bestImpactPosition = GlobalPosition + Bsc.BestImpactPosition(ProjectileSpeed, toTarget, target.Velocity, ProjectileAcceleration, target.Acceleration);
+		return bestImpactPosition;
+	}
 ```
 
 ---
@@ -107,10 +107,10 @@ using BallisticSolutions;
 ## <a name="reference"></a>Reference
 
 1. [BallisticSolutions](#ballistic-solutions)
-    1. [Bsc](#bsc)
-        1. [Time](#time)
-        2. [Position](#position)
-        3. [Velocity](#velocity)
+	1. [Bsc](#bsc)
+		1. [Time](#time)
+		2. [Position](#position)
+		3. [Velocity](#velocity)
 
 ## <a name="ballistic-solutions"></a>Namespace: `BallisticSolutions`
 
@@ -119,33 +119,38 @@ using BallisticSolutions;
 #### <a name="time"></a>Methods: Time
 
 Computes the earliest positive interception time between a projectile and a moving target.  
-Overloads for `Vector2`, `Vector3`, `Vector4`.
+**Returns:** The earliest interception time (t > 0). Returns `NaN` if no interception is possible.
+Supports `Vector2`, `Vector3`, `Vector4` overloads.
 ```csharp
 T BestImpactTime<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T>;
 ```
 
 Computes all possible interception times between a projectile and a moving target.  
-Overloads for `Vector2`, `Vector3`, `Vector4`.
+**Returns:** A sorted array of all valid interception times (t > 0). Empty if interception is impossible.  
+Supports `Vector2`, `Vector3`, `Vector4` overloads.
 ```csharp
 T[] ImpactTimes<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T>;
 ```
 
 #### <a name="position"></a>Methods: Position
 
-Computes displacement under constant acceleration.  
-Overloads for `Vector2`, `Vector3`, `Vector4`.
+Computes displacement under constant acceleration.
+**Returns:** The displacement vector after `time` has elapsed.  
+Supports `Vector2`, `Vector3`, `Vector4` overloads.
 ```csharp
 Vector4 Displacement<T>(T time, Vector4 velocity, Vector4 acceleration = default) where T : IFloatingPointIeee754<T>;
 ```
 
 Computes the impact position of the earliest valid interception.  
-Overloads for `Vector2`, `Vector3`, `Vector4`.
+**Returns:** The impact position vector. Returns `NaN` vector if interception is impossible.
+Supports `Vector2`, `Vector3`, `Vector4` overloads.
 ```csharp
 Vector4 BestImpactPosition<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T>;
 ```
 
 Computes all possible impact positions corresponding to valid interception times.  
-Overloads for `Vector2`, `Vector3`, `Vector4`.
+**Returns:** An array of vectors representing all valid impact positions. Empty if interception is impossible.  
+Supports `Vector2`, `Vector3`, `Vector4` overloads.
 ```csharp
 Vector4[] ImpactPositions<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T>;
 
@@ -154,19 +159,22 @@ Vector4[] ImpactPositions<T>(T projectileSpeed, Vector4 toTarget, Vector4 target
 #### <a name="velocity"></a>Methods: Velocity
 
 Computes the firing velocity required to hit the target at a given interception time.  
-Overloads for `Vector2`, `Vector3`, `Vector4`.
+**Returns:** The required firing velocity vector. Returns Vector.NaN if `impactTime` ≤ 0.  
+Supports `Vector2`, `Vector3`, `Vector4` overloads.
 ```csharp
 Vector4 FiringVelocity<T>(T impactTime, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T>;
 ```
 
 Computes the firing velocity required for the earliest valid interception.  
-Overloads for `Vector2`, `Vector3`, `Vector4`.
+**Returns:** The required firing velocity vector. Returns `NaN` vector if interception is impossible.  
+Supports `Vector2`, `Vector3`, `Vector4` overloads.
 ```csharp
 Vector4 BestFiringVelocity<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T>;
 ```
 
 Computes firing velocities for all valid interception times.  
-Overloads for `Vector2`, `Vector3`, `Vector4`.
+**Returns:** An array of firing velocity vectors, one for each valid interception time. Empty if interception is impossible.  
+Supports `Vector2`, `Vector3`, `Vector4` overloads.
 ```csharp
 Vector4[] FiringVelocities<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T>;
 ```

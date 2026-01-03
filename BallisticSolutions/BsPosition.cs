@@ -1,5 +1,6 @@
 using System.Numerics;
-using BallisticSolutions.VectorExtensions;
+using BallisticSolutions.BsVectorExtensions;
+
 #if GODOT
 using Vector2 = Godot.Vector2;
 using Vector3 = Godot.Vector3;
@@ -12,7 +13,10 @@ using Vector4 = System.Numerics.Vector4;
 
 namespace BallisticSolutions;
 
-public static partial class Bsc {
+/// <summary>
+/// Provides methods for computing projectile positions, impact positions, and displacement calculations under constant acceleration.
+/// </summary>
+public static class BsPosition {
 
 	/// <summary>
 	/// Computes displacement under constant acceleration.
@@ -47,10 +51,10 @@ public static partial class Bsc {
 	/// <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
 	/// <param name="targetAcceleration">The acceleration vector of the target.</param>
 	/// <returns>
-	/// The impact position vector. Returns Vector.NaN if interception is impossible.
+	/// The impact position vector. Returns `NaN` vector if interception is impossible.
 	/// </returns>
 	public static Vector4 BestImpactPosition<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
-		if (projectileSpeed < T.Zero) Warning("`Bsc.BestImpactPosition`: Negative `projectileSpeed`.");
+		if (projectileSpeed < T.Zero) Logger.PushWarning("`Bsc.BestImpactPosition`: Negative `projectileSpeed`.");
 
 		return toTarget + Displacement(BestImpactTime(projectileSpeed, toTarget, targetVelocity, projectileAcceleration, targetAcceleration), targetVelocity, targetAcceleration);
 	}
@@ -76,7 +80,7 @@ public static partial class Bsc {
 	/// An array of vectors representing all valid impact positions.
 	/// </returns>
 	public static Vector4[] ImpactPositions<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
-		if (projectileSpeed < T.Zero) Warning("`Bsc.ImpactPositions`: Negative `projectileSpeed`.");
+		if (projectileSpeed < T.Zero) Logger.PushWarning("`Bsc.ImpactPositions`: Negative `projectileSpeed`.");
 
 		return [..
 			ImpactTimes(projectileSpeed, toTarget, targetVelocity, projectileAcceleration, targetAcceleration)
@@ -97,4 +101,11 @@ public static partial class Bsc {
 			ImpactPositions(projectileSpeed, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4())
 				.Select(position => position.ToVector2())
 		];
+
+
+
+
+
+
+
 }

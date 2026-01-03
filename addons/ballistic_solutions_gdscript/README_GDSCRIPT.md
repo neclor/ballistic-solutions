@@ -34,38 +34,38 @@
 @export var projectile_acceleration: Vector2 = Vector2.ZERO
 
 func shoot(target: Target2D) -> void:
-    var to_target: Vector2 = target.global_position - global_position
-    var velocity: Vector2 = Bsc.best_firing_velocity_vector2(projectile_speed, to_target, target.velocity, projectile_acceleration, target.acceleration)
-    
-    if is_nan(velocity.x):
-        print("Impossible to hit the target")
-        return
-    
-    var new_projectile: Projectile2D = projectile_packed_scene.instantiate()
-    new_projectile.global_position = global_position
-    new_projectile.velocity = velocity
-    new_projectile.acceleration = projectile_acceleration
+	var to_target: Vector2 = target.global_position - global_position
+	var velocity: Vector2 = Bsc.best_firing_velocity_vector2(projectile_speed, to_target, target.velocity, projectile_acceleration, target.acceleration)
+	
+	if is_nan(velocity.x):
+		print("Impossible to hit the target")
+		return
+	
+	var new_projectile: Projectile2D = projectile_packed_scene.instantiate()
+	new_projectile.global_position = global_position
+	new_projectile.velocity = velocity
+	new_projectile.acceleration = projectile_acceleration
 
-    get_parent().add_child(new_projectile)
+	get_parent().add_child(new_projectile)
 
 func get_best_impact_time(target: Target2D) -> float:
-    var to_target: Vector2 = target.global_position - global_position
-    var best_impact_time: float = Bsc.best_impact_time(projectile_speed, to_target, target.velocity, projectile_acceleration, target.acceleration)
-    return best_impact_time
+	var to_target: Vector2 = target.global_position - global_position
+	var best_impact_time: float = Bsc.best_impact_time(projectile_speed, to_target, target.velocity, projectile_acceleration, target.acceleration)
+	return best_impact_time
 
 func get_best_impact_position(target: Target2D) -> Vector2:
-    var to_target: Vector2 = target.global_position - global_position
-    var best_impact_position: Vector2 = global_position + Bsc.best_impact_position(projectile_speed, to_target, target.velocity, projectile_acceleration, target.acceleration)
-    return best_impact_position
+	var to_target: Vector2 = target.global_position - global_position
+	var best_impact_position: Vector2 = global_position + Bsc.best_impact_position(projectile_speed, to_target, target.velocity, projectile_acceleration, target.acceleration)
+	return best_impact_position
 ```
 
 ---
 
 ## <a name="reference"></a>Reference
 1. [Bsc](#bsc)
-    1. [Time](#time)
-    2. [Position](#position)
-    3. [Velocity](#velocity)
+	1. [Time](#time)
+	2. [Position](#position)
+	3. [Velocity](#velocity)
 
 ### <a name="bsc"></a>Class: `Bsc`
 

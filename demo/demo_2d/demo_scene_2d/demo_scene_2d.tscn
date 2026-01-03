@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ly3tkljwfa8m"]
+[gd_scene format=3 uid="uid://ly3tkljwfa8m"]
 
 [ext_resource type="PackedScene" uid="uid://beqhq1817oav7" path="res://demo/demo_2d/wall/wall.tscn" id="1_orey4"]
 [ext_resource type="Script" uid="uid://ixphgyc2vqpk" path="res://demo/demo_2d/demo_scene_2d/demo_scene_2d.gd" id="1_s3u83"]
@@ -7,40 +7,40 @@
 [ext_resource type="PackedScene" uid="uid://cyeydvona6yuj" path="res://demo/demo_2d/menu/menu.tscn" id="5_bh43b"]
 [ext_resource type="PackedScene" uid="uid://dyhohsn75nnvd" path="res://demo/demo_2d/turret/CSharp/Turret2DCSharp.tscn" id="5_reg2c"]
 
-[node name="DemoScene2D" type="Node2D" node_paths=PackedStringArray("player", "turret_gdscript", "turret_csharp")]
+[node name="DemoScene2D" type="Node2D" unique_id=959849633 node_paths=PackedStringArray("player", "turret_gdscript", "turret_csharp")]
 script = ExtResource("1_s3u83")
 player = NodePath("Player2D")
 turret_gdscript = NodePath("Turret2DGDScript")
 turret_csharp = NodePath("Turret2DCSharp")
 
-[node name="Walls" type="Node2D" parent="."]
+[node name="Walls" type="Node2D" parent="." unique_id=803897312]
 
-[node name="ButtomWall" parent="Walls" instance=ExtResource("1_orey4")]
+[node name="ButtomWall" parent="Walls" unique_id=1579177643 instance=ExtResource("1_orey4")]
 position = Vector2(0, 1296)
 
-[node name="RightWall" parent="Walls" instance=ExtResource("1_orey4")]
+[node name="RightWall" parent="Walls" unique_id=720006639 instance=ExtResource("1_orey4")]
 position = Vector2(2304, 0)
 rotation = -1.5708
 
-[node name="TopWall" parent="Walls" instance=ExtResource("1_orey4")]
+[node name="TopWall" parent="Walls" unique_id=287548327 instance=ExtResource("1_orey4")]
 position = Vector2(0, -1296)
 rotation = 3.14159
 
-[node name="LeftWall" parent="Walls" instance=ExtResource("1_orey4")]
+[node name="LeftWall" parent="Walls" unique_id=54824641 instance=ExtResource("1_orey4")]
 position = Vector2(-2304, 0)
 rotation = 1.5708
 
-[node name="Player2D" parent="." instance=ExtResource("3_e1cyj")]
+[node name="Player2D" parent="." unique_id=329158789 instance=ExtResource("3_e1cyj")]
 unique_name_in_owner = true
 position = Vector2(0, 256)
 
-[node name="Turret2DGDScript" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_kwcv7")]
+[node name="Turret2DGDScript" parent="." unique_id=846419834 node_paths=PackedStringArray("player") instance=ExtResource("2_kwcv7")]
 player = NodePath("../Player2D")
 
-[node name="Turret2DCSharp" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("5_reg2c")]
+[node name="Turret2DCSharp" parent="." unique_id=922292823 node_paths=PackedStringArray("Player") instance=ExtResource("5_reg2c")]
 Player = NodePath("../Player2D")
 
-[node name="Menu" parent="." instance=ExtResource("5_bh43b")]
+[node name="Menu" parent="." unique_id=1031995781 instance=ExtResource("5_bh43b")]
 
 [connection signal="value_changed" from="Menu/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerSpeed" to="." method="_on_player_speed_value_changed"]
 [connection signal="text_changed" from="Menu/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/PlayerAccelerateVectorX" to="." method="_on_player_accelerate_vector_x_text_changed"]

@@ -1,5 +1,6 @@
 using System.Numerics;
-using BallisticSolutions.VectorExtensions;
+using BallisticSolutions.BsVectorExtensions;
+
 #if GODOT
 using Vector2 = Godot.Vector2;
 using Vector3 = Godot.Vector3;
@@ -12,7 +13,10 @@ using Vector4 = System.Numerics.Vector4;
 
 namespace BallisticSolutions;
 
-public static partial class Bsc {
+/// <summary>
+/// Provides methods for computing required firing velocities to hit a target under constant acceleration conditions.
+/// </summary>
+public static class BsVelocity {
 
 	/// <summary>
 	/// Computes the firing velocity required to hit the target at a given interception time.
@@ -28,7 +32,7 @@ public static partial class Bsc {
 	/// </returns>
 	public static Vector4 FiringVelocity<T>(T impactTime, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
 		if (impactTime <= T.Zero) {
-			Error("`Bsc.FiringVelocity`: Zero or negative `impactTime`. Returning Vector.NaN.");
+			Logger.PushError("`Bsc.FiringVelocity`: Zero or negative `impactTime`. Returning NaN vector.");
 			return Vector4.NaN;
 		}
 
@@ -54,10 +58,10 @@ public static partial class Bsc {
 	/// <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
 	/// <param name="targetAcceleration">The acceleration vector of the target.</param>
 	/// <returns>
-	/// The required firing velocity vector. Returns Vector.NaN if interception is impossible.
+	/// The required firing velocity vector. Returns `NaN` vector if interception is impossible.
 	/// </returns>
 	public static Vector4 BestFiringVelocity<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
-		if (projectileSpeed < T.Zero) Warning("`Bsc.BestFiringVelocity`: Negative `projectileSpeed`.");
+		if (projectileSpeed < T.Zero) Logger.PushWarning("`Bsc.BestFiringVelocity`: Negative `projectileSpeed`.");
 
 		return FiringVelocity(BestImpactTime(projectileSpeed, toTarget, targetVelocity, projectileAcceleration, targetAcceleration), toTarget, targetVelocity, projectileAcceleration, targetAcceleration);
 	}
@@ -83,7 +87,7 @@ public static partial class Bsc {
 	/// An array of firing velocity vectors, one for each valid interception time.
 	/// </returns>
 	public static Vector4[] FiringVelocities<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
-		if (projectileSpeed < T.Zero) Warning("`Bsc.FiringVelocities`: Negative `projectileSpeed`.");
+		if (projectileSpeed < T.Zero) Logger.PushWarning("`Bsc.FiringVelocities`: Negative `projectileSpeed`.");
 
 		return [..
 			ImpactTimes(projectileSpeed, toTarget, targetVelocity, projectileAcceleration, targetAcceleration)

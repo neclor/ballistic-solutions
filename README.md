@@ -51,7 +51,7 @@ This can significantly affect ballistic accuracy if not properly accounted for.
 ## <a name="demo"></a>Demo
 You can test the addon using the included demo scene.
 
-![](docs/screenshot.png)
+![](docs/screenshot_2d.png)
 ![](docs/screenshot_3d.png)
 
 ---
