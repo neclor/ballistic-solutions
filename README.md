@@ -7,11 +7,12 @@ taking into account the velocities and accelerations of both projectile and targ
 
 ## Table of Contents
 1. [Quickstart](#quickstart)
-2. [GDScript](#gdscript)
-3. [C#](#csharp)
-4. [Demo](#demo) 
-5. [Contributing](#contributing)
-6. [How it Works ?](#how-it-works)
+2. [Warning](#warning)
+3. [GDScript](#gdscript)
+4. [C#](#csharp)
+5. [Demo](#demo)
+6. [Contributing](#contributing)
+7. [How it Works ?](#how-it-works)
 
 ---
 
@@ -27,6 +28,18 @@ taking into account the velocities and accelerations of both projectile and targ
 
 ---
 
+## <a name="warning"></a>Warning
+
+**Godot Physics Consideration:**  
+Godot applies linear damping to physics bodies by default, which gradually reduces object velocity.
+This can significantly affect ballistic accuracy if not properly accounted for.
+
+**Recommendations:**
+- Set `default_linear_damp = 0` in the project settings, if you want pure projectile motion
+- Test thoroughly with your specific physics settings
+
+---
+
 ## <a name="gdscript"></a>[GDScript](README_GDSCRIPT.md)
 
 ---
@@ -39,6 +52,7 @@ taking into account the velocities and accelerations of both projectile and targ
 You can test the addon using the included demo scene.
 
 ![](docs/screenshot.png)
+![](docs/screenshot_3d.png)
 
 ---
 
