@@ -67,12 +67,13 @@ using BallisticSolutions;
     [Export]
     public PackedScene ProjectilePackedScene { get; set; }
 
+    [Export]
     public float ProjectileSpeed { get; set; } = 200f;
+    [Export]
     public Vector2 ProjectileAcceleration { get; set; } = Vector2.Zero;
 
     public void Shoot(Target2D target) {
         Vector2 toTarget = target.GlobalPosition - GlobalPosition;
-
         Vector2 velocity = Bsc.BestFiringVelocity(ProjectileSpeed, toTarget, target.Velocity, ProjectileAcceleration, target.Acceleration);
 
         if (float.IsNaN(velocity.X)) {
@@ -86,6 +87,18 @@ using BallisticSolutions;
         newProjectile.Acceleration = ProjectileAcceleration;
     
         GetParent().AddChild(newProjectile);
+    }
+
+    public float GetBestImpactTime(Target2D target) {
+        Vector2 toTarget = target.GlobalPosition - GlobalPosition;
+        float bestImpactTime = Bsc.BestImpactTime(ProjectileSpeed, toTarget, target.Velocity, ProjectileAcceleration, target.Acceleration);
+        return bestImpactTime;
+    }
+
+    public Vector2 GetBestImpactPosition(Target2D target) {
+        Vector2 toTarget = target.GlobalPosition - GlobalPosition;
+        Vector2 bestImpactPosition = GlobalPosition + Bsc.BestImpactPosition(ProjectileSpeed, toTarget, target.Velocity, ProjectileAcceleration, target.Acceleration);
+        return bestImpactPosition;
     }
 ```
 

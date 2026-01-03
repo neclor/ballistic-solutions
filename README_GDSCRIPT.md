@@ -30,11 +30,11 @@
 
 @export var projectile_packed_scene: PackedScene
 
-var projectile_speed: float = 200
-var projectile_acceleration: Vector2 = Vector2.ZERO
+@export var projectile_speed: float = 200
+@export var projectile_acceleration: Vector2 = Vector2.ZERO
 
 func shoot(target: Target2D) -> void:
-	var to_target: Vector2 = target.global_position - global_position
+    var to_target: Vector2 = target.global_position - global_position
     var velocity: Vector2 = Bsc.best_firing_velocity_vector2(projectile_speed, to_target, target.velocity, projectile_acceleration, target.acceleration)
     
     if is_nan(velocity.x):
@@ -47,6 +47,16 @@ func shoot(target: Target2D) -> void:
     new_projectile.acceleration = projectile_acceleration
 
     get_parent().add_child(new_projectile)
+
+func get_best_impact_time(target: Target2D) -> float:
+    var to_target: Vector2 = target.global_position - global_position
+    var best_impact_time: float = Bsc.best_impact_time(projectile_speed, to_target, target.velocity, projectile_acceleration, target.acceleration)
+    return best_impact_time
+
+func get_best_impact_position(target: Target2D) -> Vector2:
+    var to_target: Vector2 = target.global_position - global_position
+    var best_impact_position: Vector2 = global_position + Bsc.best_impact_position(projectile_speed, to_target, target.velocity, projectile_acceleration, target.acceleration)
+    return best_impact_position
 ```
 
 ---
