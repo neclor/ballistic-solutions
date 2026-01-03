@@ -15,8 +15,7 @@ func create_projectile(velocity: Vector3) -> void:
 	var new_projectile: Projectile3D = projectile_packed_scene.instantiate()
 	get_parent().add_child(new_projectile)
 	new_projectile.global_position = global_position
-	new_projectile.velocity = velocity
-	new_projectile.acceleration = projectile_acceleration
+	new_projectile.linear_velocity = velocity
 
 
 func _on_timer_timeout() -> void:

@@ -83,6 +83,11 @@ zoom_out={
 2d_physics/layer_2="Projectile"
 2d_physics/layer_3="Player"
 
+[physics]
+
+3d/physics_engine="Jolt Physics"
+3d/default_linear_damp=0.0
+
 [rendering]
 
 environment/defaults/default_clear_color=Color(0.188235, 0.188235, 0.188235, 1)
