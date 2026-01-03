@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbnnfj658gjb0"]
+
+[ext_resource type="PackedScene" uid="uid://dywxd3kl4gmxq" path="res://demo/demo_3d/turret/turret_3d.tscn" id="1_elevi"]
+[ext_resource type="Script" uid="uid://b310uo2c5wlgt" path="res://demo/demo_3d/demo_scene_3d.gd" id="1_y23wu"]
+[ext_resource type="PackedScene" uid="uid://byafnfub68r0f" path="res://demo/demo_3d/target/target_3d.tscn" id="2_y23wu"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lebdu"]
+size = Vector2(1000, 1000)
+
+[node name="DemoScene3D" type="Node3D"]
+script = ExtResource("1_y23wu")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_lebdu")
+
+[node name="Turret3D" parent="." node_paths=PackedStringArray("target") instance=ExtResource("1_elevi")]
+target = NodePath("../Target3D")
+projectile_speed = 40.0
+
+[node name="Target3D" parent="." instance=ExtResource("2_y23wu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 100)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.80581933, -0.08440202, 0.5861158, -0.00014326017, 0.9898179, 0.14233908, -0.59216166, 0.114615604, -0.79762655, 72.212105, 44.645466, -14.643908)
+current = true

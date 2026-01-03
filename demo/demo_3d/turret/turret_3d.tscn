@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://dywxd3kl4gmxq"]
+
+[ext_resource type="Script" uid="uid://djedyqnlhvwac" path="res://demo/demo_3d/turret/turret_3d.gd" id="1_s7hd8"]
+[ext_resource type="PackedScene" uid="uid://bks7arsxx8cee" path="res://demo/demo_3d/projectile/projectile_3d.tscn" id="2_jqqpc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s7hd8"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jqqpc"]
+material = SubResource("StandardMaterial3D_s7hd8")
+
+[node name="Turret3D" type="Node3D"]
+script = ExtResource("1_s7hd8")
+projectile_packed_scene = ExtResource("2_jqqpc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_jqqpc")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
