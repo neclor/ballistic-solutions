@@ -21,14 +21,14 @@ static func firing_velocity(impact_time: float, to_target: Variant, target_veloc
 			return firing_velocity_vector4(impact_time, to_target, BsVector4Extensions.from_vector(target_velocity), BsVector4Extensions.from_vector(projectile_acceleration), BsVector4Extensions.from_vector(target_acceleration))
 
 		_:
-			_BsLogger._push_error("`Bsc.firing_velocity`: Unsupported type `" + type_string(type) + "`. Returning null.")
+			_BsLogger._push_error("`Bsc.firing_velocity`: Unsupported type `" + type_string(type) + "`. Returned null.")
 			return null
 
 
 ## See [method firing_velocity].
 static func firing_velocity_vector4(impact_time: float, to_target: Vector4, target_velocity: Vector4 = Vector4.ZERO, projectile_acceleration: Vector4 = Vector4.ZERO, target_acceleration: Vector4 = Vector4.ZERO) -> Vector4:
 	if impact_time < 0 or is_zero_approx(impact_time):
-		_BsLogger._push_error("`Bsc.firing_velocity`: Zero or negative `impact_time`. Returning NAN_VECTOR.");
+		_BsLogger._push_error("`Bsc.firing_velocity`: Zero or negative `impact_time`. Returned NAN_VECTOR.");
 		return BsVector4Extensions.NAN_VECTOR
 
 	return to_target / impact_time + target_velocity - (projectile_acceleration - target_acceleration) * impact_time / 2
@@ -59,7 +59,7 @@ static func best_firing_velocity(projectile_speed: float, to_target: Variant, ta
 			return best_firing_velocity_vector4(projectile_speed, to_target, BsVector4Extensions.from_vector(target_velocity), BsVector4Extensions.from_vector(projectile_acceleration), BsVector4Extensions.from_vector(target_acceleration))
 
 		_:
-			_BsLogger._push_error("`Bsc.best_firing_velocity`: Unsupported type `" + type_string(type) + "`. Returning null.")
+			_BsLogger._push_error("`Bsc.best_firing_velocity`: Unsupported type `" + type_string(type) + "`. Returned null.")
 			return null
 
 
@@ -95,7 +95,7 @@ static func firing_velocities(projectile_speed: float, to_target: Variant, targe
 			return firing_velocities_vector4(projectile_speed, to_target, BsVector4Extensions.from_vector(target_velocity), BsVector4Extensions.from_vector(projectile_acceleration), BsVector4Extensions.from_vector(target_acceleration))
 
 		_:
-			_BsLogger._push_error("`Bsc.firing_velocities`: Unsupported type `" + type_string(type) + "`. Returning [].")
+			_BsLogger._push_error("`Bsc.firing_velocities`: Unsupported type `" + type_string(type) + "`. Returned [].")
 			return []
 
 

@@ -15,7 +15,7 @@ static func best_impact_position(projectile_speed: float, to_target: Variant, ta
 		Variant.Type.TYPE_VECTOR3, Variant.Type.TYPE_VECTOR3I: return best_impact_position_vector3(projectile_speed, to_target, BsVector3Extensions.from_vector(target_velocity), BsVector3Extensions.from_vector(projectile_acceleration), BsVector3Extensions.from_vector(target_acceleration))
 		Variant.Type.TYPE_VECTOR4, Variant.Type.TYPE_VECTOR4I: return best_impact_position_vector4(projectile_speed, to_target, BsVector4Extensions.from_vector(target_velocity), BsVector4Extensions.from_vector(projectile_acceleration), BsVector4Extensions.from_vector(target_acceleration))
 		_:
-			_BsLogger._push_error("`Bsc.best_impact_position`: Unsupported type `" + type_string(type) + "`. Returning null.")
+			_BsLogger._push_error("`Bsc.best_impact_position`: Unsupported type `" + type_string(type) + "`. Returned null.")
 			return null
 
 
@@ -44,7 +44,7 @@ static func displacement(time: float, velocity: Variant, acceleration: Variant =
 		Variant.Type.TYPE_VECTOR3, Variant.Type.TYPE_VECTOR3I: return displacement_vector3(time, velocity, BsVector3Extensions.from_vector(acceleration))
 		Variant.Type.TYPE_VECTOR4, Variant.Type.TYPE_VECTOR4I: return displacement_vector4(time, velocity, BsVector4Extensions.from_vector(acceleration))
 		_:
-			_BsLogger._push_error("`Bsc.displacement`: Unsupported type `" + type_string(type) + "`. Returning null.")
+			_BsLogger._push_error("`Bsc.displacement`: Unsupported type `" + type_string(type) + "`. Returned null.")
 			return null
 
 
@@ -82,7 +82,7 @@ static func impact_positions(projectile_speed: float, to_target: Variant, target
 			return impact_positions_vector4(projectile_speed, to_target, BsVector4Extensions.from_vector(target_velocity), BsVector4Extensions.from_vector(projectile_acceleration), BsVector4Extensions.from_vector(target_acceleration))
 
 		_:
-			_BsLogger._push_error("`Bsc.impact_positions`: Unsupported type `" + type_string(type) + "`. Returning [].")
+			_BsLogger._push_error("`Bsc.impact_positions`: Unsupported type `" + type_string(type) + "`. Returned [].")
 			return []
 
 

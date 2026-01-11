@@ -32,7 +32,7 @@ public static class BsVelocity {
 	/// </returns>
 	public static Vector4 FiringVelocity<T>(T impactTime, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
 		if (impactTime <= T.Zero) {
-			Logger.PushError("`Bsc.FiringVelocity`: Zero or negative `impactTime`. Returning NaN vector.");
+			Logger.PushError("`Bsc.FiringVelocity`: Zero or negative `impactTime`. Returned NaN vector.");
 			return Vector4.NaN;
 		}
 

@@ -16,7 +16,7 @@ static func from_vector(from: Variant) -> Vector2:
 		Variant.Type.TYPE_VECTOR3, Variant.Type.TYPE_VECTOR3I: return from_vector3(from)
 		Variant.Type.TYPE_VECTOR4, Variant.Type.TYPE_VECTOR4I: return from_vector4(from)
 		_:
-			_BsLogger._push_error("`BsVector2Extensions.from_vector`: Unsupported type `" + type_string(type) + "`. Returning NAN_VECTOR.")
+			_BsLogger._push_error("`BsVector2Extensions.from_vector`: Unsupported type `" + type_string(type) + "`. Returned NAN_VECTOR.")
 			return NAN_VECTOR
 
 

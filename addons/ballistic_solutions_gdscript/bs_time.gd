@@ -15,7 +15,7 @@ static func all_impact_times(projectile_speed: float, to_target: Variant, target
 		Variant.Type.TYPE_VECTOR3, Variant.Type.TYPE_VECTOR3I: return all_impact_times_by_speed_vector3(projectile_speed, to_target, BsVector3Extensions.from_vector(target_velocity), BsVector3Extensions.from_vector(projectile_acceleration), BsVector3Extensions.from_vector(target_acceleration))
 		Variant.Type.TYPE_VECTOR4, Variant.Type.TYPE_VECTOR4I: return all_impact_times_by_speed_vector4(projectile_speed, to_target, BsVector4Extensions.from_vector(target_velocity), BsVector4Extensions.from_vector(projectile_acceleration), BsVector4Extensions.from_vector(target_acceleration))
 		_:
-			_BsLogger._push_error("`Bsc.impact_times`: Unsupported type `" + type_string(type) + "`. Returning [].")
+			_BsLogger._push_error("`Bsc.impact_times`: Unsupported type `" + type_string(type) + "`. Returned [].")
 			return []
 
 
@@ -30,7 +30,7 @@ static func all_impact_times_by_speed(projectile_speed: float, to_target: Varian
 		Variant.Type.TYPE_VECTOR3, Variant.Type.TYPE_VECTOR3I: return all_impact_times_by_speed_vector3(projectile_speed, to_target, BsVector3Extensions.from_vector(target_velocity), BsVector3Extensions.from_vector(projectile_acceleration), BsVector3Extensions.from_vector(target_acceleration))
 		Variant.Type.TYPE_VECTOR4, Variant.Type.TYPE_VECTOR4I: return all_impact_times_by_speed_vector4(projectile_speed, to_target, BsVector4Extensions.from_vector(target_velocity), BsVector4Extensions.from_vector(projectile_acceleration), BsVector4Extensions.from_vector(target_acceleration))
 		_:
-			_BsLogger._push_error("`Bsc.impact_times`: Unsupported type `" + type_string(type) + "`. Returning [].")
+			_BsLogger._push_error("`Bsc.impact_times`: Unsupported type `" + type_string(type) + "`. Returned [].")
 			return []
 
 
@@ -101,7 +101,7 @@ static func best_impact_time_by_speed(projectile_speed: float, to_target: Varian
 		Variant.Type.TYPE_VECTOR3, Variant.Type.TYPE_VECTOR3I: return best_impact_time_by_speed_vector3(projectile_speed, to_target, BsVector3Extensions.from_vector(target_velocity), BsVector3Extensions.from_vector(projectile_acceleration), BsVector3Extensions.from_vector(target_acceleration))
 		Variant.Type.TYPE_VECTOR4, Variant.Type.TYPE_VECTOR4I: return best_impact_time_by_speed_vector4(projectile_speed, to_target, BsVector4Extensions.from_vector(target_velocity),  BsVector4Extensions.from_vector(projectile_acceleration), BsVector4Extensions.from_vector(target_acceleration))
 		_:
-			_BsLogger._push_error("`Bsc.best_impact_time`: Unsupported type `" + type_string(type) + "`. Returning NAN.")
+			_BsLogger._push_error("`Bsc.best_impact_time`: Unsupported type `" + type_string(type) + "`. Returned NAN.")
 			return NAN
 
 
