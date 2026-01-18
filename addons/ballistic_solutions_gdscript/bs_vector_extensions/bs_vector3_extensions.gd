@@ -4,6 +4,9 @@
 ## Extension for [Vector3]
 
 
+const _SCRIPT: String = "BsVector3Extensions"
+
+
 ## [Vector3] whose elements are equal to [constant NAN].
 const NAN_VECTOR: Vector3 = Vector3(NAN, NAN, NAN)
 
@@ -16,7 +19,7 @@ static func from_vector(from: Variant, z: float = 0) -> Vector3:
 		Variant.Type.TYPE_VECTOR3, Variant.Type.TYPE_VECTOR3I: return from
 		Variant.Type.TYPE_VECTOR4, Variant.Type.TYPE_VECTOR4I: return from_vector4(from)
 		_:
-			_BsLogger._push_error("`BsVector3Extensions.from_vector`: Unsupported type `" + type_string(type) + "`. Returned NAN_VECTOR.")
+			_BsLogger.format_error(_SCRIPT, from_vector.get_method(), "Unsupported type `%s`" % type_string(type), "nan vector")
 			return NAN_VECTOR
 
 

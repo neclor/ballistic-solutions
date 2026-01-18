@@ -8,12 +8,12 @@ using Vector3 = System.Numerics.Vector3;
 using Vector4 = System.Numerics.Vector4;
 #endif
 
-namespace BallisticSolutions.BsVectorExtensions;
+namespace BallisticSolutions.VectorExtensions;
 
 /// <summary>
 /// Extension methods for working with Vector3.
 /// </summary>
-public static class BsVector3Extensions {
+public static class Vector3Extensions {
 
 #if GODOT
 	private static readonly Vector3 _nan = new(float.NaN, float.NaN, float.NaN);

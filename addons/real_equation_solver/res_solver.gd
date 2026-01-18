@@ -1,10 +1,9 @@
-class_name Res extends RealEquationSolver
+@abstract class_name ResSolver extends RealEquationSolver
 
 
-## Res - Real Equation Solver [br]
 ## Equation solver for real-valued polynomial equations up to 4th degree.
 ##
-## @tutorial(RES - Real Equation Solver): https://github.com/neclor/godot-real-equation-solver/blob/main/README.md
+## @tutorial(Real Equation Solver): https://github.com/neclor/godot-real-equation-solver/blob/main/README.md
 ##
 ## @tutorial(Wikipedia: Linear equation): https://en.wikipedia.org/wiki/Linear_equation
 ## @tutorial(Wikipedia: Quadratic equation): https://en.wikipedia.org/wiki/Quadratic_equation
@@ -14,35 +13,44 @@ class_name Res extends RealEquationSolver
 ## @tutorial(Wikipedia: Ferrari's solution): https://ru.wikipedia.org/wiki/%D0%9C%D0%B5%D1%82%D0%BE%D0%B4_%D0%A4%D0%B5%D1%80%D1%80%D0%B0%D1%80%D0%B8
 
 
-## Returns a real root of an equation of the form: [param a] * x + [param b] = 0
+const _SCRIPT: GDScript = ResSolver
+
+
+## Returns a real root of an equation of the form: [param a]x + [param b] = 0.
 ##
 ## [codeblock lang=gdscript]
-## Res.linear(5, -10) # Returns 2
-## Res.linear(0, 1) # Returns NAN
+## ResSolver.linear(5, -10) # Returns 2
+## ResSolver.linear(0, 1) # Returns NAN
 ## [/codeblock]
 static func linear(a: float, b: float) -> float:
 	if is_zero_approx(a): return NAN
 	return -b / a
 
 
-## Returns a sorted array of real roots of an equation of the form: [param a] * x^2 + [param b] * x + [param c] = 0
+## See [method ResSolver.linear].
+static func linear_array(coeffs: Array[float]) -> float:
+	if coeffs.size() != 2:
+		_ResLogger.format_error(_SCRIPT, linear_array, "There must be exactly 2 coefficients [a, b]", NAN)
+		return NAN
+	return linear(coeffs[0], coeffs[1])
+
+
+## Returns a sorted array of real roots of an equation of the form: [param a]x² + [param b]x + [param c] = 0.
 ##
 ## [codeblock lang=gdscript]
-## Res.quadratic(1, 1, -6) # Returns [-3, 2]
+## ResSolver.quadratic(1, 1, -6) # Returns [-3, 2]
 ## [/codeblock]
 static func quadratic(a: float, b: float, c: float) -> Array[float]:
 	if is_zero_approx(a):
 		var root: float = linear(b, c)
-		if is_nan(root): return []
+		if is_nan(root): return [] # Don't use ternary operator it returns Array instead Array[float]
 		return [root]
 
 	var p: float = b / a
 	var q: float = c / a
-
 	var D: float = p * p - 4 * q
 
-	# The check for 0 must be before the check for the sign
-	if is_zero_approx(D): return [-p / 2]
+	if is_zero_approx(D): return [-p / 2] # The check for 0 must be before the check for the sign
 
 	if D < 0: return []
 
@@ -54,13 +62,21 @@ static func quadratic(a: float, b: float, c: float) -> Array[float]:
 	return roots
 
 
-## Returns a sorted array of real roots of an equation of the form: [param a] * x^3 + [param b] * x^2 + [param c] * x + [param d] = 0
+## See [method ResSolver.quadratic].
+static func quadratic_array(coeffs: Array[float]) -> Array[float]:
+	if coeffs.size() != 3:
+		_ResLogger.format_error(_SCRIPT, quadratic_array, "There must be exactly 3 coefficients [a, b, c]", [])
+		return []
+	return quadratic(coeffs[0], coeffs[1], coeffs[2])
+
+
+## Returns a sorted array of real roots of an equation of the form: [param a]x³ + [param b]x² + [param c]x + [param d] = 0.
 ##
 ## [codeblock lang=gdscript]
-## Res.cubic(2, -11, 12, 9) # Returns [-0.5, 3]
+## ResSolver.cubic(2, -11, 12, 9) # Returns [-0.5, 3]
 ## [/codeblock]
 ##
-## [b][color=GOLD]Warning:[/color][/b] For large argument values, answers may be inaccurate or incorrect. [br]
+## [b][color=GOLD]Warning:[/color][/b] For large argument values, answers may be inaccurate or incorrect, e.g. >= 10_000_000. [br]
 static func cubic(a: float, b: float, c: float, d: float) -> Array[float]:
 	if is_zero_approx(a): return quadratic(b, c, d)
 
@@ -83,7 +99,7 @@ static func cubic(a: float, b: float, c: float, d: float) -> Array[float]:
 		if is_zero_approx(R):
 			roots.append(-p_div_3)
 		else:
-			var cbrt_R: float = RealEquationSolverMath.cbrt(R)
+			var cbrt_R: float = ResMath.cbrt(R)
 			roots.append(-2 * cbrt_R - p_div_3)
 			roots.append(cbrt_R - p_div_3)
 
@@ -97,7 +113,7 @@ static func cubic(a: float, b: float, c: float, d: float) -> Array[float]:
 
 	else:
 		if is_zero_approx(Q):
-			roots.append(-RealEquationSolverMath.cbrt(r - p_div_3_pow_3) - p_div_3)
+			roots.append(-ResMath.cbrt(r - p_div_3_pow_3) - p_div_3)
 		elif Q > 0:
 			var f: float = acosh(absf(R) / sqrt(Q_pow_3)) / 3
 			roots.append(-2 * signf(R) * sqrt(Q) * cosh(f) - p_div_3)
@@ -109,13 +125,21 @@ static func cubic(a: float, b: float, c: float, d: float) -> Array[float]:
 	return roots
 
 
-## Returns a sorted array of real roots of an equation of the form: [param a] * x^4 + [param b] * x^3 + [param c] * x^2 + [param d] * x + [param e] = 0
+## See [method ResSolver.cubic].
+static func cubic_array(coeffs: Array[float]) -> Array[float]:
+	if coeffs.size() != 4:
+		_ResLogger.format_error(_SCRIPT, cubic_array, "There must be exactly 4 coefficients [a, b, c, d]", [])
+		return []
+	return cubic(coeffs[0], coeffs[1], coeffs[2], coeffs[3])
+
+
+## Returns a sorted array of real roots of an equation of the form: [param a]x⁴ + [param b]x³ + [param c]x² + [param d]x + [param e] = 0.
 ##
 ## [codeblock lang=gdscript]
-## Res.quartic(1, -10, 35, -50, 24) # Returns [1, 2, 3, 4]
+## ResSolver.quartic(1, -10, 35, -50, 24) # Returns [1, 2, 3, 4]
 ## [/codeblock]
 ##
-## [b][color=GOLD]Warning:[/color][/b] For large argument values, answers may be inaccurate or incorrect.[br]
+## [b][color=GOLD]Warning:[/color][/b] For large argument values, answers may be inaccurate or incorrect, e.g. >= 10_000_000. [br]
 static func quartic(a: float, b: float, c: float, d: float, e: float) -> Array[float]:
 	if is_zero_approx(a): return cubic(b, c, d, e)
 
@@ -128,14 +152,14 @@ static func quartic(a: float, b: float, c: float, d: float, e: float) -> Array[f
 	var half_a1_pow_2: float = half_a1 * half_a1
 	var half_a1_pow_3: float = half_a1_pow_2 * half_a1
 
-	# Converting to a depRessed quartic. x = u - a1 / 4 -> u^4 + p * u^2 + q * u + r = 0
+	# Converting to a depRessed quartic. x = u - a1 / 4 -> u⁴ + p * u² + q * u + r = 0
 	var p: float = (-3.0 / 2.0) * half_a1_pow_2 + b1
 	var q: float = half_a1_pow_3 - half_a1 * b1 + c1
 	var r: float = (-3.0 / 16.0) * (half_a1_pow_2 * half_a1_pow_2) + half_a1_pow_2 * b1 / 4 - half_a1 * c1 / 2 + d1
 
 	var u_values: Array[float] = []
 	if is_zero_approx(q):
-		for u_pow_2 in quadratic(1, p, r):
+		for u_pow_2: float in quadratic(1, p, r):
 			if is_zero_approx(u_pow_2):
 				u_values.append(0)
 			elif u_pow_2 > 0:
@@ -146,9 +170,9 @@ static func quartic(a: float, b: float, c: float, d: float, e: float) -> Array[f
 	else:
 		var p_pow_2: float = p * p
 		var p_pow_3: float = p_pow_2 * p
-		
+
 		var half_q: float = q / 2
-		
+
 		var cubic_b: float = 2.5 * p
 		var cubic_c: float = 2 * p_pow_2 - r
 		var cubic_d: float = (p_pow_3 - p * r - half_q * half_q) / 2
@@ -159,20 +183,55 @@ static func quartic(a: float, b: float, c: float, d: float, e: float) -> Array[f
 		var half_q_div_sqrt_p_add_2y: float = half_q / sqrt_p_add_2y
 
 		var new_u_values: Array[float] = quadratic(1, -sqrt_p_add_2y, p_add_y + half_q_div_sqrt_p_add_2y) + quadratic(1, sqrt_p_add_2y, p_add_y - half_q_div_sqrt_p_add_2y)
-		for new_u in new_u_values:
-			var has_u: bool = false
-			for u in u_values:
-				if is_equal_approx(new_u, u):
-					has_u = true
-					break
-			if not has_u: u_values.append(new_u)
+		for new_u: float in new_u_values:
+			if not u_values.any(func(u: float) -> bool: return is_equal_approx(new_u, u)):
+				u_values.append(new_u)
 
-	# Converting back from depRessed quartic. x = u - a1 / 4
+	# Converting back from depressed quartic. x = u - a1 / 4
 	var a1_div_4: float = a1 / 4
 	var roots: Array[float] = Array(u_values.map(func(u: float) -> float: return u - a1_div_4), TYPE_FLOAT, "", null)
 	roots.sort()
 	return roots
 
 
-func _init() -> void:
-	_error("`Res`: Class is static and should not be instantiated.")
+## See [method ResSolver.quartic].
+static func quartic_array(coeffs: Array[float]) -> Array[float]:
+	if coeffs.size() != 5:
+		_ResLogger.format_error(_SCRIPT, quartic_array, "There must be exactly 5 coefficients [a, b, c, d, e]", [])
+		return []
+	return quartic(coeffs[0], coeffs[1], coeffs[2], coeffs[3], coeffs[4])
+
+
+## Returns a sorted array of the real roots of an equation based on the number of arguments.
+##
+## [codeblock lang=gdscript]
+## ResSolver.solve(1, -3, 2) # Returns [1, 2]
+## [/codeblock]
+##
+## [b][color=GOLD]Warning:[/color][/b] For large argument values, answers may be inaccurate or incorrect, e.g. >= 10_000_000. [br]
+static func solve(...coeffs: Array) -> Array[float]:
+	if coeffs.size() > 5:
+		_ResLogger.format_error(_SCRIPT, solve, "There cannot be more than 5 arguments", [])
+		return []
+
+	if not ResMath.is_numeric_array(coeffs):
+		_ResLogger.format_error(_SCRIPT, solve, "One of the arguments is not a number", [])
+		return []
+
+	return solve_array(Array(coeffs, Variant.Type.TYPE_FLOAT, "", null))
+
+
+## See [method ResSolver.solve].
+static func solve_array(coeffs: Array[float]) -> Array[float]:
+	if coeffs.size() > 5:
+		_ResLogger.format_error(_SCRIPT, solve_array, "There cannot be more than 5 arguments", [])
+		return []
+
+	match coeffs.size():
+		2:
+			var root: float = linear_array(coeffs)
+			return [] if is_nan(root) else [root]
+		3: return quadratic_array(coeffs)
+		4: return cubic_array(coeffs)
+		5: return quartic_array(coeffs)
+		_: return []
