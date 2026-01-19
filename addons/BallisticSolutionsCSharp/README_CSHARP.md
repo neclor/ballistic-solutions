@@ -4,13 +4,13 @@
 
 ## Table of Contents
 
-1. [Installation & Dependencies](#installation)
+1. [Installation & Dependencies](#installation--dependencies)
 2. [Example](#example)
 3. [Reference](#reference)
 
 ---
 
-## <a name="installation"></a>Installation & Dependencies
+## Installation & Dependencies
 
 ### Installation
 
@@ -26,29 +26,29 @@ To use this library, you need to reference the compiled `.dll` file in your proj
 #### Option 2: Edit the .csproj file directly
 
 1. Add a `<Reference>` entry for the `BallisticSolutions.dll` in `<ItemGroup>`
-    ```xml
-    <ItemGroup>
-      <Reference Include="BallisticSolutions">
-        <HintPath>addons\BallisticSolutionsCSharp\BallisticSolutions.dll</HintPath>
-      </Reference>
-    </ItemGroup>
-    ```
+	```xml
+	<ItemGroup>
+	  <Reference Include="BallisticSolutions">
+		<HintPath>addons\BallisticSolutionsCSharp\BallisticSolutions.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+	```
 
 2. Add NuGet dependencies: [MathNet.Numerics](https://www.nuget.org/packages/MathNet.Numerics/)
-    ```xml
-    <ItemGroup>
-      <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
-    </ItemGroup>
-    ```
+	```xml
+	<ItemGroup>
+	  <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
+	</ItemGroup>
+	```
 
-    **Or** Add a `<Reference>` entry for the `MathNet.Numerics.dll` in `<ItemGroup>`
-    ```xml
-    <ItemGroup>
-      <Reference Include="MathNet.Numerics">
-        <HintPath>addons\BallisticSolutionsCSharp\MathNet.Numerics.dll</HintPath>
-      </Reference>
-    </ItemGroup>
-    ```
+	**Or** Add a `<Reference>` entry for the `MathNet.Numerics.dll` in `<ItemGroup>`
+	```xml
+	<ItemGroup>
+	  <Reference Include="MathNet.Numerics">
+		<HintPath>addons\BallisticSolutionsCSharp\MathNet.Numerics.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+	```
 
 ---
 
@@ -57,118 +57,160 @@ To use this library, you need to reference the compiled `.dll` file in your proj
 
 ---
 
-## <a name="example"></a>Example
+## Example
+---
+
 ```csharp
 using Godot;
 using BallisticSolutions;
 
 // ...
 
-    [Export]
-    public PackedScene ProjectilePackedScene { get; set; }
+	[Export]
+	public PackedScene ProjectilePackedScene { get; set; }
 
-    [Export]
-    public float ProjectileSpeed { get; set; } = 200f;
-    [Export]
-    public Vector2 ProjectileAcceleration { get; set; } = Vector2.Zero;
+	[Export]
+	public float ProjectileSpeed { get; set; } = 200f;
+	[Export]
+	public Vector2 ProjectileAcceleration { get; set; } = Vector2.Zero;
 
-    public void Shoot(Target2D target) {
-        Vector2 toTarget = target.GlobalPosition - GlobalPosition;
-        Vector2 velocity = Bsc.BestFiringVelocity(ProjectileSpeed, toTarget, target.Velocity, ProjectileAcceleration, target.Acceleration);
+	public void Shoot(Target2D target) {
+		Vector2 toTarget = target.GlobalPosition - GlobalPosition;
+		Vector2 velocity = BsVelocity.BestFiringVelocity(ProjectileSpeed, toTarget, target.Velocity, ProjectileAcceleration, target.Acceleration);
 
-        if (float.IsNaN(velocity.X)) {
-            GD.Print("Impossible to hit the target");
-            return;
-        }
+		if (float.IsNaN(velocity.X)) {
+			GD.Print("Impossible to hit the target");
+			return;
+		}
 
-        var newProjectile = ProjectilePackedScene.Instantiate<Projectile2D>();
-        newProjectile.GlobalPosition = GlobalPosition;
-        newProjectile.Velocity = velocity;
-        newProjectile.Acceleration = ProjectileAcceleration;
-    
-        GetParent().AddChild(newProjectile);
-    }
-
-    public float GetBestImpactTime(Target2D target) {
-        Vector2 toTarget = target.GlobalPosition - GlobalPosition;
-        float bestImpactTime = Bsc.BestImpactTime(ProjectileSpeed, toTarget, target.Velocity, ProjectileAcceleration, target.Acceleration);
-        return bestImpactTime;
-    }
-
-    public Vector2 GetBestImpactPosition(Target2D target) {
-        Vector2 toTarget = target.GlobalPosition - GlobalPosition;
-        Vector2 bestImpactPosition = GlobalPosition + Bsc.BestImpactPosition(ProjectileSpeed, toTarget, target.Velocity, ProjectileAcceleration, target.Acceleration);
-        return bestImpactPosition;
-    }
+		var newProjectile = ProjectilePackedScene.Instantiate<Projectile2D>();
+		newProjectile.GlobalPosition = GlobalPosition;
+		newProjectile.Velocity = velocity;
+		newProjectile.Acceleration = ProjectileAcceleration;
+	
+		GetParent().AddChild(newProjectile);
+	}
 ```
 
 ---
 
-## <a name="reference"></a>Reference
+## Reference
 
-1. [BallisticSolutions](#ballistic-solutions)
-    1. [Bsc](#bsc)
-        1. [Time](#time)
-        2. [Position](#position)
-        3. [Velocity](#velocity)
+For the complete documentation, rely on the generated XML documentation.  
+Not all namespaces, classes, and methods are listed.  
 
-## <a name="ballistic-solutions"></a>Namespace: `BallisticSolutions`
-
-### <a name="bsc"></a>Class: `Bsc`
-
-#### <a name="time"></a>Methods: Time
-
-Computes the earliest positive interception time between a projectile and a moving target.  
-Overloads for `Vector2`, `Vector3`, `Vector4`.
-```csharp
-T BestImpactTime<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T>;
-```
-
-Computes all possible interception times between a projectile and a moving target.  
-Overloads for `Vector2`, `Vector3`, `Vector4`.
-```csharp
-T[] ImpactTimes<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T>;
-```
-
-#### <a name="position"></a>Methods: Position
-
-Computes displacement under constant acceleration.  
-Overloads for `Vector2`, `Vector3`, `Vector4`.
-```csharp
-Vector4 Displacement<T>(T time, Vector4 velocity, Vector4 acceleration = default) where T : IFloatingPointIeee754<T>;
-```
-
-Computes the impact position of the earliest valid interception.  
-Overloads for `Vector2`, `Vector3`, `Vector4`.
-```csharp
-Vector4 BestImpactPosition<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T>;
-```
-
-Computes all possible impact positions corresponding to valid interception times.  
-Overloads for `Vector2`, `Vector3`, `Vector4`.
-```csharp
-Vector4[] ImpactPositions<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T>;
-
-```
-
-#### <a name="velocity"></a>Methods: Velocity
-
-Computes the firing velocity required to hit the target at a given interception time.  
-Overloads for `Vector2`, `Vector3`, `Vector4`.
-```csharp
-Vector4 FiringVelocity<T>(T impactTime, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T>;
-```
-
-Computes the firing velocity required for the earliest valid interception.  
-Overloads for `Vector2`, `Vector3`, `Vector4`.
-```csharp
-Vector4 BestFiringVelocity<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T>;
-```
-
-Computes firing velocities for all valid interception times.  
-Overloads for `Vector2`, `Vector3`, `Vector4`.
-```csharp
-Vector4[] FiringVelocities<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T>;
-```
+1. `BallisticSolutions`
+	1. [`BsPosition`](#bsposition)
+	2. [`BsTime`](#bstime)
+	3. [`BsVelocity`](#bsvelocity)
 
 ---
+
+## `BsPosition`
+
+```csharp
+Vector4[] AllImpactPositions(Vector4 projectileDirection, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default)
+```
+**Returns:** all possible impact positions corresponding to valid interception times.
+
+---
+
+```csharp
+Vector4[] AllImpactPositions<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default)
+```
+**Returns:** all possible impact positions using a scalar projectile speed.
+
+---
+
+```csharp
+Vector4 BestImpactPosition(Vector4 projectileDirection, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default)
+```
+**Returns:** the impact position of the earliest valid interception or NaN vector if impossible.
+
+---
+
+```csharp
+Vector4 BestImpactPosition<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default)
+```
+**Returns:** the earliest impact position using a scalar projectile speed.
+
+---
+
+```csharp
+Vector4 Displacement<T>(T time, Vector4 velocity, Vector4 acceleration = default)
+```
+**Returns:** displacement under constant acceleration.
+
+---
+
+```csharp
+Vector4 Position<T>(Vector4 position, T time, Vector4 velocity = default, Vector4 acceleration = default)
+```
+**Returns:** position after elapsed time under constant acceleration.
+
+---
+
+## `BsTime`
+
+```csharp
+T[] AllImpactTimes<T>(Vector4 projectileDirection, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default)
+```
+**Returns:** all valid interception times (t > 0), sorted ascending.
+
+---
+
+```csharp
+T[] AllImpactTimes<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default)
+```
+**Returns:** all valid interception times using a scalar projectile speed.
+
+---
+
+```csharp
+T BestImpactTime<T>(Vector4 projectileDirection, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default)
+```
+**Returns:** the earliest valid interception time or NaN if none exists.
+
+---
+
+```csharp
+T BestImpactTime<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default)
+```
+**Returns:** the earliest valid interception time using a scalar projectile speed.
+
+---
+
+## `BsVelocity`
+
+```csharp
+Vector4[] AllFiringVelocities(Vector4 projectileDirection, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default)
+```
+**Returns:** all firing velocities corresponding to valid interception times.
+
+---
+
+```csharp
+Vector4[] AllFiringVelocities<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default)
+```
+**Returns:** all firing velocities using a scalar projectile speed.
+
+---
+
+```csharp
+Vector4 BestFiringVelocity(Vector4 projectileDirection, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default)
+```
+**Returns:** the firing velocity for the earliest valid interception or NaN vector if impossible.
+
+---
+
+```csharp
+Vector4 BestFiringVelocity<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default)
+```
+**Returns:** the firing velocity using a scalar projectile speed.
+
+---
+
+```csharp
+Vector4 FiringVelocity<T>(T impactTime, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default)
+```
+**Returns:** the firing velocity required to hit the target at a specific interception time.
