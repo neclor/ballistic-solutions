@@ -21,5 +21,5 @@ func create_projectile(velocity: Vector3) -> void:
 func _on_timer_timeout() -> void:
 	if target == null: return
 	var to_target = target.global_position - global_position
-	for velocity in Bsc.firing_velocities(projectile_speed, to_target, target.velocity, projectile_acceleration, target.acceleration):
+	for velocity in BsVelocity.all_firing_velocities_by_speed(projectile_speed, to_target, target.velocity, projectile_acceleration, target.acceleration):
 		create_projectile(velocity)

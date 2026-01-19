@@ -5,6 +5,7 @@ Equation solver and generator for real-valued polynomial equations up to 4th deg
 ---
 
 ## Table of Content
+
 1. [Download](#download)
 2. [Example](#example)
 3. [Reference](#reference)

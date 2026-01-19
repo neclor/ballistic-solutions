@@ -15,11 +15,11 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Ballistic Solutions Demo"
-config/version="4.0.1"
+config/version="5.0.0"
 config/tags=PackedStringArray("addon")
 run/main_scene="uid://ly3tkljwfa8m"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
-config/icon="uid://dxwiw0jxw7mul"
+config/icon="uid://dwcmii6wio6ls"
 
 [display]
 

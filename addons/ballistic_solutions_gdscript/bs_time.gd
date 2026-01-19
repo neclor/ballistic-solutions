@@ -25,7 +25,7 @@ static func all_impact_times(projectile_speed_or_direction: Variant, to_target: 
 
 
 #region all_impact_times_by_direction
-## Computes all possible interception times for a given projectile direction and a moving target. [br]
+## Computes all possible interception times between a projectile and a moving target using projectile direction. [br]
 ## [b]Returns:[/b] A sorted array of all valid interception times (t > 0). Empty if interception is impossible.
 static func all_impact_times_by_direction(projectile_direction: Variant, to_target: Variant, target_velocity: Variant = Vector4.ZERO, projectile_acceleration: Variant = Vector4.ZERO, target_acceleration: Variant = Vector4.ZERO) -> Array[float]:
 	var type: Variant.Type = typeof(projectile_direction)
@@ -50,26 +50,12 @@ static func all_impact_times_by_direction_vector3(projectile_direction: Vector3,
 
 ## See [method BsTime.all_impact_times_by_direction].
 static func all_impact_times_by_direction_vector4(projectile_direction: Vector4, to_target: Vector4, target_velocity: Vector4 = Vector4.ZERO, projectile_acceleration: Vector4 = Vector4.ZERO, target_acceleration: Vector4 = Vector4.ZERO) -> Array[float]:
-	var relative_acceleration: Vector4 = projectile_acceleration - target_acceleration
-
-	var p: Vector4 = relative_acceleration - projectile_direction.dot(relative_acceleration) * projectile_direction;
-	var q: Vector4 = target_velocity - projectile_direction.dot(target_velocity) * projectile_direction;
-	var r: Vector4 = to_target - projectile_direction.dot(to_target) * projectile_direction;
-
-	var a: float = p.length_squared() / 4
-	var b: float = -p.dot(q)
-	var c: float = q.length_squared() - p.dot(r)
-	var d: float = 2 * q.dot(r)
-	var e: float = r.length_squared()
-
-	var all_impact_times: Array[float] = Array(ResSolver.quartic(a, b, c, d, e).filter(func(i: float) -> bool: return i > 0), TYPE_FLOAT, "", null)
-	all_impact_times.sort()
-	return all_impact_times
+	return BsEquations.time_by_direction(projectile_direction, to_target, target_velocity, projectile_acceleration, target_acceleration)
 #endregion
 
 
 #region all_impact_times_by_speed
-## Computes all possible interception times for a given projectile speed and a moving target. [br]
+## Computes all possible interception times for a given projectile and a moving target using projectile speed. [br]
 ## [b]Returns:[/b] A sorted array of all valid interception times (t > 0). Empty if interception is impossible.
 static func all_impact_times_by_speed(projectile_speed: float, to_target: Variant, target_velocity: Variant = Vector4.ZERO, projectile_acceleration: Variant = Vector4.ZERO, target_acceleration: Variant = Vector4.ZERO) -> Array[float]:
 	var type: Variant.Type = typeof(to_target)
@@ -95,18 +81,7 @@ static func all_impact_times_by_speed_vector3(projectile_speed: float, to_target
 ## See [method BsTime.all_impact_times_by_speed].
 static func all_impact_times_by_speed_vector4(projectile_speed: float, to_target: Vector4, target_velocity: Vector4 = Vector4.ZERO, projectile_acceleration: Vector4 = Vector4.ZERO, target_acceleration: Vector4 = Vector4.ZERO) -> Array[float]:
 	if projectile_speed < 0: _BsLogger.format_warning(_SCRIPT, all_impact_times_by_speed.get_method(), "Negative `projectile_speed`")
-
-	var relative_acceleration: Vector4 = projectile_acceleration - target_acceleration
-
-	var a: float = relative_acceleration.length_squared() / 4
-	var b: float = -relative_acceleration.dot(target_velocity)
-	var c: float = target_velocity.length_squared() - relative_acceleration.dot(to_target) - projectile_speed * projectile_speed
-	var d: float = 2 * target_velocity.dot(to_target)
-	var e: float = to_target.length_squared()
-
-	var all_impact_times: Array[float] = Array(ResSolver.quartic(a, b, c, d, e).filter(func(i: float) -> bool: return i > 0), TYPE_FLOAT, "", null)
-	all_impact_times.sort()
-	return all_impact_times
+	return BsEquations.time_by_speed(projectile_speed, to_target, target_velocity, projectile_acceleration, target_acceleration)
 #endregion
 #endregion
 

@@ -30,7 +30,7 @@ public partial class Turret2DCSharp : Node2D {
 		TargetVelocity = Player.Velocity;
 		TargetAcceleration = (Vector2)Player.Get("current_acceleration");
 
-		ImpactTimes = Bsc.ImpactTimes(ProjectileSpeed, ToTarget, TargetVelocity, ProjectileAcceleration, TargetAcceleration);
+		ImpactTimes = BsTime.AllImpactTimes(ProjectileSpeed, ToTarget, TargetVelocity, ProjectileAcceleration, TargetAcceleration);
 
 		switch (ImpactTimes.Length) {
 			case 0:
@@ -39,13 +39,13 @@ public partial class Turret2DCSharp : Node2D {
 				break;
 
 			case 1:
-				Crosshair1?.Position = ToTarget + Bsc.Displacement(ImpactTimes[0], TargetVelocity, TargetAcceleration);
+				Crosshair1?.Position = BsPosition.Position(ToTarget, ImpactTimes[0], TargetVelocity, TargetAcceleration);
 				Crosshair2?.Position = Vector2.Zero;
 				break;
 
 			case 2:
-				Crosshair1?.Position = ToTarget + Bsc.Displacement(ImpactTimes[0], TargetVelocity, TargetAcceleration);
-				Crosshair2?.Position = ToTarget + Bsc.Displacement(ImpactTimes[1], TargetVelocity, TargetAcceleration);
+				Crosshair1?.Position = BsPosition.Position(ToTarget, ImpactTimes[0], TargetVelocity, TargetAcceleration);
+				Crosshair2?.Position = BsPosition.Position(ToTarget, ImpactTimes[1], TargetVelocity, TargetAcceleration);
 				break;
 
 			default:
@@ -57,7 +57,7 @@ public partial class Turret2DCSharp : Node2D {
 		if (Player is null) return;
 
 		foreach (float time in ImpactTimes) {
-			CreateProjectile(Bsc.FiringVelocity(time, ToTarget, TargetVelocity, ProjectileAcceleration, TargetAcceleration));
+			CreateProjectile(BsVelocity.FiringVelocity(time, ToTarget, TargetVelocity, ProjectileAcceleration, TargetAcceleration));
 		}
 	}
 

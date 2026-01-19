@@ -152,7 +152,6 @@ static func best_firing_velocity_by_direction_vector3(projectile_direction: Vect
 ## See [method BsVelocity.best_firing_velocity_by_direction].
 static func best_firing_velocity_by_direction_vector4(projectile_direction: Vector4, to_target: Vector4, target_velocity: Vector4 = Vector4.ZERO, projectile_acceleration: Vector4 = Vector4.ZERO, target_acceleration: Vector4 = Vector4.ZERO) -> Vector4:
 	return firing_velocity_vector4(BsTime.best_impact_time_by_direction_vector4(projectile_direction, to_target, target_velocity, projectile_acceleration, target_acceleration), to_target, target_velocity, projectile_acceleration, target_acceleration)
-
 #endregion
 
 
@@ -217,5 +216,5 @@ static func firing_velocity_vector4(impact_time: float, to_target: Vector4, targ
 	if impact_time < 0 or is_zero_approx(impact_time):
 		_BsLogger.format_error(_SCRIPT, firing_velocity.get_method(), "Zero or negative `impact_time`", "nan vector")
 		return BsVector4Extensions.NAN_VECTOR
-	return to_target / impact_time + target_velocity - (projectile_acceleration - target_acceleration) * impact_time / 2
+	return BsEquations.velocity(impact_time, to_target, target_velocity, projectile_acceleration, target_acceleration)
 #endregion

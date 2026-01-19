@@ -26,25 +26,25 @@ func _physics_process(_delta: float) -> void:
 	target_velocity = player.velocity
 	target_acceleration = player.current_acceleration
 
-	impact_times = Bsc.impact_times_vector2(projectile_speed, to_target, target_velocity, projectile_acceleration, target_acceleration)
+	impact_times = BsTime.all_impact_times_by_speed_vector2(projectile_speed, to_target, target_velocity, projectile_acceleration, target_acceleration)
 
 	match impact_times.size():
 		0:
 			crosshair_1.position = Vector2.ZERO
 			crosshair_2.position = Vector2.ZERO
 		1:
-			crosshair_1.position = to_target + Bsc.displacement_vector2(impact_times[0], target_velocity, target_acceleration)
+			crosshair_1.position = BsPosition.position_vector2(to_target, impact_times[0], target_velocity, target_acceleration)
 			crosshair_2.position = Vector2.ZERO
 		2:
-			crosshair_1.position = to_target + Bsc.displacement_vector2(impact_times[0], target_velocity, target_acceleration)
-			crosshair_2.position = to_target + Bsc.displacement_vector2(impact_times[1], target_velocity, target_acceleration)
+			crosshair_1.position = BsPosition.position_vector2(to_target, impact_times[0], target_velocity, target_acceleration)
+			crosshair_2.position = BsPosition.position_vector2(to_target, impact_times[1], target_velocity, target_acceleration)
 
 
 func create_projectiles() -> void:
 	if player == null: return
 
 	for time in impact_times:
-		create_projectile(Bsc.firing_velocity_vector2(time, to_target, target_velocity, projectile_acceleration, target_acceleration))
+		create_projectile(BsVelocity.firing_velocity_vector2(time, to_target, target_velocity, projectile_acceleration, target_acceleration))
 
 
 func create_projectile(velocity: Vector2) -> void:

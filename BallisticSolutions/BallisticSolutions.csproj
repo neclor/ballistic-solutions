@@ -1,4 +1,4 @@
-﻿<Project Sdk="Godot.NET.Sdk/4.5.0-beta.5">
+﻿<Project Sdk="Godot.NET.Sdk/4.6.0-beta.2">
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
@@ -19,9 +19,9 @@
 
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
 
-    <Version>4.0.1.0</Version>
-    <AssemblyVersion>4.0.1.0</AssemblyVersion>
-    <FileVersion>4.0.1.0</FileVersion>
+    <Version>5.0.0.0</Version>
+    <AssemblyVersion>5.0.0.0</AssemblyVersion>
+    <FileVersion>5.0.0.0</FileVersion>
 
     <Authors>neclor</Authors>
     
@@ -32,7 +32,7 @@
     <PackageProjectUrl>https://github.com/neclor/ballistic-solutions</PackageProjectUrl>
     <RepositoryUrl>https://github.com/neclor/ballistic-solutions</RepositoryUrl>
 
-    <PackageReadmeFile>README_SCHARP.md</PackageReadmeFile>
+    <PackageReadmeFile>README_CSHARP.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 

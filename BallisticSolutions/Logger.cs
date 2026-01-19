@@ -26,3 +26,4 @@ internal class Logger {
 	public static void FormatWarning(string @class, string method, string message = "", string returned = "") => Warning(FormatMessage(@class, method, message, returned));
 
 	public static string FormatMessage(string @class, string method, string message = "", string returned = "") => $"[{LibraryName}] - `{@class}.{method}`" + (string.IsNullOrEmpty(message) ? "" : $": {message}.") + (string.IsNullOrEmpty(returned) ? "" : $" Returned {returned}.");
+}

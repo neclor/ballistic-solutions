@@ -10,6 +10,7 @@ internal class RealQuarticEquationSolver {
 			FindRoots.Polynomial([.. (new T[] { e, d, c, b, a }).Select(coefficient => double.CreateSaturating(coefficient))])
 				.Where(i => i.Imaginary == 0)
 				.Select(i => T.CreateSaturating(i.Real))
+				.Distinct()
 				.Order()
 		];
 	}

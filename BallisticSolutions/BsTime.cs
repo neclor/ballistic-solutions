@@ -36,23 +36,7 @@ public static class BsTime {
 	/// <returns>
 	/// A sorted array of all valid interception times (t > 0). Empty if interception is impossible.
 	/// </returns>
-	public static T[] AllImpactTimes<T>(Vector4 projectileDirection, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
-		projectileDirection = projectileDirection.Normalized();
-
-		Vector4 relativeAcceleration = projectileAcceleration - targetAcceleration;
-
-		Vector4 p = relativeAcceleration - projectileDirection.Dot(relativeAcceleration) * projectileDirection;
-		Vector4 q = targetVelocity - projectileDirection.Dot(targetVelocity) * projectileDirection;
-		Vector4 r = toTarget - projectileDirection.Dot(toTarget) * projectileDirection;
-
-		T a = T.CreateSaturating(p.LengthSquared() / 4);
-		T b = T.CreateSaturating(-p.Dot(q));
-		T c = T.CreateSaturating(q.LengthSquared() - p.Dot(r));
-		T d = T.CreateSaturating(2 * q.Dot(r));
-		T e = T.CreateSaturating(r.LengthSquared());
-
-		return [.. RealQuarticEquationSolver.Solve(a, b, c, d, e).Where(i => i > T.Zero).Order()];
-	}
+	public static T[] AllImpactTimes<T>(Vector4 projectileDirection, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T> => BsEquations.Time<T>(projectileDirection, toTarget, targetVelocity, projectileAcceleration, targetAcceleration);
 
 	/// <inheritdoc cref="AllImpactTimes{T}(T, Vector4, Vector4, Vector4, Vector4)"/>
 	public static T[] AllImpactTimes<T>(T projectileSpeed, Vector2 toTarget, Vector2 targetVelocity = default, Vector2 projectileAcceleration = default, Vector2 targetAcceleration = default) where T : IFloatingPointIeee754<T> => AllImpactTimes(projectileSpeed, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4());
@@ -73,24 +57,15 @@ public static class BsTime {
 	/// A sorted array of all valid interception times (t > 0). Empty if interception is impossible.
 	/// </returns>
 	public static T[] AllImpactTimes<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
-		if (projectileSpeed < T.Zero) Logger.FormatWarning(nameof(BsTime), nameof(AllImpactTimes), "Negative `projectileSpeed`");
-
-		Vector4 relativeAcceleration = projectileAcceleration - targetAcceleration;
-
-		T a = T.CreateSaturating(relativeAcceleration.LengthSquared() / 4);
-		T b = T.CreateSaturating(-relativeAcceleration.Dot(targetVelocity));
-		T c = T.CreateSaturating(targetVelocity.LengthSquared() - relativeAcceleration.Dot(toTarget)) - projectileSpeed * projectileSpeed;
-		T d = T.CreateSaturating(2 * targetVelocity.Dot(toTarget));
-		T e = T.CreateSaturating(toTarget.LengthSquared());
-
-		return [.. RealQuarticEquationSolver.Solve(a, b, c, d, e).Where(i => i > T.Zero).Order()];
+		if (projectileSpeed < T.Zero) Logger.FormatWarning(nameof(BsEquations), nameof(AllImpactTimes), "Negative `projectileSpeed`");
+		return BsEquations.Time(projectileSpeed, toTarget, targetVelocity, projectileAcceleration, targetAcceleration);
 	}
 
 	/// <inheritdoc cref="BestImpactTime{T}(Vector4, Vector4, Vector4, Vector4, Vector4)"/>
-	public static T BestImpactTime<T>(Vector2 projectileDirection, Vector2 toTarget, Vector2 targetVelocity = default, Vector2 projectileAcceleration = default, Vector2 targetAcceleration = default) where T : IFloatingPointIeee754<T> => BestImpactTime(projectileDirection.ToVector4(), toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4());
+	public static T BestImpactTime<T>(Vector2 projectileDirection, Vector2 toTarget, Vector2 targetVelocity = default, Vector2 projectileAcceleration = default, Vector2 targetAcceleration = default) where T : IFloatingPointIeee754<T> => BestImpactTime<T>(projectileDirection.ToVector4(), toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4());
 
 	/// <inheritdoc cref="BestImpactTime{T}(Vector4, Vector4, Vector4, Vector4, Vector4)"/>
-	public static T BestImpactTime<T>(Vector3 projectileDirection, Vector3 toTarget, Vector3 targetVelocity = default, Vector3 projectileAcceleration = default, Vector3 targetAcceleration = default) where T : IFloatingPointIeee754<T> => BestImpactTime(projectileDirection.ToVector4(), toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4());
+	public static T BestImpactTime<T>(Vector3 projectileDirection, Vector3 toTarget, Vector3 targetVelocity = default, Vector3 projectileAcceleration = default, Vector3 targetAcceleration = default) where T : IFloatingPointIeee754<T> => BestImpactTime<T>(projectileDirection.ToVector4(), toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4());
 
 	/// <summary>
 	/// Computes the earliest positive interception time between a projectile and a moving target.
@@ -128,7 +103,6 @@ public static class BsTime {
 	/// </returns>
 	public static T BestImpactTime<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
 		if (projectileSpeed < T.Zero) Logger.FormatWarning(nameof(BsTime), nameof(BestImpactTime), "Negative `projectileSpeed`");
-
 		T[] allImpactTimes = AllImpactTimes(projectileSpeed, toTarget, targetVelocity, projectileAcceleration, targetAcceleration);
 		return allImpactTimes.Length == 0 ? T.NaN : allImpactTimes[0];
 	}

@@ -118,14 +118,13 @@ public static class BsVelocity {
 	/// <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
 	/// <param name="targetAcceleration">The acceleration vector of the target.</param>
 	/// <returns>
-	/// The required firing velocity vector. Returns Vector.NaN if <paramref name="impactTime"/> ≤ 0.
+	/// The required firing velocity vector. Returns `NaN` vector if <paramref name="impactTime"/> ≤ 0.
 	/// </returns>
 	public static Vector4 FiringVelocity<T>(T impactTime, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
 		if (impactTime <= T.Zero) {
-			Logger.FormatError(nameof(BsVelocity), nameof(FiringVelocity), "Zero or negative `impactTime`", "NaN vector");
+			Logger.FormatError(nameof(BsEquations), nameof(FiringVelocity), "Zero or negative `impactTime`", "NaN vector");
 			return Vector4.NaN;
 		}
-		float impactTimeFloat = float.CreateSaturating(impactTime);
-		return toTarget / impactTimeFloat + targetVelocity - (projectileAcceleration - targetAcceleration) * impactTimeFloat / 2;
+		return BsEquations.Velocity(impactTime, toTarget, targetVelocity, projectileAcceleration, targetAcceleration);
 	}
 }
