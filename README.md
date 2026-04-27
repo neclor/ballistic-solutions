@@ -19,7 +19,7 @@ Library for calculating interception times, impact positions, and firing vectors
 
 ## Download
 
-- [Asset Store](https://store-beta.godotengine.org/asset/neclor/ballistic-solutions)
+- [Asset Store](https://store.godotengine.org/asset/neclor/ballistic-solutions/)
 - [Asset Library](https://godotengine.org/asset-library/asset/3010)
 - [GitHub](https://github.com/neclor/ballistic-solutions)
 
