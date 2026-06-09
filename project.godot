@@ -18,7 +18,7 @@ config/name="Ballistic Solutions Demo"
 config/version="5.0.0"
 config/tags=PackedStringArray("addon")
 run/main_scene="uid://ly3tkljwfa8m"
-config/features=PackedStringArray("4.6", "C#", "Forward Plus")
+config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 config/icon="uid://dwcmii6wio6ls"
 
 [display]

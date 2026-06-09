@@ -1,13 +1,9 @@
 using System.Numerics;
-using BallisticSolutions.VectorExtensions;
+using BallisticSolutions.BsVectorExtensions;
 
 #if GODOT
-using Vector2 = Godot.Vector2;
-using Vector3 = Godot.Vector3;
 using Vector4 = Godot.Vector4;
 #else
-using Vector2 = System.Numerics.Vector2;
-using Vector3 = System.Numerics.Vector3;
 using Vector4 = System.Numerics.Vector4;
 #endif
 
@@ -44,7 +40,34 @@ public static class BsEquations {
 	/// <returns>
 	/// The position vector after <paramref name="time"/> has elapsed.
 	/// </returns>
-	public static Vector4 Position<T>(Vector4 position, T time, Vector4 velocity = default, Vector4 acceleration = default) where T : IFloatingPointIeee754<T> => position + Displacement(time, velocity, acceleration);
+	public static Vector4 Position<T>(Vector4 position, T time, Vector4 velocity = default, Vector4 acceleration = default) where T : IFloatingPointIeee754<T> =>
+		position + Displacement(time, velocity, acceleration);
+
+	/// <summary>
+	/// Computes all possible interception times between a projectile and a moving target.
+	/// </summary>
+	/// <typeparam name="T">A floating-point numeric type (e.g., float, double) implementing <see cref="IFloatingPointIeee754{T}"/>.</typeparam>
+	/// <param name="projectileSpeed">The speed of the projectile.</param>
+	/// <param name="toTarget">The vector from the shooter to the target.</param>
+	/// <param name="targetVelocity">The velocity vector of the target.</param>
+	/// <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+	/// <param name="targetAcceleration">The acceleration vector of the target.</param>
+	/// <returns>
+	/// A sorted array of all valid interception times (t > 0). Empty if interception is impossible.
+	/// </returns>
+	public static T[] Time<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
+		if (projectileSpeed < T.Zero) BsLogger.FormatWarning(nameof(BsEquations), nameof(Time), "Negative `projectileSpeed`");
+
+		Vector4 relativeAcceleration = projectileAcceleration - targetAcceleration;
+
+		T a = T.CreateSaturating(relativeAcceleration.LengthSquared() / 4);
+		T b = T.CreateSaturating(-relativeAcceleration.Dot(targetVelocity));
+		T c = T.CreateSaturating(targetVelocity.LengthSquared() - relativeAcceleration.Dot(toTarget)) - projectileSpeed * projectileSpeed;
+		T d = T.CreateSaturating(2 * targetVelocity.Dot(toTarget));
+		T e = T.CreateSaturating(toTarget.LengthSquared());
+
+		return [.. RealQuarticEquationSolver.Solve(a, b, c, d, e).Where(i => i > T.Zero).Order()];
+	}
 
 	/// <summary>
 	/// Computes all possible interception times between a projectile and a moving target.
@@ -77,32 +100,6 @@ public static class BsEquations {
 	}
 
 	/// <summary>
-	/// Computes all possible interception times between a projectile and a moving target.
-	/// </summary>
-	/// <typeparam name="T">A floating-point numeric type (e.g., float, double) implementing <see cref="IFloatingPointIeee754{T}"/>.</typeparam>
-	/// <param name="projectileSpeed">The speed of the projectile.</param>
-	/// <param name="toTarget">The vector from the shooter to the target.</param>
-	/// <param name="targetVelocity">The velocity vector of the target.</param>
-	/// <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
-	/// <param name="targetAcceleration">The acceleration vector of the target.</param>
-	/// <returns>
-	/// A sorted array of all valid interception times (t > 0). Empty if interception is impossible.
-	/// </returns>
-	public static T[] Time<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
-		if (projectileSpeed < T.Zero) Logger.FormatWarning(nameof(BsEquations), nameof(Time), "Negative `projectileSpeed`");
-
-		Vector4 relativeAcceleration = projectileAcceleration - targetAcceleration;
-
-		T a = T.CreateSaturating(relativeAcceleration.LengthSquared() / 4);
-		T b = T.CreateSaturating(-relativeAcceleration.Dot(targetVelocity));
-		T c = T.CreateSaturating(targetVelocity.LengthSquared() - relativeAcceleration.Dot(toTarget)) - projectileSpeed * projectileSpeed;
-		T d = T.CreateSaturating(2 * targetVelocity.Dot(toTarget));
-		T e = T.CreateSaturating(toTarget.LengthSquared());
-
-		return [.. RealQuarticEquationSolver.Solve(a, b, c, d, e).Where(i => i > T.Zero).Order()];
-	}
-
-	/// <summary>
 	/// Computes the firing velocity required to hit the target at a given interception time.
 	/// </summary>
 	/// <typeparam name="T">A floating-point numeric type (e.g., float, double) implementing <see cref="IFloatingPointIeee754{T}"/>.</typeparam>
@@ -116,9 +113,10 @@ public static class BsEquations {
 	/// </returns>
 	public static Vector4 Velocity<T>(T impactTime, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
 		if (impactTime <= T.Zero) {
-			Logger.FormatError(nameof(BsEquations), nameof(Velocity), "Zero or negative `impactTime`", "NaN vector");
+			BsLogger.FormatError(nameof(BsEquations), nameof(Velocity), "Zero or negative `impactTime`", "NaN vector");
 			return Vector4.NaN;
 		}
+
 		float impactTimeFloat = float.CreateSaturating(impactTime);
 		return toTarget / impactTimeFloat + targetVelocity - (projectileAcceleration - targetAcceleration) * impactTimeFloat / 2;
 	}

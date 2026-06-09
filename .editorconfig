@@ -9,19 +9,19 @@ insert_final_newline = true
 [*.md]
 trim_trailing_whitespace = false
 
-[*.{gd,gdshader}]
-indent_size = 4
-indent_style = tab
-tab_width = 4
-
-[*.{sln,slnx,csproj}]
-indent_size = 2
+[*.{xml,yaml,sln,slnx,csproj}]
 indent_style = space
+indent_size = 2
 tab_width = 2
 
-[*.cs]
-indent_size = 4
+[*.{gd,gdshader}]
 indent_style = tab
+indent_size = 4
+tab_width = 4
+
+[*.{cs,razor,cshtml}]
+indent_style = tab
+indent_size = 4
 tab_width = 4
 
 #### .NET Code Actions ####
@@ -56,7 +56,7 @@ csharp_style_var_elsewhere = false:suggestion
 
 dotnet_diagnostic.IDE0010.severity = warning # Add missing cases to switch statement
 
-csharp_prefer_braces = when_multiline:suggestion # IDE0011 Add braces
+csharp_prefer_braces = when_multiline:warning # IDE0011 Add braces
 csharp_style_throw_expression = true:suggestion # IDE0016 Use throw expression
 dotnet_style_object_initializer = true:suggestion # IDE0017 Use object initializer
 csharp_style_inlined_variable_declaration = true:suggestion # IDE0018 Inline variable declaration
@@ -70,8 +70,7 @@ csharp_style_expression_bodied_properties = when_on_single_line:suggestion # IDE
 csharp_style_expression_bodied_indexers = when_on_single_line:suggestion # IDE0026 Use expression body for indexers
 csharp_style_expression_bodied_accessors = when_on_single_line:suggestion # IDE0027 Use expression body for accessors
 
-# IDE0028 Use collection initializers
-dotnet_style_collection_initializer = true:suggestion
+dotnet_style_collection_initializer = true:suggestion # IDE0028 Use collection initializers
 dotnet_style_prefer_collection_expression = when_types_loosely_match:suggestion # IDE0300, IDE0301, IDE0302, IDE0303, IDE0304, IDE0305, IDE0306 Use collection expression
 
 dotnet_style_coalesce_expression = true:suggestion # IDE0029, IDE0030, IDE0270 Null check can be simplified
@@ -97,11 +96,11 @@ dotnet_style_readonly_field = true:warning # IDE0044 Add readonly modifier
 dotnet_style_prefer_conditional_expression_over_assignment = true:silent # IDE0045 Use conditional expression for assignment
 dotnet_style_prefer_conditional_expression_over_return = true:silent # IDE0046 Use conditional expression for return
 
-# IDE004, IDE0048 Remove unnecessary parentheses, Add parentheses for clarity
-dotnet_style_parentheses_in_arithmetic_binary_operators = always_for_clarity:silent
-dotnet_style_parentheses_in_relational_binary_operators = always_for_clarity:silent
-dotnet_style_parentheses_in_other_binary_operators = always_for_clarity:silent
-dotnet_style_parentheses_in_other_operators = never_if_unnecessary:silent
+# IDE004, IDE0047, IDE0048 Remove unnecessary parentheses, Add parentheses for clarity
+dotnet_style_parentheses_in_arithmetic_binary_operators = always_for_clarity:suggestion
+dotnet_style_parentheses_in_relational_binary_operators = always_for_clarity:suggestion
+dotnet_style_parentheses_in_other_binary_operators = always_for_clarity:suggestion
+dotnet_style_parentheses_in_other_operators = never_if_unnecessary:suggestion
 
 # IDE0049 Use language keywords instead of framework type names for type references
 dotnet_style_predefined_type_for_locals_parameters_members = true:silent
@@ -135,7 +134,7 @@ csharp_new_line_between_query_expression_clauses = true
 ## Indentation options ##
 csharp_indent_case_contents = true
 csharp_indent_switch_labels = true
-csharp_indent_labels = one_less_than_current
+csharp_indent_labels = no_change
 csharp_indent_block_contents = true
 csharp_indent_braces = false
 csharp_indent_case_contents_when_block = false
@@ -170,8 +169,8 @@ csharp_preserve_single_line_statements = true
 
 csharp_style_prefer_index_operator = true:suggestion # IDE0056 Use index operator
 csharp_style_prefer_range_operator = true:suggestion # IDE0057 Use range operator
-csharp_style_unused_value_expression_statement_preference = discard_variable:silent # IDE0058 Remove unused expression value
-csharp_style_unused_value_assignment_preference = discard_variable:suggestion # IDE0059 Remove unnecessary value assignment
+csharp_style_unused_value_expression_statement_preference = discard_variable:warning # IDE0058 Remove unused expression value
+csharp_style_unused_value_assignment_preference = discard_variable:warning # IDE0059 Remove unnecessary value assignment
 dotnet_code_quality_unused_parameters = all:warning # IDE0060 Remove unused parameter
 csharp_style_expression_bodied_local_functions = when_on_single_line:suggestion # IDE0061 Use expression body for local functions
 csharp_prefer_static_local_function = true:warning # IDE0062 Make local function static
