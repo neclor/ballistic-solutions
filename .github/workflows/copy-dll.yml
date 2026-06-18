@@ -25,6 +25,10 @@ jobs:
         run: dotnet build --configuration Release
         working-directory: BallisticSolutions
 
+      - name: Find build output
+        run: find BallisticSolutions/src -name "*.dll" 2>/dev/null || echo "No DLLs found"
+
+
       - name: Copy DLLs to addons folder
         run: |
           BUILD_DIR="BallisticSolutions/src/BallisticSolutions/bin/Release/net10.0"
