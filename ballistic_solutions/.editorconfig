@@ -162,7 +162,7 @@ csharp_preserve_single_line_blocks = true # Example: { return x }
 
 csharp_style_prefer_index_operator = true:suggestion # IDE0056
 csharp_style_prefer_range_operator = true:suggestion # IDE0057
-csharp_style_unused_value_expression_statement_preference = discard_variable:warning # IDE0058
+csharp_style_unused_value_expression_statement_preference = discard_variable:none # IDE0058
 csharp_style_unused_value_assignment_preference = discard_variable:warning # IDE0059
 dotnet_code_quality_unused_parameters = all:warning # IDE0060
 csharp_style_expression_bodied_local_functions = true:suggestion # IDE0061
@@ -916,4 +916,5 @@ resharper_csharp_space_after_operator_keyword = true
 resharper_csharp_space_within_slice_pattern = true
 
 ##### Inspection Severities
+resharper_check_namespace_highlighting = none
 resharper_local_function_can_be_made_static_highlighting = warning

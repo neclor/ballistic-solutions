@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://beqhq1817oav7"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_j8xjn"]
+a = Vector2(-2310, -20)
+b = Vector2(2310, -20)
+
+[node name="Wall" type="StaticBody2D" unique_id=743670331 groups=["wall"]]
+collision_mask = 0
+
+[node name="Line2D" type="Line2D" parent="." unique_id=1249413798]
+position = Vector2(0, -10)
+points = PackedVector2Array(-2310, 0, 2310, 0)
+width = 20.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=134289662]
+shape = SubResource("SegmentShape2D_j8xjn")

@@ -6,6 +6,7 @@ using Godot;
 namespace BallisticSolutions.Demo.Demo2D;
 
 [GlobalClass]
+// ReSharper disable once InconsistentNaming
 public partial class Turret2DCSharp : Node2D {
 	[Export]
 	public PackedScene? ProjectilePackedScene { get; set; }
@@ -19,8 +20,8 @@ public partial class Turret2DCSharp : Node2D {
 	[Export]
 	public Polygon2D? Crosshair2 { get; set; }
 
-	public float ProjectileSpeed { get; set; } = 200;
-	public Vector2 ProjectileAcceleration { get; set; } = Vector2.Zero;
+	private float ProjectileSpeed { get; set; } = 200;
+	private Vector2 ProjectileAcceleration { get; set; } = Vector2.Zero;
 
 	private float[] ImpactTimes { get; set; } = [];
 	private Vector2 ToTarget { get; set; }
@@ -51,10 +52,12 @@ public partial class Turret2DCSharp : Node2D {
 				Crosshair1?.Position = BsPosition2D.Position(ToTarget, ImpactTimes[0], TargetVelocity, TargetAcceleration);
 				Crosshair2?.Position = BsPosition2D.Position(ToTarget, ImpactTimes[1], TargetVelocity, TargetAcceleration);
 				break;
+
+			default: return;
 		}
 	}
 
-	public void CreateProjectiles() {
+	private void CreateProjectiles() {
 		if (Player is null) return;
 
 		foreach (float time in ImpactTimes) {
@@ -62,7 +65,7 @@ public partial class Turret2DCSharp : Node2D {
 		}
 	}
 
-	public void CreateProjectile(Vector2 velocity) {
+	private void CreateProjectile(Vector2 velocity) {
 		if (ProjectilePackedScene is null) return;
 
 		CharacterBody2D newProjectile = ProjectilePackedScene.Instantiate<CharacterBody2D>();
@@ -72,5 +75,5 @@ public partial class Turret2DCSharp : Node2D {
 		GetParent().AddChild(newProjectile);
 	}
 
-	public void OnTimerTimeout() => CreateProjectiles();
+	private void OnTimerTimeout() => CreateProjectiles();
 }

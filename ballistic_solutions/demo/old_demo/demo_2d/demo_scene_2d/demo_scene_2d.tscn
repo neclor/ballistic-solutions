@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://ly3tkljwfa8m"]
 
-[ext_resource type="PackedScene" uid="uid://beqhq1817oav7" path="res://demo/demo_2d/wall/wall.tscn" id="1_orey4"]
-[ext_resource type="Script" uid="uid://ixphgyc2vqpk" path="res://demo/demo_2d/demo_scene_2d/demo_scene_2d.gd" id="1_s3u83"]
-[ext_resource type="PackedScene" uid="uid://dcidp3ukia16q" path="res://demo/demo_2d/turret/gdscript/turret_2d_gdscript.tscn" id="2_kwcv7"]
-[ext_resource type="PackedScene" uid="uid://c561j8bdsy66w" path="res://demo/demo_2d/player_2d/player_2d.tscn" id="3_e1cyj"]
-[ext_resource type="PackedScene" uid="uid://cyeydvona6yuj" path="res://demo/demo_2d/menu/menu.tscn" id="5_bh43b"]
-[ext_resource type="PackedScene" uid="uid://dyhohsn75nnvd" path="res://demo/demo_2d/turret/CSharp/Turret2DCSharp.tscn" id="5_reg2c"]
+[ext_resource type="PackedScene" uid="uid://beqhq1817oav7" path="res://demo/old_demo/demo_2d/wall/wall.tscn" id="1_orey4"]
+[ext_resource type="Script" uid="uid://ixphgyc2vqpk" path="res://demo/old_demo/demo_2d/demo_scene_2d/demo_scene_2d.gd" id="1_s3u83"]
+[ext_resource type="PackedScene" uid="uid://dcidp3ukia16q" path="res://demo/old_demo/demo_2d/turret/gdscript/turret_2d_gdscript.tscn" id="2_kwcv7"]
+[ext_resource type="PackedScene" uid="uid://c561j8bdsy66w" path="res://demo/old_demo/demo_2d/player_2d/player_2d.tscn" id="3_e1cyj"]
+[ext_resource type="PackedScene" uid="uid://cyeydvona6yuj" path="res://demo/old_demo/demo_2d/menu/menu.tscn" id="5_bh43b"]
+[ext_resource type="PackedScene" uid="uid://dyhohsn75nnvd" path="res://demo/old_demo/demo_2d/turret/CSharp/Turret2DCSharp.tscn" id="5_reg2c"]
 
 [node name="DemoScene2D" type="Node2D" unique_id=959849633 node_paths=PackedStringArray("player", "turret_gdscript", "turret_csharp")]
 script = ExtResource("1_s3u83")

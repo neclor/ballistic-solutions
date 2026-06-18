@@ -30,9 +30,9 @@ public static class BsPosition2D {
 
 	/// <inheritdoc cref="BsPosition4D.All(float, Vector4, Vector4, Vector4, Vector4)"/>
 	public static Vector2[] All(float projectileSpeed, Vector2 toTarget, Vector2 targetVelocity = default, Vector2 projectileAcceleration = default, Vector2 targetAcceleration = default)
-		=> [.. BsPosition4D.All(projectileSpeed, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4()).Select(p => p.ToVector2())];
+		=> [.. BsPosition4D.All(projectileSpeed, toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4()).Select(static p => p.ToVector2())];
 
 	/// <inheritdoc cref="BsPosition4D.All(Vector4, Vector4, Vector4, Vector4, Vector4)"/>
 	public static Vector2[] All(Vector2 projectileDirection, Vector2 toTarget, Vector2 targetVelocity = default, Vector2 projectileAcceleration = default, Vector2 targetAcceleration = default)
-		=> [.. BsPosition4D.All(projectileDirection.ToVector4(), toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4()).Select(p => p.ToVector2())];
+		=> [.. BsPosition4D.All(projectileDirection.ToVector4(), toTarget.ToVector4(), targetVelocity.ToVector4(), projectileAcceleration.ToVector4(), targetAcceleration.ToVector4()).Select(static p => p.ToVector2())];
 }

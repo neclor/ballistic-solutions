@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://bks7arsxx8cee"]
+[gd_scene format=3 uid="uid://bks7arsxx8cee"]
 
-[ext_resource type="Script" uid="uid://c2wmcljk6wotk" path="res://demo/demo_3d/projectile/projectile_3d.gd" id="1_jl0ir"]
+[ext_resource type="Script" uid="uid://c2wmcljk6wotk" path="res://demo/old_demo/demo_3d/projectile/projectile_3d.gd" id="1_jl0ir"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8s2wu"]
 
@@ -10,16 +10,16 @@ albedo_color = Color(0, 1, 0, 1)
 [sub_resource type="SphereMesh" id="SphereMesh_u382y"]
 material = SubResource("StandardMaterial3D_jl0ir")
 
-[node name="Projectile3D" type="RigidBody3D"]
+[node name="Projectile3D" type="RigidBody3D" unique_id=1237980423]
 collision_layer = 0
 contact_monitor = true
 max_contacts_reported = 5
 script = ExtResource("1_jl0ir")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=38185249]
 shape = SubResource("SphereShape3D_8s2wu")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1442301840]
 mesh = SubResource("SphereMesh_u382y")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

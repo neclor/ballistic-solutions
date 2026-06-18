@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cyvyfahpnnoej"]
+
+[ext_resource type="Script" uid="uid://di7i4dold6ug5" path="res://demo/demo_3d/movable_camera_3d.gd" id="1_vkfd8"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_c4mji"]
+size = Vector2(1000, 1000)
+
+[node name="Demo3D" type="Node3D" unique_id=1862350974]
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=1911466829]
+mesh = SubResource("PlaneMesh_c4mji")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=186752057]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MovableCamera3D" type="Camera3D" parent="." unique_id=933492735]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.382355, 0)
+current = true
+script = ExtResource("1_vkfd8")
+metadata/_custom_type_script = "uid://di7i4dold6ug5"

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bbnnfj658gjb0"]
 
-[ext_resource type="PackedScene" uid="uid://dywxd3kl4gmxq" path="res://demo/demo_3d/turret/turret_3d.tscn" id="1_elevi"]
-[ext_resource type="Script" uid="uid://b310uo2c5wlgt" path="res://demo/demo_3d/demo_scene_3d.gd" id="1_y23wu"]
-[ext_resource type="PackedScene" uid="uid://byafnfub68r0f" path="res://demo/demo_3d/target/target_3d.tscn" id="2_y23wu"]
+[ext_resource type="PackedScene" uid="uid://dywxd3kl4gmxq" path="res://demo/old_demo/demo_3d/turret/turret_3d.tscn" id="1_elevi"]
+[ext_resource type="Script" uid="uid://b310uo2c5wlgt" path="res://demo/old_demo/demo_3d/demo_scene_3d.gd" id="1_y23wu"]
+[ext_resource type="PackedScene" uid="uid://byafnfub68r0f" path="res://demo/old_demo/demo_3d/target/target_3d.tscn" id="2_y23wu"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lebdu"]
 size = Vector2(1000, 1000)
