@@ -1,0 +1,42 @@
+name: Copy DLL
+
+on:
+  workflow_run:
+    workflows: [CI]
+    branches: [main, dev]
+    types: [completed]
+
+permissions:
+  contents: write
+
+jobs:
+  copy-dll:
+    name: Build & Copy DLL
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Build
+        run: dotnet build --configuration Release
+        working-directory: BallisticSolutions
+
+      - name: Copy DLLs to addons folder
+        run: |
+          BUILD_DIR="BallisticSolutions/src/BallisticSolutions/bin/Release/net10.0"
+          ADDON_DIR="ballistic_solutions/addons/BallisticSolutionsCSharp"
+          cp "$BUILD_DIR/BallisticSolutions.dll" "$ADDON_DIR/"
+          cp "$BUILD_DIR/BallisticSolutions.xml" "$ADDON_DIR/"
+          cp "$BUILD_DIR/MathNet.Numerics.dll" "$ADDON_DIR/"
+
+      - name: Commit DLLs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add ballistic_solutions/addons/BallisticSolutionsCSharp/
+          git diff --cached --quiet || git commit -m "Update DLLs"
+          git push
