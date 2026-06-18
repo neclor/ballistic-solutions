@@ -19,13 +19,18 @@
     <RootNamespace>BallisticSolutions.Demo</RootNamespace>
   </PropertyGroup>
 
+  <!--
   <ItemGroup>
     <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
   </ItemGroup>
+  -->
 
   <ItemGroup>
     <Reference Include="BallisticSolutions">
       <HintPath>addons\BallisticSolutionsCSharp\BallisticSolutions.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Numerics">
+      <HintPath>addons\BallisticSolutionsCSharp\MathNet.Numerics.dll</HintPath>
     </Reference>
   </ItemGroup>
 

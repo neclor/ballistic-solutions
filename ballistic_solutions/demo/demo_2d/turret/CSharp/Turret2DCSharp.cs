@@ -1,17 +1,21 @@
+using BallisticSolutions.BsSolvers.BsPosition;
+using BallisticSolutions.BsSolvers.BsTime;
+using BallisticSolutions.BsSolvers.BsVelocity;
 using Godot;
 
 namespace BallisticSolutions.Demo.Demo2D;
 
 [GlobalClass]
 public partial class Turret2DCSharp : Node2D {
-
 	[Export]
 	public PackedScene? ProjectilePackedScene { get; set; }
+
 	[Export]
 	public CharacterBody2D? Player { get; set; }
 
 	[Export]
 	public Polygon2D? Crosshair1 { get; set; }
+
 	[Export]
 	public Polygon2D? Crosshair2 { get; set; }
 
@@ -30,7 +34,7 @@ public partial class Turret2DCSharp : Node2D {
 		TargetVelocity = Player.Velocity;
 		TargetAcceleration = (Vector2)Player.Get("current_acceleration");
 
-		ImpactTimes = BsTime2D.All(ProjectileSpeed, ToTarget, TargetVelocity, ProjectileAcceleration, TargetAcceleration);
+		ImpactTimes = BsTime2D.All<float>(ProjectileSpeed, ToTarget, TargetVelocity, ProjectileAcceleration, TargetAcceleration);
 
 		switch (ImpactTimes.Length) {
 			case 0:
@@ -46,9 +50,6 @@ public partial class Turret2DCSharp : Node2D {
 			case 2:
 				Crosshair1?.Position = BsPosition2D.Position(ToTarget, ImpactTimes[0], TargetVelocity, TargetAcceleration);
 				Crosshair2?.Position = BsPosition2D.Position(ToTarget, ImpactTimes[1], TargetVelocity, TargetAcceleration);
-				break;
-
-			default:
 				break;
 		}
 	}
