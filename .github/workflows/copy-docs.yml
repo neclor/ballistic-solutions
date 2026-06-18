@@ -1,0 +1,40 @@
+name: Copy Docs
+
+on:
+  push:
+    branches: [main, dev]
+    paths:
+      - 'README.md'
+      - 'README_CSHARP.md'
+      - 'README_GDSCRIPT.md'
+      - 'LICENSE'
+
+permissions:
+  contents: write
+
+jobs:
+  copy-docs:
+    name: Copy Docs to Addons
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Copy docs to addons
+        run: |
+          for ADDON in \
+            ballistic_solutions/addons/BallisticSolutionsCSharp \
+            ballistic_solutions/addons/ballistic_solutions_gdscript; do
+            cp README.md "$ADDON/README.md"
+            cp README_CSHARP.md "$ADDON/README_CSHARP.md"
+            cp README_GDSCRIPT.md "$ADDON/README_GDSCRIPT.md"
+            cp LICENSE "$ADDON/LICENSE"
+          done
+
+      - name: Commit docs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add ballistic_solutions/addons/BallisticSolutionsCSharp/
+          git add ballistic_solutions/addons/ballistic_solutions_gdscript/
+          git diff --cached --quiet || git commit -m "Update docs"
+          git push
