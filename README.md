@@ -78,6 +78,6 @@ You can test the addon using the included demo scene.
 - Each positive solution `t` corresponds to a valid hit time and gives a required initial velocity.  
 - If no positive solutions exist, interception is impossible with current parameters.
 
-See detailed [Formula documentation](docs/how_it_works.md).
+See detailed [Mathematical report](docs/mathematical_report.md).
 
 ---

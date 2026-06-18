@@ -116,7 +116,7 @@ Vector4[] AllImpactPositions(Vector4 projectileDirection, Vector4 toTarget, Vect
 ---
 
 ```csharp
-Vector4[] AllImpactPositions<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default)
+Vector4[] AllImpactPositions<T>(float projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default)
 ```
 **Returns:** all possible impact positions using a scalar projectile speed.
 
@@ -130,7 +130,7 @@ Vector4 BestImpactPosition(Vector4 projectileDirection, Vector4 toTarget, Vector
 ---
 
 ```csharp
-Vector4 BestImpactPosition<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default)
+Vector4 BestImpactPosition<T>(float projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default)
 ```
 **Returns:** the earliest impact position using a scalar projectile speed.
 
@@ -160,7 +160,7 @@ T[] AllImpactTimes<T>(Vector4 projectileDirection, Vector4 toTarget, Vector4 tar
 ---
 
 ```csharp
-T[] AllImpactTimes<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default)
+T[] AllImpactTimes<T>(float projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default)
 ```
 **Returns:** all valid interception times using a scalar projectile speed.
 
@@ -174,7 +174,7 @@ T BestImpactTime<T>(Vector4 projectileDirection, Vector4 toTarget, Vector4 targe
 ---
 
 ```csharp
-T BestImpactTime<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default)
+T BestImpactTime<T>(float projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default)
 ```
 **Returns:** the earliest valid interception time using a scalar projectile speed.
 
@@ -190,7 +190,7 @@ Vector4[] AllFiringVelocities(Vector4 projectileDirection, Vector4 toTarget, Vec
 ---
 
 ```csharp
-Vector4[] AllFiringVelocities<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default)
+Vector4[] AllFiringVelocities<T>(float projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default)
 ```
 **Returns:** all firing velocities using a scalar projectile speed.
 
@@ -204,7 +204,7 @@ Vector4 BestFiringVelocity(Vector4 projectileDirection, Vector4 toTarget, Vector
 ---
 
 ```csharp
-Vector4 BestFiringVelocity<T>(T projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default)
+Vector4 BestFiringVelocity<T>(float projectileSpeed, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default)
 ```
 **Returns:** the firing velocity using a scalar projectile speed.
 
