@@ -3,9 +3,16 @@ name: CI
 on:
   push:
     branches: [main, dev]
+    paths:
+      - "BallisticSolutions/**"
   pull_request:
     branches: [main]
+    paths:
+      - "BallisticSolutions/**"
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   test:

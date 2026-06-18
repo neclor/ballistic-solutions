@@ -4,10 +4,10 @@ on:
   push:
     branches: [main, dev]
     paths:
-      - 'README.md'
-      - 'README_CSHARP.md'
-      - 'README_GDSCRIPT.md'
-      - 'LICENSE'
+      - "README.md"
+      - "README_CSHARP.md"
+      - "README_GDSCRIPT.md"
+      - "LICENSE"
 
 permissions:
   contents: write
