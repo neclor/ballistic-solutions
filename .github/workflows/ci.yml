@@ -11,6 +11,9 @@ on:
       - "BallisticSolutions/**"
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   test:
     name: Build & Test
