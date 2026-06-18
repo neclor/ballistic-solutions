@@ -1,6 +1,7 @@
 # Ballistic Solutions
 
-Library for calculating interception times, impact positions, and firing vectors, taking into account the velocities and accelerations of both projectile and target.
+
+Ballistic solutions for moving targets: interception time, position, and firing velocity, accounting for projectile and target acceleration.
 
 ---
 
