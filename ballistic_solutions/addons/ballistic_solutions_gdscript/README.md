@@ -64,8 +64,8 @@ You can test the addon using the included demo scene.
 
 ![](docs/demo_3d_1.png)
 ![](docs/demo_3d_2.png)
-![](docs/demo_2d_2.png)
 ![](docs/demo_2d_1.png)
+![](docs/demo_2d_2.png)
 
 ---
 
