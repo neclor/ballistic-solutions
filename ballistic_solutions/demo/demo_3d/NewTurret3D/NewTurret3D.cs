@@ -28,7 +28,7 @@ public partial class NewTurret3D : Node3D {
 			Target.GlobalPosition - GlobalPosition,
 			Target.LinearVelocity,
 			gravityVector,
-			gravityVector
+			Target.GetGravity()
 		);
 
 		foreach (Vector3 vel in velocities) {

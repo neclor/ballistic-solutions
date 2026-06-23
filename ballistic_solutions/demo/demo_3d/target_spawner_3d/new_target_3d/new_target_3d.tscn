@@ -12,6 +12,7 @@ material = SubResource("StandardMaterial3D_4s1wa")
 
 [node name="NewTarget3D" type="RigidBody3D" unique_id=1953671960]
 collision_mask = 0
+gravity_scale = -1.0
 contact_monitor = true
 max_contacts_reported = 8
 script = ExtResource("1_a6mlr")

@@ -23,10 +23,11 @@ script = ExtResource("1_vkfd8")
 metadata/_custom_type_script = "uid://di7i4dold6ug5"
 
 [node name="TargetSpawner3D" parent="." unique_id=35735108 instance=ExtResource("2_aj56t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6926193, -42.796967)
-target_initial_velocity = Vector3(-20, 20, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26.606295, -42.796967)
+target_initial_velocity = Vector3(-20, -20, 0)
 
 [node name="NewTurret3D" parent="." unique_id=548600413 instance=ExtResource("3_tb0su")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.840855, 1.4707556, -29.105995)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.971097, 38.684227, -42.762096)
+_bulletSpeed = 30.0
 
 [connection signal="spawned_count" from="TargetSpawner3D" to="NewTurret3D" method="ChangeTarget"]
