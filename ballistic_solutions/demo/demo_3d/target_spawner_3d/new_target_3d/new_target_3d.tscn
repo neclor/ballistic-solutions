@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://cjarcpb57qiv8"]
+
+[ext_resource type="Script" uid="uid://dfv5dtmadllky" path="res://demo/demo_3d/target_spawner_3d/new_target_3d/new_target_3d.gd" id="1_a6mlr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4s1wa"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_hr1an"]
+material = SubResource("StandardMaterial3D_4s1wa")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hr1an"]
+
+[node name="NewTarget3D" type="RigidBody3D" unique_id=1953671960]
+collision_mask = 0
+contact_monitor = true
+max_contacts_reported = 8
+script = ExtResource("1_a6mlr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1536455983]
+mesh = SubResource("SphereMesh_hr1an")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1926400170]
+shape = SubResource("SphereShape3D_hr1an")
+
+[node name="Timer" type="Timer" parent="." unique_id=893653199]
+wait_time = 10.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

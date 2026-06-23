@@ -2,9 +2,9 @@
 
 ---
 
-## Table of Content
+## Table of Contents
 
-1. [Dependencies](#installation)
+1. [Dependencies](#dependencies)
 2. [Example](#example)
 3. [Reference](#reference)
 
@@ -16,9 +16,8 @@
 ---
 
 ## Example
-```gdscript
-# ...
 
+```gdscript
 @export var projectile_packed_scene: PackedScene
 
 @export var projectile_speed: float = 200
@@ -26,17 +25,16 @@
 
 func shoot(target: Target2D) -> void:
 	var to_target: Vector2 = target.global_position - global_position
-	var velocity: Vector2 = BsVelocity.best_firing_velocity_by_speed_vector2(projectile_speed, to_target, target.velocity, projectile_acceleration, target.acceleration)
-	
-	if is_nan(velocity.x):
+	var solution: BsSolution2D = BsSolution2D.best_by_speed(projectile_speed, to_target, target.velocity, projectile_acceleration, target.acceleration)
+
+	if solution == null:
 		print("Impossible to hit the target")
 		return
-	
+
 	var new_projectile: Projectile2D = projectile_packed_scene.instantiate()
 	new_projectile.global_position = global_position
-	new_projectile.velocity = velocity
+	new_projectile.velocity = solution.projectile_velocity
 	new_projectile.acceleration = projectile_acceleration
-
 	get_parent().add_child(new_projectile)
 ```
 
@@ -44,141 +42,177 @@ func shoot(target: Target2D) -> void:
 
 ## Reference
 
-This provides a **concise reference**, for the complete documentation, please refer to the **built-in Godot documentation**.  
+For the complete documentation, refer to the **built-in Godot documentation**.
 
-Not all classes and methods are listed.  
-Only semantically distinct functionality is documented.  
-Overloads for `Vector2`, `Vector3`, and `Vector4` are not duplicated.  
-All vector parameters are of the same dimensionality.
+`Nd` suffix denotes 2D, 3D, or 4D variants — `BsTimeNd` stands for `BsTime2D`, `BsTime3D`, and `BsTime4D`. Each variant uses the corresponding `VectorN` type (`Vector2`, `Vector3`, `Vector4`). All variants share the same API.
 
-1. `BallisticSolutions`
-	1. [`BsPosition`](#bsposition)
-	2. [`BsTime`](#bstime)
-	3. [`BsVelocity`](#bsvelocity)
+1. [`BsSolution`](#bssolution)
+2. [`BsSolutionNd`](#bssolutionnd)
+3. [`BsPositionNd`](#bspositionnd)
+4. [`BsTimeNd`](#bstimend)
+5. [`BsVelocityNd`](#bsvelocitynd)
 
 ---
 
-## `BsPosition`
+## `BsSolution`
 
-```gdscript
-Array all_impact_positions_by_direction(projectile_direction, to_target, projectile_acceleration = Vector.ZERO, target_velocity = Vector.ZERO, target_acceleration = Vector.ZERO) static
-```
-Computes all possible impact positions corresponding to valid interception times.  
-**Returns:** An array of vectors representing all valid impact positions.
+Abstract base class. All properties are available on `BsSolution2D`, `BsSolution3D`, and `BsSolution4D`.
 
----
-
-```gdscript
-Array all_impact_positions_by_speed(projectile_speed, to_target, projectile_acceleration = Vector.ZERO, target_velocity = Vector.ZERO, target_acceleration = Vector.ZERO) static
-```
-Computes all possible impact positions corresponding to valid interception times.  
-**Returns:** An array of vectors representing all valid impact positions.
-
----
-
-```gdscript
-Array best_impact_position_by_direction(projectile_direction, to_target, projectile_acceleration = Vector.ZERO, target_velocity = Vector.ZERO, target_acceleration = Vector.ZERO) static
-```
-Computes the impact position of the earliest valid interception.  
-**Returns:** The impact position vector. Returns `NAN` vector if interception is impossible.
+| Property | Type | Description |
+|---|---|---|
+| `time` | `float` | Interception time. |
+| `position` | `VectorN` | Impact position relative to the projectile origin. |
+| `distance_to_position` | `float` | Distance to the impact position. |
+| `direction_to_position` | `VectorN` | Direction to the impact position. |
+| `projectile_velocity` | `VectorN` | Required firing velocity. |
+| `projectile_speed` | `float` | Projectile speed. |
+| `projectile_direction` | `VectorN` | Projectile direction. |
+| `to_target` | `VectorN` | Vector from shooter to target at t = 0. |
+| `distance_to_target` | `float` | Distance to target at t = 0. |
+| `direction_to_target` | `VectorN` | Direction to target at t = 0. |
+| `target_velocity` | `VectorN` | Target velocity at t = 0. |
+| `target_speed` | `float` | Target speed. |
+| `target_direction` | `VectorN` | Target direction. |
+| `projectile_acceleration` | `VectorN` | Projectile acceleration. |
+| `target_acceleration` | `VectorN` | Target acceleration. |
 
 ---
 
+## `BsSolutionNd`
+
 ```gdscript
-Array best_impact_position_by_speed(projectile_speed, to_target, projectile_acceleration = Vector.ZERO, target_velocity = Vector.ZERO, target_acceleration = Vector.ZERO) static
+static func best_by_speed(projectile_speed: float, to_target: VectorN, target_velocity: VectorN = VectorN.ZERO, projectile_acceleration: VectorN = VectorN.ZERO, target_acceleration: VectorN = VectorN.ZERO) -> BsSolutionNd
 ```
-Computes all possible impact positions corresponding to valid interception times.  
-**Returns:** The impact position vector. Returns `NAN` vector if interception is impossible.
+**Returns:** the earliest valid solution. Returns `null` if interception is impossible.
 
 ---
 
 ```gdscript
-Vector displacement(time, velocity, acceleration = Vector.ZERO) static
+static func best_by_direction(projectile_direction: VectorN, to_target: VectorN, target_velocity: VectorN = VectorN.ZERO, projectile_acceleration: VectorN = VectorN.ZERO, target_acceleration: VectorN = VectorN.ZERO) -> BsSolutionNd
 ```
-Computes displacement under constant acceleration.  
-**Returns:** The displacement vector after `time` has elapsed.
+**Returns:** the earliest valid solution. Returns `null` if interception is impossible.
 
 ---
 
 ```gdscript
-Vector position(position, time, velocity, acceleration = Vector.ZERO) static
+static func all_by_speed(projectile_speed: float, to_target: VectorN, target_velocity: VectorN = VectorN.ZERO, projectile_acceleration: VectorN = VectorN.ZERO, target_acceleration: VectorN = VectorN.ZERO) -> Array[BsSolutionNd]
 ```
-Computes position after elapsed time under constant acceleration.  
-**Returns:** The position vector after `time` has elapsed.
-
----
-
-## `BsTime`
-
-```gdscript
-Array[float] all_impact_times_by_direction(projectile_direction, to_target, projectile_acceleration = Vector.ZERO, target_velocity = Vector.ZERO, target_acceleration = Vector.ZERO) static
-```
-Computes all possible interception times between a projectile and a moving target.  
-**Returns:** A sorted array of all valid interception times (t > 0). Empty if interception is impossible.
+**Returns:** all valid solutions sorted by interception time. Empty array if impossible.
 
 ---
 
 ```gdscript
-Array[float] all_impact_times_by_speed(projectile_speed, to_target, projectile_acceleration = Vector.ZERO, target_velocity = Vector.ZERO, target_acceleration = Vector.ZERO) static
+static func all_by_direction(projectile_direction: VectorN, to_target: VectorN, target_velocity: VectorN = VectorN.ZERO, projectile_acceleration: VectorN = VectorN.ZERO, target_acceleration: VectorN = VectorN.ZERO) -> Array[BsSolutionNd]
 ```
-Computes all possible interception times between a projectile and a moving target.  
-**Returns:** A sorted array of all valid interception times (t > 0). Empty if interception is impossible.
+**Returns:** all valid solutions sorted by interception time. Empty array if impossible.
+
+---
+
+## `BsPositionNd`
+
+```gdscript
+static func displacement(time: float, velocity: VectorN, acceleration: VectorN = VectorN.ZERO) -> VectorN
+```
+**Returns:** displacement under constant acceleration.
 
 ---
 
 ```gdscript
-float best_impact_time_by_direction(projectile_direction, to_target, projectile_acceleration = Vector.ZERO, target_velocity = Vector.ZERO, target_acceleration = Vector.ZERO) static
+static func position(position: VectorN, time: float, velocity: VectorN, acceleration: VectorN = VectorN.ZERO) -> VectorN
 ```
-Computes the earliest positive interception time between a projectile and a moving target.  
-**Returns:** The earliest interception time (t > 0). Returns `NAN` if no interception is possible.
+**Returns:** position after elapsed time under constant acceleration.
 
 ---
 
 ```gdscript
-float best_impact_time_by_speed(projectile_speed, to_target, projectile_acceleration = Vector.ZERO, target_velocity = Vector.ZERO, target_acceleration = Vector.ZERO) static
+static func best_by_speed(projectile_speed: float, to_target: VectorN, target_velocity: VectorN = VectorN.ZERO, projectile_acceleration: VectorN = VectorN.ZERO, target_acceleration: VectorN = VectorN.ZERO) -> VectorN
 ```
-Computes the earliest positive interception time between a projectile and a moving target.  
-**Returns:** The earliest interception time (t > 0). Returns `NAN` if no interception is possible.
-
----
-
-## `BsVelocity`
-
-
-```gdscript
-Array all_firing_velocities_by_direction(projectile_direction, to_target, projectile_acceleration = Vector.ZERO, target_velocity = Vector.ZERO, target_acceleration = Vector.ZERO) static
-```
-Computes firing velocities for all valid interception times.  
-**Returns:** An array of firing velocity vectors, one for each valid interception time.
+**Returns:** the earliest valid impact position. Returns a NaN vector if impossible.
 
 ---
 
 ```gdscript
-Array all_firing_velocities_by_speed(projectile_speed, to_target, projectile_acceleration = Vector.ZERO, target_velocity = Vector.ZERO, target_acceleration = Vector.ZERO) static
+static func best_by_direction(projectile_direction: VectorN, to_target: VectorN, target_velocity: VectorN = VectorN.ZERO, projectile_acceleration: VectorN = VectorN.ZERO, target_acceleration: VectorN = VectorN.ZERO) -> VectorN
 ```
-Computes firing velocities for all valid interception times.  
-**Returns:** An array of firing velocity vectors, one for each valid interception time.
+**Returns:** the earliest valid impact position. Returns a NaN vector if impossible.
 
 ---
 
 ```gdscript
-Array best_firing_velocity_by_direction(projectile_direction, to_target, projectile_acceleration = Vector.ZERO, target_velocity = Vector.ZERO, target_acceleration = Vector.ZERO) static
+static func all_by_speed(projectile_speed: float, to_target: VectorN, target_velocity: VectorN = VectorN.ZERO, projectile_acceleration: VectorN = VectorN.ZERO, target_acceleration: VectorN = VectorN.ZERO) -> Array[VectorN]
 ```
-Computes the firing velocity required for the earliest valid interception.  
-**Returns:** The required firing velocity vector. Returns `NAN` vector if interception is impossible.
+**Returns:** all valid impact positions. Empty array if impossible.
 
 ---
 
 ```gdscript
-Array best_firing_velocity_by_speed(projectile_speed, to_target, projectile_acceleration = Vector.ZERO, target_velocity = Vector.ZERO, target_acceleration = Vector.ZERO) static
+static func all_by_direction(projectile_direction: VectorN, to_target: VectorN, target_velocity: VectorN = VectorN.ZERO, projectile_acceleration: VectorN = VectorN.ZERO, target_acceleration: VectorN = VectorN.ZERO) -> Array[VectorN]
 ```
-Computes the firing velocity required for the earliest valid interception.  
-**Returns:** The required firing velocity vector. Returns `NAN` vector if interception is impossible.
+**Returns:** all valid impact positions. Empty array if impossible.
+
+---
+
+## `BsTimeNd`
+
+```gdscript
+static func best_by_speed(projectile_speed: float, to_target: VectorN, target_velocity: VectorN = VectorN.ZERO, projectile_acceleration: VectorN = VectorN.ZERO, target_acceleration: VectorN = VectorN.ZERO) -> float
+```
+**Returns:** the earliest interception time (t ≥ 0). Returns `NAN` if impossible.
 
 ---
 
 ```gdscript
-Vector firing_velocity(impact_time, to_target, projectile_acceleration = Vector.ZERO, target_velocity = Vector.ZERO, target_acceleration = Vector.ZERO) static
+static func best_by_direction(projectile_direction: VectorN, to_target: VectorN, target_velocity: VectorN = VectorN.ZERO, projectile_acceleration: VectorN = VectorN.ZERO, target_acceleration: VectorN = VectorN.ZERO) -> float
 ```
-Computes the firing velocity required to hit the target at a given interception time.  
-**Returns:** The required firing velocity vector. Returns `NAN` vector if `impact_time` ≤ 0.
+**Returns:** the earliest interception time (t ≥ 0). Returns `NAN` if impossible.
+
+---
+
+```gdscript
+static func all_by_speed(projectile_speed: float, to_target: VectorN, target_velocity: VectorN = VectorN.ZERO, projectile_acceleration: VectorN = VectorN.ZERO, target_acceleration: VectorN = VectorN.ZERO) -> Array[float]
+```
+**Returns:** all valid interception times sorted ascending. Empty array if impossible.
+
+---
+
+```gdscript
+static func all_by_direction(projectile_direction: VectorN, to_target: VectorN, target_velocity: VectorN = VectorN.ZERO, projectile_acceleration: VectorN = VectorN.ZERO, target_acceleration: VectorN = VectorN.ZERO) -> Array[float]
+```
+**Returns:** all valid interception times sorted ascending. Empty array if impossible.
+
+---
+
+## `BsVelocityNd`
+
+```gdscript
+static func velocity(time: float, to_target: VectorN, target_velocity: VectorN = VectorN.ZERO, projectile_acceleration: VectorN = VectorN.ZERO, target_acceleration: VectorN = VectorN.ZERO) -> VectorN
+```
+**Returns:** the firing velocity required to hit the target at the given time.
+
+---
+
+```gdscript
+static func best_by_speed(projectile_speed: float, to_target: VectorN, target_velocity: VectorN = VectorN.ZERO, projectile_acceleration: VectorN = VectorN.ZERO, target_acceleration: VectorN = VectorN.ZERO) -> VectorN
+```
+**Returns:** the earliest valid firing velocity. Returns a NaN vector if impossible.
+
+---
+
+```gdscript
+static func best_by_direction(projectile_direction: VectorN, to_target: VectorN, target_velocity: VectorN = VectorN.ZERO, projectile_acceleration: VectorN = VectorN.ZERO, target_acceleration: VectorN = VectorN.ZERO) -> VectorN
+```
+**Returns:** the earliest valid firing velocity. Returns a NaN vector if impossible.
+
+---
+
+```gdscript
+static func all_by_speed(projectile_speed: float, to_target: VectorN, target_velocity: VectorN = VectorN.ZERO, projectile_acceleration: VectorN = VectorN.ZERO, target_acceleration: VectorN = VectorN.ZERO) -> Array[VectorN]
+```
+**Returns:** all valid firing velocities. Empty array if impossible.
+
+---
+
+```gdscript
+static func all_by_direction(projectile_direction: VectorN, to_target: VectorN, target_velocity: VectorN = VectorN.ZERO, projectile_acceleration: VectorN = VectorN.ZERO, target_acceleration: VectorN = VectorN.ZERO) -> Array[VectorN]
+```
+**Returns:** all valid firing velocities. Empty array if impossible.

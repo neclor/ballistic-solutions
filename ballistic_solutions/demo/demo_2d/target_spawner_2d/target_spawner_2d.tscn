@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://c614utorjckcn"]
+
+[ext_resource type="Script" uid="uid://iaemfsm2n5rv" path="res://demo/demo_2d/target_spawner_2d/target_spawner_2d.gd" id="1_8nean"]
+
+[node name="TargetSpawner2D" type="Node2D" unique_id=1639619025]
+script = ExtResource("1_8nean")
+metadata/_edit_horizontal_guides_ = [-20.0, 20.0]
+metadata/_edit_vertical_guides_ = [-20.0, 20.0]
+
+[node name="TargetTimer" type="Timer" parent="." unique_id=682221620]
+wait_time = 2.0
+autostart = true
+
+[node name="TraceTimer" type="Timer" parent="." unique_id=909097973]
+wait_time = 0.25
+autostart = true
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1816293122]
+z_index = 1
+color = Color(0, 1, 0, 1)
+polygon = PackedVector2Array(-20, 20, 20, 20, 20, -20, -20, -20)
+
+[connection signal="timeout" from="TargetTimer" to="." method="_on_target_timer_timeout"]
+[connection signal="timeout" from="TraceTimer" to="." method="_on_trace_timer_timeout"]

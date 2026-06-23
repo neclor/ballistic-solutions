@@ -13,7 +13,7 @@ config_version=5
 config/name="Ballistic Solutions"
 config/version="6.0.0"
 config/tags=PackedStringArray("addon")
-run/main_scene="uid://ly3tkljwfa8m"
+run/main_scene="uid://b535kjqixs2q8"
 config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 config/icon="uid://dawovmtuu62dl"
 
@@ -87,12 +87,15 @@ ctrl={
 [layer_names]
 
 2d_physics/layer_1="Wall"
+3d_physics/layer_1="Target"
 2d_physics/layer_2="Projectile"
+3d_physics/layer_2="Bullet"
 2d_physics/layer_3="Player"
 
 [physics]
 
 3d/default_linear_damp=0.0
+2d/default_linear_damp=0.0
 
 [rendering]
 

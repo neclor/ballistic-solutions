@@ -1,4 +1,4 @@
-<Project Sdk="Godot.NET.Sdk/4.7.0">
+<Project Sdk="Godot.NET.Sdk/4.7.0-beta.5">
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
@@ -32,10 +32,6 @@
     <Reference Include="MathNet.Numerics">
       <HintPath>addons\BallisticSolutionsCSharp\MathNet.Numerics.dll</HintPath>
     </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="demo\demo_3d\NewTurret3D\" />
   </ItemGroup>
 
 </Project>

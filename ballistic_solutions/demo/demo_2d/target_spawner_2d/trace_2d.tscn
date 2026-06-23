@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://byey3vgs7dwkk"]
+
+[ext_resource type="PackedScene" uid="uid://dmplshca2p8hv" path="res://demo/demo_2d/target_spawner_2d/target_2d/target_2d.tscn" id="1_qgttl"]
+
+[node name="Trace2D" unique_id=685869186 instance=ExtResource("1_qgttl")]
+
+[node name="Polygon2D" parent="." index="1" unique_id=2061994874]
+scale = Vector2(0.5, 0.5)

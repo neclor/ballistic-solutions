@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dp0jbrvbad8j4"]
+
+[ext_resource type="Script" uid="uid://bowtsmrpmmp1c" path="res://demo/demo_2d/turret_2d/turret_2d.gd" id="1_45cmh"]
+
+[node name="Turret2D" type="Node2D" unique_id=930761259]
+script = ExtResource("1_45cmh")
+metadata/_edit_horizontal_guides_ = [-11.0, 10.0]
+metadata/_edit_vertical_guides_ = [-10.0, 10.0]
+
+[node name="Timer" type="Timer" parent="." unique_id=720288344]
+wait_time = 0.05
+autostart = true
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=397499379]
+color = Color(0, 1, 0, 1)
+polygon = PackedVector2Array(10, -11, 10, 10, -10, 10, -10, -11)
+
+[connection signal="timeout" from="Timer" to="." method="shoot"]

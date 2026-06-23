@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c0khgn6gnlo4e"]
+
+[ext_resource type="Script" uid="uid://mvxfuoymvatg" path="res://demo/demo_3d/target_spawner_3d/target_spawner_3d.gd" id="1_1u7e8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4s1wa"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hr1an"]
+material = SubResource("StandardMaterial3D_4s1wa")
+
+[node name="TargetSpawner3D" type="Node3D" unique_id=35735108]
+script = ExtResource("1_1u7e8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=359194880]
+mesh = SubResource("BoxMesh_hr1an")
+
+[node name="Timer" type="Timer" parent="." unique_id=791305684]
+wait_time = 0.2
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

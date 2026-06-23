@@ -911,11 +911,11 @@ resharper_csharp_space_after_operator_keyword = true
 resharper_csharp_space_within_slice_pattern = true
 
 ##### Inspection Severities
-resharper_check_namespace_highlighting = none
+resharper_check_namespace_highlighting = silent
 resharper_local_function_can_be_made_static_highlighting = warning
+resharper_member_can_be_private_global_highlighting = silent
+resharper_member_can_be_protected_global_highlighting = silent
 
-resharper_unused_type_global_highlighting = none
-resharper_unused_member_global_highlighting = none
-resharper_member_can_be_private_global_highlighting = none
-resharper_unused_auto_property_accessor_global_highlighting = none
-resharper_member_can_be_protected_global_highlighting = none
+resharper_unused_type_global_highlighting = silent
+resharper_unused_member_global_highlighting = silent
+resharper_unused_auto_property_accessor_global_highlighting = silent
