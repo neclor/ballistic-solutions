@@ -22,20 +22,20 @@ Ballistic solutions for moving targets: interception time, position, and firing 
 
 - [NuGet]()
 - [Asset Store](https://store.godotengine.org/asset/neclor/ballistic-solutions/)
-- [Asset Library](https://godotengine.org/asset-library/asset/3010)
 - [GitHub](https://github.com/neclor/ballistic-solutions)
+- [Asset Library](https://godotengine.org/asset-library/asset/3010)
 
 ---
 
 ## Quickstart
 
-1. Install the addon in Godot or reference the DLL in your C# project.
-2. In your scene, compute the vector to the target:
+1. Install the addon.
+2. Compute the vector to the target:
     ```gdscript
     var to_target = target.global_position - global_position
     ```
-3. Call `best_firing_velocity_by_speed` to get initial projectile velocity.
-4. Instantiate your projectile and assign `velocity` and `acceleration`.
+3. Call `BsVelocity?D.best_by_speed` to get initial projectile velocity.
+4. Instantiate your projectile and assign `velocity`.
 
 ---
 
@@ -62,8 +62,10 @@ This can significantly affect ballistic accuracy if not properly accounted for.
 ## Demo
 You can test the addon using the included demo scene.
 
-![](docs/screenshot_2d.png)
-![](docs/screenshot_3d.png)
+![](docs/demo_3d_1.png)
+![](docs/demo_3d_2.png)
+![](docs/demo_2d_2.png)
+![](docs/demo_2d_1.png)
 
 ---
 
