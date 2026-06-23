@@ -10,6 +10,7 @@ size = Vector2(10000, 10000)
 [node name="Demo3D" type="Node3D" unique_id=1862350974]
 
 [node name="Floor" type="MeshInstance3D" parent="." unique_id=1911466829]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03389454, -0.023666382, 0.010257721)
 mesh = SubResource("PlaneMesh_c4mji")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=186752057]
@@ -27,7 +28,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26.606295, -42.796967)
 target_initial_velocity = Vector3(-20, -20, 0)
 
 [node name="NewTurret3D" parent="." unique_id=548600413 instance=ExtResource("3_tb0su")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.971097, 38.684227, -42.762096)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.951853, 38.684227, -58.454224)
 _bulletSpeed = 30.0
 
 [connection signal="spawned_count" from="TargetSpawner3D" to="NewTurret3D" method="ChangeTarget"]
