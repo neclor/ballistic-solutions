@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://b535kjqixs2q8"]
+
+[ext_resource type="Script" uid="uid://dytuginckpwwi" path="res://demo/demo_2d/demo_2d.gd" id="1_y6ohc"]
+[ext_resource type="PackedScene" uid="uid://c614utorjckcn" path="res://demo/demo_2d/target_spawner_2d/target_spawner_2d.tscn" id="2_kgp11"]
+[ext_resource type="PackedScene" uid="uid://dp0jbrvbad8j4" path="res://demo/demo_2d/turret_2d/turret_2d.tscn" id="3_31lai"]
+
+[node name="Demo2D" type="Node2D" unique_id=962098544]
+script = ExtResource("1_y6ohc")
+
+[node name="TargetTimer" type="Timer" parent="." unique_id=368036480]
+wait_time = 0.3
+autostart = true
+
+[node name="TargetSpawner2D" parent="." unique_id=1639619025 instance=ExtResource("2_kgp11")]
+position = Vector2(484, 80)
+
+[node name="Turret2D" parent="." unique_id=930761259 instance=ExtResource("3_31lai")]
+position = Vector2(1316, 501)
+
+[connection signal="timeout" from="TargetTimer" to="." method="_on_target_timer_timeout"]
+[connection signal="spawned" from="TargetSpawner2D" to="Turret2D" method="change_target"]

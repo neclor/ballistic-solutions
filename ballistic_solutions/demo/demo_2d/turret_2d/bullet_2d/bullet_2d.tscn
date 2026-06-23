@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://cx4uwxdunh5ir"]
+
+[ext_resource type="Script" uid="uid://cwaqrytbqoboe" path="res://demo/demo_2d/turret_2d/bullet_2d/bullet_2d.gd" id="1_5aodx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_45cmh"]
+size = Vector2(10, 10)
+
+[node name="Bullet2D" type="RigidBody2D" unique_id=2006129888]
+collision_layer = 2
+collision_mask = 0
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 8
+script = ExtResource("1_5aodx")
+metadata/_edit_horizontal_guides_ = [-5.0, 5.0]
+metadata/_edit_vertical_guides_ = [-5.0, 5.0]
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1512843592]
+collision_layer = 2
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1751639587]
+shape = SubResource("RectangleShape2D_45cmh")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=249406938]
+color = Color(0, 0.5019608, 1, 1)
+polygon = PackedVector2Array(-5, -5, 5, -5, 5, 5, -5, 5)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]

@@ -1,0 +1,37 @@
+<Project Sdk="Godot.NET.Sdk/4.7.0-beta.5">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <LangVersion>preview</LangVersion>
+
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <AnalysisLevel>preview</AnalysisLevel>
+    <AnalysisMode>All</AnalysisMode>
+    <AnalysisModeStyle>Default</AnalysisModeStyle> <!-- AnalysisModeStyle=Default enables IDE rules configuration in .editorconfig -->
+    <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+
+    <RootNamespace>BallisticSolutions.Demo</RootNamespace>
+  </PropertyGroup>
+
+  <!--
+  <ItemGroup>
+    <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
+  </ItemGroup>
+  -->
+
+  <ItemGroup>
+    <Reference Include="BallisticSolutions">
+      <HintPath>addons\BallisticSolutionsCSharp\BallisticSolutions.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Numerics">
+      <HintPath>addons\BallisticSolutionsCSharp\MathNet.Numerics.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

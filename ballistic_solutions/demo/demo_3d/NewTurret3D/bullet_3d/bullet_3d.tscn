@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bqtkckfhoqtsr"]
+
+[ext_resource type="Script" uid="uid://6bqoi6m43765" path="res://demo/demo_3d/NewTurret3D/bullet_3d/bullet_3d.gd" id="1_mjglx"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_n3a8e"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n3a8e"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_hr1an"]
+material = SubResource("StandardMaterial3D_n3a8e")
+
+[node name="Bullet3D" type="RigidBody3D" unique_id=492390196]
+script = ExtResource("1_mjglx")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1443183026]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=334796110]
+shape = SubResource("SphereShape3D_n3a8e")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1270776130]
+mesh = SubResource("SphereMesh_hr1an")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

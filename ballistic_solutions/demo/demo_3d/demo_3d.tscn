@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://cyvyfahpnnoej"]
+
+[ext_resource type="Script" uid="uid://di7i4dold6ug5" path="res://demo/demo_3d/movable_camera_3d.gd" id="1_vkfd8"]
+[ext_resource type="PackedScene" uid="uid://c0khgn6gnlo4e" path="res://demo/demo_3d/target_spawner_3d/target_spawner_3d.tscn" id="2_aj56t"]
+[ext_resource type="PackedScene" uid="uid://cev0dk34deuki" path="res://demo/demo_3d/NewTurret3D/NewTurret3D.tscn" id="3_tb0su"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_c4mji"]
+size = Vector2(10000, 10000)
+
+[node name="Demo3D" type="Node3D" unique_id=1862350974]
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=1911466829]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03389454, -0.023666382, 0.010257721)
+mesh = SubResource("PlaneMesh_c4mji")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=186752057]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MovableCamera3D" type="Camera3D" parent="." unique_id=933492735]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.5810604, 0)
+current = true
+script = ExtResource("1_vkfd8")
+metadata/_custom_type_script = "uid://di7i4dold6ug5"
+
+[node name="TargetSpawner3D" parent="." unique_id=35735108 instance=ExtResource("2_aj56t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26.606295, -42.796967)
+target_initial_velocity = Vector3(-20, -20, 0)
+
+[node name="NewTurret3D" parent="." unique_id=548600413 instance=ExtResource("3_tb0su")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.951853, 38.684227, -58.454224)
+_bulletSpeed = 30.0
+
+[connection signal="spawned_count" from="TargetSpawner3D" to="NewTurret3D" method="ChangeTarget"]

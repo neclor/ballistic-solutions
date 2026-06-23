@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dmplshca2p8hv"]
+
+[ext_resource type="Script" uid="uid://de1uwqaofyosc" path="res://demo/demo_2d/target_spawner_2d/target_2d/target_2d.gd" id="1_y4d5v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hr1an"]
+
+[node name="Target2D" type="RigidBody2D" unique_id=685869186]
+collision_mask = 0
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 8
+constant_force = Vector2(-50, 25)
+script = ExtResource("1_y4d5v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1713004744]
+shape = SubResource("RectangleShape2D_hr1an")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=2061994874]
+scale = Vector2(1.2, 1.2)
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(10, 10, 10, -10, -10, -10, -10, 10)
+
+[node name="Timer" type="Timer" parent="." unique_id=327080763]
+wait_time = 10.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
