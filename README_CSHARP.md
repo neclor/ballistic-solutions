@@ -14,46 +14,36 @@
 
 ### Installation
 
-#### Option 1: Using IDE
+#### Option 1: NuGet Package (Recommended)
 
-To use this library, you need to reference the compiled `.dll` file in your project.
+Search for [BallisticSolutions](https://www.nuget.org/packages/BallisticSolutions) in the NuGet package manager.
 
-1. Right-click on your project in **Solution Explorer** -> **Add** -> **Project Reference…**.
-2. Select **Browse…** and choose the `BallisticSolutions.dll` file.
-3. Install [MathNet.Numerics](https://www.nuget.org/packages/MathNet.Numerics/) **Or** choose the `MathNet.Numerics.dll` file similarly to step 2.
-4. Confirm and rebuild your project.
+Or add to your `.csproj`:
 
-#### Option 2: Edit the .csproj file directly
+```xml
+<ItemGroup>
+  <PackageReference Include="BallisticSolutions" Version="*" />
+</ItemGroup>
+```
 
-1. Add a `<Reference>` entry for the `BallisticSolutions.dll` in `<ItemGroup>`
-	```xml
-	<ItemGroup>
-	  <Reference Include="BallisticSolutions">
-		<HintPath>addons\BallisticSolutionsCSharp\BallisticSolutions.dll</HintPath>
-	  </Reference>
-	</ItemGroup>
-	```
+#### Option 2: DLL
 
-2. Add NuGet dependencies: [MathNet.Numerics](https://www.nuget.org/packages/MathNet.Numerics/)
-	```xml
-	<ItemGroup>
-	  <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
-	</ItemGroup>
-	```
+Add to your `.csproj`:
 
-	**Or** Add a `<Reference>` entry for the `MathNet.Numerics.dll` in `<ItemGroup>`
-	```xml
-	<ItemGroup>
-	  <Reference Include="MathNet.Numerics">
-		<HintPath>addons\BallisticSolutionsCSharp\MathNet.Numerics.dll</HintPath>
-	  </Reference>
-	</ItemGroup>
-	```
-
----
+```xml
+<ItemGroup>
+  <Reference Include="BallisticSolutions">
+    <HintPath>addons\BallisticSolutionsCSharp\BallisticSolutions.dll</HintPath>
+  </Reference>
+  <Reference Include="MathNet.Numerics">
+    <HintPath>addons\BallisticSolutionsCSharp\MathNet.Numerics.dll</HintPath>
+  </Reference>
+</ItemGroup>
+```
 
 ### Dependencies
-- [MathNet.Numerics](https://www.nuget.org/packages/MathNet.Numerics/) (recommended via NuGet).
+- [GodotSharp](https://www.nuget.org/packages/GodotSharp)
+- [MathNet.Numerics](https://www.nuget.org/packages/MathNet.Numerics/)
 
 ---
 
@@ -61,30 +51,38 @@ To use this library, you need to reference the compiled `.dll` file in your proj
 
 ```csharp
 using Godot;
-using BallisticSolutions.BsSolutions;
+using BallisticSolutions.BsSolvers.BsVelocity;
 
 // ...
 
 	[Export]
-	public PackedScene ProjectilePackedScene { get; set; }
+	public PackedScene ProjectileScene { get; set; }
 
 	[Export]
-	public float ProjectileSpeed { get; set; } = 200f;
+	public float ProjectileSpeed { get; set; } = 200;
+
 	[Export]
-	public Vector2 ProjectileAcceleration { get; set; } = Vector2.Zero;
+	public Vector2 ProjectileAcceleration { get; set; }
 
 	public void Shoot(Target2D target) {
 		Vector2 toTarget = target.GlobalPosition - GlobalPosition;
-		BsSolution2D<float>? solution = BsSolution2D.Best<float>(ProjectileSpeed, toTarget, target.Velocity, ProjectileAcceleration, target.Acceleration);
 
-		if (solution == null) {
+		Vector2 velocity = BsVelocity2D.Best(
+			ProjectileSpeed,
+			toTarget,
+			target.Velocity,
+			ProjectileAcceleration,
+			target.Acceleration
+		);
+
+		if (float.IsNaN(velocity.X)) {
 			GD.Print("Impossible to hit the target");
 			return;
 		}
 
-		var newProjectile = ProjectilePackedScene.Instantiate<Projectile2D>();
+		var newProjectile = ProjectileScene.Instantiate<Projectile2D>();
 		newProjectile.GlobalPosition = GlobalPosition;
-		newProjectile.Velocity = solution.ProjectileVelocity;
+		newProjectile.Velocity = velocity;
 		newProjectile.Acceleration = ProjectileAcceleration;
 
 		GetParent().AddChild(newProjectile);
@@ -95,15 +93,15 @@ using BallisticSolutions.BsSolutions;
 
 ## Reference
 
-For the complete documentation, rely on the generated XML documentation.
+For the complete documentation, refer to the generated XML documentation.
 
-`Nd` suffix denotes 2D, 3D, or 4D variants — `BsTimeNd` stands for `BsTime2D`, `BsTime3D`, and `BsTime4D`. Each variant uses the corresponding `VectorN` type (`Vector2`, `Vector3`, `Vector4`). All variants share the same API.
+`*D` suffix denotes 2D, 3D, or 4D variants — `BsTime*D` stands for `BsTime2D`, `BsTime3D`, and `BsTime4D`. Each variant uses the corresponding `Vector*` type (`Vector2`, `Vector3`, `Vector4`). All variants share the same API.
 
 1. [`BsSolution<T>`](#bssolutiont)
-2. [`BsSolutionNd`](#bssolutionnd)
-3. [`BsPositionNd`](#bspositionnd)
-4. [`BsTimeNd`](#bstimend)
-5. [`BsVelocityNd`](#bsvelocitynd)
+2. [`BsSolution*D`](#bssolutiond)
+3. [`BsPosition*D`](#bspositiond)
+4. [`BsTime*D`](#bstimed)
+5. [`BsVelocity*D`](#bsvelocityd)
 
 ---
 
@@ -114,158 +112,158 @@ Abstract base class representing a ballistic solution. `T` is a floating-point n
 | Property | Type | Description |
 |---|---|---|
 | `Time` | `T` | Interception time. |
-| `Position` | `VectorN` | Impact position relative to the projectile origin. |
+| `Position` | `Vector*` | Impact position relative to the projectile origin. |
 | `DistanceToPosition` | `float` | Distance to the impact position. |
-| `DirectionToPosition` | `VectorN` | Direction to the impact position. |
-| `ProjectileVelocity` | `VectorN` | Required firing velocity. |
+| `DirectionToPosition` | `Vector*` | Direction to the impact position. |
+| `ProjectileVelocity` | `Vector*` | Required firing velocity. |
 | `ProjectileSpeed` | `float` | Projectile speed. |
-| `ProjectileDirection` | `VectorN` | Projectile direction. |
-| `ToTarget` | `VectorN` | Vector from shooter to target at t = 0. |
+| `ProjectileDirection` | `Vector*` | Projectile direction. |
+| `ToTarget` | `Vector*` | Vector from shooter to target at t = 0. |
 | `DistanceToTarget` | `float` | Distance to target at t = 0. |
-| `DirectionToTarget` | `VectorN` | Direction to target at t = 0. |
-| `TargetVelocity` | `VectorN` | Target velocity at t = 0. |
+| `DirectionToTarget` | `Vector*` | Direction to target at t = 0. |
+| `TargetVelocity` | `Vector*` | Target velocity at t = 0. |
 | `TargetSpeed` | `float` | Target speed. |
-| `TargetDirection` | `VectorN` | Target direction. |
-| `ProjectileAcceleration` | `VectorN` | Projectile acceleration. |
-| `TargetAcceleration` | `VectorN` | Target acceleration. |
+| `TargetDirection` | `Vector*` | Target direction. |
+| `ProjectileAcceleration` | `Vector*` | Projectile acceleration. |
+| `TargetAcceleration` | `Vector*` | Target acceleration. |
 
 ---
 
-## `BsSolutionNd`
+## `BsSolution*D`
 
 ```csharp
-BsSolutionNd<T>? Best<T>(float projectileSpeed, VectorN toTarget, VectorN targetVelocity = default, VectorN projectileAcceleration = default, VectorN targetAcceleration = default)
+BsSolution*D<T>? Best<T>(float projectileSpeed, Vector* toTarget, Vector* targetVelocity = default, Vector* projectileAcceleration = default, Vector* targetAcceleration = default)
 ```
 **Returns:** the earliest valid solution, or `null` if interception is impossible.
 
 ---
 
 ```csharp
-BsSolutionNd<T>? Best<T>(VectorN projectileDirection, VectorN toTarget, VectorN targetVelocity = default, VectorN projectileAcceleration = default, VectorN targetAcceleration = default)
+BsSolution*D<T>? Best<T>(Vector* projectileDirection, Vector* toTarget, Vector* targetVelocity = default, Vector* projectileAcceleration = default, Vector* targetAcceleration = default)
 ```
 **Returns:** the earliest valid solution, or `null` if interception is impossible.
 
 ---
 
 ```csharp
-BsSolutionNd<T>[] All<T>(float projectileSpeed, VectorN toTarget, VectorN targetVelocity = default, VectorN projectileAcceleration = default, VectorN targetAcceleration = default)
+BsSolution*D<T>[] All<T>(float projectileSpeed, Vector* toTarget, Vector* targetVelocity = default, Vector* projectileAcceleration = default, Vector* targetAcceleration = default)
 ```
 **Returns:** all valid solutions sorted by interception time. Empty array if impossible.
 
 ---
 
 ```csharp
-BsSolutionNd<T>[] All<T>(VectorN projectileDirection, VectorN toTarget, VectorN targetVelocity = default, VectorN projectileAcceleration = default, VectorN targetAcceleration = default)
+BsSolution*D<T>[] All<T>(Vector* projectileDirection, Vector* toTarget, Vector* targetVelocity = default, Vector* projectileAcceleration = default, Vector* targetAcceleration = default)
 ```
 **Returns:** all valid solutions sorted by interception time. Empty array if impossible.
 
 ---
 
-## `BsPositionNd`
+## `BsPosition*D`
 
 ```csharp
-VectorN Displacement<T>(T time, VectorN velocity, VectorN acceleration = default)
+Vector* Displacement<T>(T time, Vector* velocity, Vector* acceleration = default)
 ```
 **Returns:** displacement under constant acceleration.
 
 ---
 
 ```csharp
-VectorN Position<T>(VectorN position, T time, VectorN velocity, VectorN acceleration = default)
+Vector* Position<T>(Vector* position, T time, Vector* velocity, Vector* acceleration = default)
 ```
 **Returns:** position after elapsed time under constant acceleration.
 
 ---
 
 ```csharp
-VectorN Best(float projectileSpeed, VectorN toTarget, VectorN targetVelocity = default, VectorN projectileAcceleration = default, VectorN targetAcceleration = default)
+Vector* Best(float projectileSpeed, Vector* toTarget, Vector* targetVelocity = default, Vector* projectileAcceleration = default, Vector* targetAcceleration = default)
 ```
 **Returns:** the earliest valid impact position. Returns a `NaN` vector if impossible.
 
 ---
 
 ```csharp
-VectorN Best(VectorN projectileDirection, VectorN toTarget, VectorN targetVelocity = default, VectorN projectileAcceleration = default, VectorN targetAcceleration = default)
+Vector* Best(Vector* projectileDirection, Vector* toTarget, Vector* targetVelocity = default, Vector* projectileAcceleration = default, Vector* targetAcceleration = default)
 ```
 **Returns:** the earliest valid impact position. Returns a `NaN` vector if impossible.
 
 ---
 
 ```csharp
-VectorN[] All(float projectileSpeed, VectorN toTarget, VectorN targetVelocity = default, VectorN projectileAcceleration = default, VectorN targetAcceleration = default)
+Vector*[] All(float projectileSpeed, Vector* toTarget, Vector* targetVelocity = default, Vector* projectileAcceleration = default, Vector* targetAcceleration = default)
 ```
 **Returns:** all valid impact positions. Empty array if impossible.
 
 ---
 
 ```csharp
-VectorN[] All(VectorN projectileDirection, VectorN toTarget, VectorN targetVelocity = default, VectorN projectileAcceleration = default, VectorN targetAcceleration = default)
+Vector*[] All(Vector* projectileDirection, Vector* toTarget, Vector* targetVelocity = default, Vector* projectileAcceleration = default, Vector* targetAcceleration = default)
 ```
 **Returns:** all valid impact positions. Empty array if impossible.
 
 ---
 
-## `BsTimeNd`
+## `BsTime*D`
 
 ```csharp
-T Best<T>(float projectileSpeed, VectorN toTarget, VectorN targetVelocity = default, VectorN projectileAcceleration = default, VectorN targetAcceleration = default)
+T Best<T>(float projectileSpeed, Vector* toTarget, Vector* targetVelocity = default, Vector* projectileAcceleration = default, Vector* targetAcceleration = default)
 ```
 **Returns:** the earliest interception time (t ≥ 0). Returns `NaN` if impossible.
 
 ---
 
 ```csharp
-T Best<T>(VectorN projectileDirection, VectorN toTarget, VectorN targetVelocity = default, VectorN projectileAcceleration = default, VectorN targetAcceleration = default)
+T Best<T>(Vector* projectileDirection, Vector* toTarget, Vector* targetVelocity = default, Vector* projectileAcceleration = default, Vector* targetAcceleration = default)
 ```
 **Returns:** the earliest interception time (t ≥ 0). Returns `NaN` if impossible.
 
 ---
 
 ```csharp
-T[] All<T>(float projectileSpeed, VectorN toTarget, VectorN targetVelocity = default, VectorN projectileAcceleration = default, VectorN targetAcceleration = default)
+T[] All<T>(float projectileSpeed, Vector* toTarget, Vector* targetVelocity = default, Vector* projectileAcceleration = default, Vector* targetAcceleration = default)
 ```
 **Returns:** all valid interception times sorted ascending. Empty array if impossible.
 
 ---
 
 ```csharp
-T[] All<T>(VectorN projectileDirection, VectorN toTarget, VectorN targetVelocity = default, VectorN projectileAcceleration = default, VectorN targetAcceleration = default)
+T[] All<T>(Vector* projectileDirection, Vector* toTarget, Vector* targetVelocity = default, Vector* projectileAcceleration = default, Vector* targetAcceleration = default)
 ```
 **Returns:** all valid interception times sorted ascending. Empty array if impossible.
 
 ---
 
-## `BsVelocityNd`
+## `BsVelocity*D`
 
 ```csharp
-VectorN Velocity<T>(T time, VectorN toTarget, VectorN targetVelocity = default, VectorN projectileAcceleration = default, VectorN targetAcceleration = default)
+Vector* Velocity<T>(T time, Vector* toTarget, Vector* targetVelocity = default, Vector* projectileAcceleration = default, Vector* targetAcceleration = default)
 ```
 **Returns:** the firing velocity required to hit the target at the given time.
 
 ---
 
 ```csharp
-VectorN Best(float projectileSpeed, VectorN toTarget, VectorN targetVelocity = default, VectorN projectileAcceleration = default, VectorN targetAcceleration = default)
+Vector* Best(float projectileSpeed, Vector* toTarget, Vector* targetVelocity = default, Vector* projectileAcceleration = default, Vector* targetAcceleration = default)
 ```
 **Returns:** the earliest valid firing velocity. Returns a `NaN` vector if impossible.
 
 ---
 
 ```csharp
-VectorN Best(VectorN projectileDirection, VectorN toTarget, VectorN targetVelocity = default, VectorN projectileAcceleration = default, VectorN targetAcceleration = default)
+Vector* Best(Vector* projectileDirection, Vector* toTarget, Vector* targetVelocity = default, Vector* projectileAcceleration = default, Vector* targetAcceleration = default)
 ```
 **Returns:** the earliest valid firing velocity. Returns a `NaN` vector if impossible.
 
 ---
 
 ```csharp
-VectorN[] All(float projectileSpeed, VectorN toTarget, VectorN targetVelocity = default, VectorN projectileAcceleration = default, VectorN targetAcceleration = default)
+Vector*[] All(float projectileSpeed, Vector* toTarget, Vector* targetVelocity = default, Vector* projectileAcceleration = default, Vector* targetAcceleration = default)
 ```
 **Returns:** all valid firing velocities. Empty array if impossible.
 
 ---
 
 ```csharp
-VectorN[] All(VectorN projectileDirection, VectorN toTarget, VectorN targetVelocity = default, VectorN projectileAcceleration = default, VectorN targetAcceleration = default)
+Vector*[] All(Vector* projectileDirection, Vector* toTarget, Vector* targetVelocity = default, Vector* projectileAcceleration = default, Vector* targetAcceleration = default)
 ```
 **Returns:** all valid firing velocities. Empty array if impossible.
