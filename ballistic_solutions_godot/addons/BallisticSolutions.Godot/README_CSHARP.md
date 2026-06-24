@@ -12,38 +12,54 @@
 
 ## Installation & Dependencies
 
+Two packages are available depending on your project type:
+
+| Package | Vector types |
+|---|---|
+| [BallisticSolutions](https://www.nuget.org/packages/BallisticSolutions) | `System.Numerics.Vector*` |
+| [BallisticSolutions.Godot](https://www.nuget.org/packages/BallisticSolutions.Godot) | `Godot.Vector*` |
+
 ### Installation
 
 #### Option 1: NuGet Package (Recommended)
 
-Search for [BallisticSolutions](https://www.nuget.org/packages/BallisticSolutions) in the NuGet package manager.
+Search for package in the NuGet manager.
 
 Or add to your `.csproj`:
 
 ```xml
+<!-- Pure .NET -->
 <ItemGroup>
   <PackageReference Include="BallisticSolutions" Version="*" />
 </ItemGroup>
+
+<!-- Godot -->
+<ItemGroup>
+  <PackageReference Include="BallisticSolutions.Godot" Version="*" />
+</ItemGroup>
 ```
 
-#### Option 2: DLL
+#### Option 2: DLL (Godot addon)
 
 Add to your `.csproj`:
 
 ```xml
 <ItemGroup>
-  <Reference Include="BallisticSolutions">
-    <HintPath>addons\BallisticSolutionsCSharp\BallisticSolutions.dll</HintPath>
+  <Reference Include="BallisticSolutions.Godot">
+    <HintPath>addons\BallisticSolutions.Godot\BallisticSolutions.Godot.dll</HintPath>
   </Reference>
   <Reference Include="MathNet.Numerics">
-    <HintPath>addons\BallisticSolutionsCSharp\MathNet.Numerics.dll</HintPath>
+    <HintPath>addons\BallisticSolutions.Godot\MathNet.Numerics.dll</HintPath>
   </Reference>
 </ItemGroup>
 ```
 
 ### Dependencies
-- [GodotSharp](https://www.nuget.org/packages/GodotSharp)
+
 - [MathNet.Numerics](https://www.nuget.org/packages/MathNet.Numerics/)
+
+**BallisticSolutions.Godot:**
+- [GodotSharp](https://www.nuget.org/packages/GodotSharp)
 
 ---
 
