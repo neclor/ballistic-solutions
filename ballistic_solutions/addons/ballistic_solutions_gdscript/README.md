@@ -32,7 +32,7 @@ Ballistic solutions for moving targets: interception time, position, and firing 
     ```gdscript
     var to_target = target.global_position - global_position
     ```
-3. Call `BsVelocity?D.best_by_speed` to get initial projectile velocity.
+3. Call `BsVelocity*D.best_by_speed` to get initial projectile velocity.
 4. Instantiate your projectile and assign `velocity`.
 
 ---
