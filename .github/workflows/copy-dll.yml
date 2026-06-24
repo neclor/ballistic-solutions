@@ -30,7 +30,7 @@ jobs:
       - name: Copy DLLs to addons folder
         run: |
           BUILD_DIR="BallisticSolutions/build-output"
-          ADDON_DIR="ballistic_solutions/addons/BallisticSolutionsCSharp"
+          ADDON_DIR="ballistic_solutions_godot/addons/BallisticSolutions.Godot"
           cp "$BUILD_DIR/BallisticSolutions.Godot.dll" "$ADDON_DIR/"
           cp "$BUILD_DIR/BallisticSolutions.Godot.xml" "$ADDON_DIR/"
           cp "$BUILD_DIR/MathNet.Numerics.dll" "$ADDON_DIR/"
@@ -39,6 +39,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add ballistic_solutions/addons/BallisticSolutionsCSharp/
+          git add ballistic_solutions_godot/addons/BallisticSolutions.Godot/
           git diff --cached --quiet || git commit -m "Update DLLs"
           git push origin HEAD:${{ github.event.workflow_run.head_branch }}

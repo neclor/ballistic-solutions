@@ -28,7 +28,7 @@ project/assembly_name="BallisticSolutions.Godot.Demo"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/BallisticSolutionsCSharp/plugin.cfg", "res://addons/ballistic_solutions_gdscript/plugin.cfg", "res://addons/real_equation_solver/plugin.cfg")
+enabled=PackedStringArray("res://addons/BallisticSolutions.Godot/plugin.cfg", "res://addons/ballistic_solutions/plugin.cfg", "res://addons/real_equation_solver/plugin.cfg")
 
 [input]
 

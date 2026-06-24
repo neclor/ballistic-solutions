@@ -46,10 +46,10 @@ Add to your `.csproj`:
 ```xml
 <ItemGroup>
   <Reference Include="BallisticSolutions.Godot">
-    <HintPath>addons\BallisticSolutionsCSharp\BallisticSolutions.Godot.dll</HintPath>
+    <HintPath>addons\BallisticSolutions.Godot\BallisticSolutions.Godot.dll</HintPath>
   </Reference>
   <Reference Include="MathNet.Numerics">
-    <HintPath>addons\BallisticSolutionsCSharp\MathNet.Numerics.dll</HintPath>
+    <HintPath>addons\BallisticSolutions.Godot\MathNet.Numerics.dll</HintPath>
   </Reference>
 </ItemGroup>
 ```

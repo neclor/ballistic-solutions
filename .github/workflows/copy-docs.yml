@@ -22,8 +22,8 @@ jobs:
       - name: Copy docs to addons
         run: |
           for ADDON in \
-            ballistic_solutions/addons/BallisticSolutionsCSharp \
-            ballistic_solutions/addons/ballistic_solutions_gdscript; do
+            ballistic_solutions_godot/addons/BallisticSolutions.Godot \
+            ballistic_solutions_godot/addons/ballistic_solutions; do
             cp README.md "$ADDON/README.md"
             cp README_CSHARP.md "$ADDON/README_CSHARP.md"
             cp README_GDSCRIPT.md "$ADDON/README_GDSCRIPT.md"
@@ -34,7 +34,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add ballistic_solutions/addons/BallisticSolutionsCSharp/
-          git add ballistic_solutions/addons/ballistic_solutions_gdscript/
+          git add ballistic_solutions_godot/addons/BallisticSolutions.Godot/
+          git add ballistic_solutions_godot/addons/ballistic_solutions/
           git diff --cached --quiet || git commit -m "Update docs"
           git push

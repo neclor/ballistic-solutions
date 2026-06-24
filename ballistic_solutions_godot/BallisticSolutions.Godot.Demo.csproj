@@ -16,15 +16,15 @@
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 
-    <RootNamespace>BallisticSolutions.Godot.Demo</RootNamespace>
+    <RootNamespace>BallisticSolutions.Demo</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <Reference Include="BallisticSolutions.Godot">
-      <HintPath>addons\BallisticSolutionsCSharp\BallisticSolutions.Godot.dll</HintPath>
+      <HintPath>addons\BallisticSolutions.Godot\BallisticSolutions.Godot.dll</HintPath>
     </Reference>
     <Reference Include="MathNet.Numerics">
-      <HintPath>addons\BallisticSolutionsCSharp\MathNet.Numerics.dll</HintPath>
+      <HintPath>addons\BallisticSolutions.Godot\MathNet.Numerics.dll</HintPath>
     </Reference>
   </ItemGroup>
 
