@@ -1,19 +1,9 @@
 using System.Numerics;
-using BallisticSolutions.BsVectorExtensions;
-
-#if GODOT
-using Vector3 = Godot.Vector3;
-using Vector4 = Godot.Vector4;
-#else
-using Vector3 = System.Numerics.Vector3;
-using Vector4 = System.Numerics.Vector4;
-#endif
 
 namespace BallisticSolutions.BsSolvers.BsPosition;
 
 /// <inheritdoc cref="BsPosition4D"/>
 public static class BsPosition3D {
-
 	/// <inheritdoc cref="BsPosition4D.Displacement{T}"/>
 	public static Vector3 Displacement<T>(T time, Vector3 velocity, Vector3 acceleration = default) where T : INumber<T>
 		=> BsPosition4D.Displacement(time, velocity.ToVector4(), acceleration.ToVector4()).ToVector3();

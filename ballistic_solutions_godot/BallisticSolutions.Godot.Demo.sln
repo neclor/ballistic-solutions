@@ -1,6 +1,6 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BallisticSolutions.Demo", "BallisticSolutions.Demo.csproj", "{8C5FB689-39B1-4892-9FA3-FFC0D2FE4B74}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BallisticSolutions.Godot.Demo", "BallisticSolutions.Godot.Demo.csproj", "{8C5FB689-39B1-4892-9FA3-FFC0D2FE4B74}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

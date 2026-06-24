@@ -2,14 +2,6 @@ using System.Numerics;
 using BallisticSolutions.BsSolvers.BsPosition;
 using BallisticSolutions.BsSolvers.BsTime;
 using BallisticSolutions.BsSolvers.BsVelocity;
-#if GODOT
-using Vector3 = Godot.Vector3;
-using Vector4 = Godot.Vector4;
-#else
-using BallisticSolutions.BsUtils;
-using Vector3 = System.Numerics.Vector3;
-using Vector4 = System.Numerics.Vector4;
-#endif
 
 namespace BallisticSolutions.BsSolutions;
 

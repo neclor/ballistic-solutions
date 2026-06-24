@@ -1,10 +1,4 @@
 using BallisticSolutions.BsSolvers;
-#if GODOT
-using Vector4 = Godot.Vector4;
-#else
-using BallisticSolutions.BsUtils;
-using Vector4 = System.Numerics.Vector4;
-#endif
 
 namespace BallisticSolutions.Tests;
 

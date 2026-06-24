@@ -24,15 +24,15 @@ jobs:
           dotnet-version: '10.0.x'
 
       - name: Build
-        run: dotnet build src/BallisticSolutions/BallisticSolutions.csproj --configuration Release --output build-output
+        run: dotnet build src/BallisticSolutions.Godot/BallisticSolutions.Godot.csproj --configuration Release --output build-output
         working-directory: BallisticSolutions
 
       - name: Copy DLLs to addons folder
         run: |
           BUILD_DIR="BallisticSolutions/build-output"
           ADDON_DIR="ballistic_solutions/addons/BallisticSolutionsCSharp"
-          cp "$BUILD_DIR/BallisticSolutions.dll" "$ADDON_DIR/"
-          cp "$BUILD_DIR/BallisticSolutions.xml" "$ADDON_DIR/"
+          cp "$BUILD_DIR/BallisticSolutions.Godot.dll" "$ADDON_DIR/"
+          cp "$BUILD_DIR/BallisticSolutions.Godot.xml" "$ADDON_DIR/"
           cp "$BUILD_DIR/MathNet.Numerics.dll" "$ADDON_DIR/"
 
       - name: Commit DLLs

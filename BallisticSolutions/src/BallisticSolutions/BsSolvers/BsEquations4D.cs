@@ -1,11 +1,5 @@
 using System.Numerics;
 using BallisticSolutions.BsUtils;
-using BallisticSolutions.BsVectorExtensions;
-#if GODOT
-using Vector4 = Godot.Vector4;
-#else
-using Vector4 = System.Numerics.Vector4;
-#endif
 
 namespace BallisticSolutions.BsSolvers;
 
@@ -113,6 +107,8 @@ public static class BsEquations4D {
 	/// </returns>
 	public static T[] Time<T>(Vector4 projectileDirection, Vector4 toTarget, Vector4 targetVelocity = default, Vector4 projectileAcceleration = default, Vector4 targetAcceleration = default) where T : IFloatingPointIeee754<T> {
 		projectileDirection = projectileDirection.Normalized();
+
+		projectileDirection.Normalized();
 
 		Vector4 relativeAcceleration = projectileAcceleration - targetAcceleration;
 

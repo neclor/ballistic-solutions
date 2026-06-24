@@ -1,4 +1,6 @@
 <Solution>
   <Project Path="src/BallisticSolutions/BallisticSolutions.csproj" />
-  <Project Path="tests/BallisticSolutions.Tests/BallisticSolutions.Tests.csproj" Id="3f39d981-43dd-4b93-8633-9d847974e129" />
+  <Project Path="src/BallisticSolutions.Godot/BallisticSolutions.Godot.csproj" />
+  <Project Path="tests/BallisticSolutions.Tests/BallisticSolutions.Tests.csproj" />
+  <Project Path="tests/BallisticSolutions.Godot.Tests/BallisticSolutions.Godot.Tests.csproj" />
 </Solution>

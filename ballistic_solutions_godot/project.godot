@@ -24,7 +24,7 @@ window/stretch/mode="canvas_items"
 
 [dotnet]
 
-project/assembly_name="BallisticSolutions.Demo"
+project/assembly_name="BallisticSolutions.Godot.Demo"
 
 [editor_plugins]
 

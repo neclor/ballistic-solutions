@@ -1,9 +1,4 @@
 using System.Numerics;
-#if GODOT
-using Vector4 = Godot.Vector4;
-#else
-using Vector4 = System.Numerics.Vector4;
-#endif
 
 namespace BallisticSolutions.BsSolvers.BsTime;
 

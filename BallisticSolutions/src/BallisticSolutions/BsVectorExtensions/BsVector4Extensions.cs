@@ -1,17 +1,7 @@
-#if GODOT
-using Vector2 = Godot.Vector2;
-using Vector3 = Godot.Vector3;
-using Vector4 = Godot.Vector4;
-#else
-using Vector2 = System.Numerics.Vector2;
-using Vector3 = System.Numerics.Vector3;
-using Vector4 = System.Numerics.Vector4;
-#endif
-
 namespace BallisticSolutions.BsVectorExtensions;
 
 /// <summary>
-/// Extension methods for working with <see cref="Vector4" />.
+/// Extension methods for working with <see cref="Vector4"/>.
 /// </summary>
 public static class BsVector4Extensions {
 #if GODOT
@@ -57,5 +47,20 @@ public static class BsVector4Extensions {
 		/// </summary>
 		/// <returns>A new three-dimensional vector with X, Y, and Z components.</returns>
 		public Vector3 ToVector3() => new(v.X, v.Y, v.Z);
+
+#if !GODOT
+		/// <summary>
+		/// Returns the dot product of this vector and <paramref name="with"/>.
+		/// </summary>
+		/// <param name="with">The other vector to use.</param>
+		/// <returns>The dot product of the two vectors.</returns>
+		public float Dot(Vector4 with) => Vector4.Dot(v, with);
+
+		/// <summary>
+		/// Returns the vector scaled to unit length.
+		/// </summary>
+		/// <returns>A normalized version of the vector.</returns>
+		public Vector4 Normalized() => v.LengthSquared() == 0f ? Vector4.Zero : Vector4.Normalize(v);
+#endif
 	}
 }

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
@@ -21,6 +21,10 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <DefineConstants>$(DefineConstants);GODOT</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
@@ -33,8 +37,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\BallisticSolutions\BallisticSolutions.csproj" />
+    <ProjectReference Include="..\..\src\BallisticSolutions.Godot\BallisticSolutions.Godot.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Include="../BallisticSolutions.Tests/**/*.cs" Exclude="../BallisticSolutions.Tests/obj/**;../BallisticSolutions.Tests/bin/**" />
+  </ItemGroup>
 
 </Project>

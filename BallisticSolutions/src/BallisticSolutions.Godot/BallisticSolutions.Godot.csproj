@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <LangVersion>preview</LangVersion>
 
     <EnableDynamicLoading>true</EnableDynamicLoading>
@@ -21,7 +21,7 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
 
     <Version>6.0.3</Version>
-    <Title>BallisticSolutions</Title>
+    <Title>BallisticSolutions.Godot</Title>
     <Authors>neclor</Authors>
     <Description>Ballistic solutions for moving targets: interception time, position, and firing velocity, accounting for projectile and target acceleration.</Description>
     <Copyright>neclor</Copyright>
@@ -29,7 +29,7 @@
     <PackageProjectUrl>https://github.com/neclor/ballistic-solutions</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/neclor/ballistic-solutions</RepositoryUrl>
-    <PackageTags>ballistic</PackageTags>
+    <PackageTags>godot godot4 godot-csharp ballistic</PackageTags>
 
     <AssemblyVersion>6.0.0</AssemblyVersion>
     <FileVersion>6.0.3</FileVersion>
@@ -38,12 +38,21 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <DefineConstants>$(DefineConstants);GODOT</DefineConstants>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <Optimize>True</Optimize>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
+    <PackageReference Include="GodotSharp" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="../BallisticSolutions/**/*.cs" Exclude="../BallisticSolutions/obj/**;../BallisticSolutions/bin/**" />
   </ItemGroup>
 
   <ItemGroup>
