@@ -15,16 +15,16 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: ${{ github.event.workflow_run.head_sha }}
 
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/setup-dotnet@v5
         with:
           dotnet-version: '10.0.x'
 
       - name: Build
-        run: dotnet build --configuration Release --output build-output
+        run: dotnet build src/BallisticSolutions/BallisticSolutions.csproj --configuration Release --output build-output
         working-directory: BallisticSolutions
 
       - name: Copy DLLs to addons folder
