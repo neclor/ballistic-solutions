@@ -1,6 +1,5 @@
 # Ballistic Solutions
 
-
 Ballistic solutions for moving targets: interception time, position, and firing velocity, accounting for projectile and target acceleration.
 
 ---
@@ -20,10 +19,9 @@ Ballistic solutions for moving targets: interception time, position, and firing 
 
 ## Download
 
-- [NuGet]()
+- [NuGet Package](https://www.nuget.org/packages/BallisticSolutions)
 - [Asset Store](https://store.godotengine.org/asset/neclor/ballistic-solutions/)
 - [GitHub](https://github.com/neclor/ballistic-solutions)
-- [Asset Library](https://godotengine.org/asset-library/asset/3010)
 
 ---
 

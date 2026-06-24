@@ -3,12 +3,15 @@
 [ext_resource type="Script" uid="uid://c2wmcljk6wotk" path="res://demo/old_demo/demo_3d/projectile/projectile_3d.gd" id="1_jl0ir"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8s2wu"]
+radius = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jl0ir"]
 albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_u382y"]
 material = SubResource("StandardMaterial3D_jl0ir")
+radius = 1.0
+height = 2.0
 
 [node name="Projectile3D" type="RigidBody3D" unique_id=1237980423]
 collision_layer = 0

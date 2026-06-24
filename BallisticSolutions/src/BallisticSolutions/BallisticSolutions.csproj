@@ -32,6 +32,7 @@
     <FileVersion>6.0.0</FileVersion>
     <PackageReadmeFile>README_CSHARP.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -45,10 +46,11 @@
   <ItemGroup>
     <None Include="../../../README_CSHARP.md" Pack="true" PackagePath="/" />
     <None Include="../../../LICENSE" Pack="true" PackagePath="/" />
+    <None Include="../../../docs/icon.png" Pack="true" PackagePath="/" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="GodotSharp" Version="4.7.0" />
+    <PackageReference Include="GodotSharp" Version="*" />
     <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
   </ItemGroup>
 
