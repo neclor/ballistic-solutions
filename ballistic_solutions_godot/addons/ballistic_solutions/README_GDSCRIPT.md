@@ -1,4 +1,4 @@
-# Ballistic Solutions (GDScript)
+# BallisticSolutions (GDScript)
 
 ---
 

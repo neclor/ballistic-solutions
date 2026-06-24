@@ -1,4 +1,4 @@
-# Ballistic Solutions
+# BallisticSolutions
 
 Ballistic solutions for moving targets: interception time, position, and firing velocity, accounting for projectile and target acceleration.
 
