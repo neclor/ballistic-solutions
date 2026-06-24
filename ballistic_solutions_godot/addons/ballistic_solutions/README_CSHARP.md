@@ -1,4 +1,4 @@
-# Ballistic Solutions (C#)
+# BallisticSolutions (C#)
 
 ---
 
