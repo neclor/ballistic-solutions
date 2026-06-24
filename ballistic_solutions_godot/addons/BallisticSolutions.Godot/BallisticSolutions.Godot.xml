@@ -1,0 +1,736 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BallisticSolutions.Godot</name>
+    </assembly>
+    <members>
+        <member name="T:BallisticSolutions.BsSolutions.BsSolution`2">
+            <summary>
+            Abstract base class for typed ballistic solutions.
+            </summary>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution`2.Time">
+            <summary>The interception time.</summary>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution`2.Position">
+            <summary>The impact position relative to the projectile origin.</summary>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution`2.DistanceToPosition">
+            <summary>The distance to the impact position derived from <see cref="P:BallisticSolutions.BsSolutions.BsSolution`2.Position"/>.</summary>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution`2.DirectionToPosition">
+            <summary> The direction to the impact position derived from <see cref="P:BallisticSolutions.BsSolutions.BsSolution`2.Position"/>.</summary>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution`2.ProjectileVelocity">
+            <summary>The required firing velocity.</summary>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution`2.ProjectileSpeed">
+            <summary>The projectile speed derived from <see cref="P:BallisticSolutions.BsSolutions.BsSolution`2.ProjectileVelocity"/>.</summary>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution`2.ProjectileDirection">
+            <summary>The projectile direction derived from <see cref="P:BallisticSolutions.BsSolutions.BsSolution`2.ProjectileVelocity"/>.</summary>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution`2.ToTarget">
+            <summary>The displacement from projectile origin to target at t = 0.</summary>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution`2.DistanceToTarget">
+            <summary>The distance to target at t = 0.</summary>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution`2.DirectionToTarget">
+            <summary>The direction to target at t = 0.</summary>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution`2.TargetVelocity">
+            <summary>The target velocity at t = 0.</summary>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution`2.TargetSpeed">
+            <summary>The target speed derived from <see cref="P:BallisticSolutions.BsSolutions.BsSolution`2.TargetVelocity"/>.</summary>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution`2.TargetDirection">
+            <summary>The target direction derived from <see cref="P:BallisticSolutions.BsSolutions.BsSolution`2.TargetVelocity"/>.</summary>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution`2.ProjectileAcceleration">
+            <summary>The acceleration vector of the projectile.</summary>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution`2.TargetAcceleration">
+            <summary>The acceleration vector of the target.</summary>
+        </member>
+        <member name="T:BallisticSolutions.BsSolutions.BsSolution2D`1">
+            <inheritdoc cref="T:BallisticSolutions.BsSolutions.BsSolution4D`1"/>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution2D`1.DistanceToPosition">
+            <inheritdoc cref="P:BallisticSolutions.BsSolutions.BsSolution`2.DistanceToPosition"/>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution2D`1.DirectionToPosition">
+            <inheritdoc cref="P:BallisticSolutions.BsSolutions.BsSolution`2.DirectionToPosition"/>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution2D`1.ProjectileSpeed">
+            <inheritdoc cref="P:BallisticSolutions.BsSolutions.BsSolution`2.ProjectileSpeed"/>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution2D`1.ProjectileDirection">
+            <inheritdoc cref="P:BallisticSolutions.BsSolutions.BsSolution`2.ProjectileDirection"/>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution2D`1.DistanceToTarget">
+            <inheritdoc cref="P:BallisticSolutions.BsSolutions.BsSolution`2.DistanceToTarget"/>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution2D`1.DirectionToTarget">
+            <inheritdoc cref="P:BallisticSolutions.BsSolutions.BsSolution`2.DirectionToTarget"/>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution2D`1.TargetSpeed">
+            <inheritdoc cref="P:BallisticSolutions.BsSolutions.BsSolution`2.TargetSpeed"/>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution2D`1.TargetDirection">
+            <inheritdoc cref="P:BallisticSolutions.BsSolutions.BsSolution`2.TargetDirection"/>
+        </member>
+        <member name="T:BallisticSolutions.BsSolutions.BsSolution2D">
+            <inheritdoc cref="T:BallisticSolutions.BsSolutions.BsSolution4D"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolutions.BsSolution2D.Best``1(System.Single,Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolutions.BsSolution4D.Best``1(System.Single,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolutions.BsSolution2D.Best``1(Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolutions.BsSolution4D.Best``1(Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolutions.BsSolution2D.All``1(System.Single,Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolutions.BsSolution4D.All``1(System.Single,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolutions.BsSolution2D.All``1(Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolutions.BsSolution4D.All``1(Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="T:BallisticSolutions.BsSolutions.BsSolution3D`1">
+            <inheritdoc cref="T:BallisticSolutions.BsSolutions.BsSolution4D`1"/>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution3D`1.DistanceToPosition">
+            <inheritdoc cref="P:BallisticSolutions.BsSolutions.BsSolution`2.DistanceToPosition"/>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution3D`1.DirectionToPosition">
+            <inheritdoc cref="P:BallisticSolutions.BsSolutions.BsSolution`2.DirectionToPosition"/>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution3D`1.ProjectileSpeed">
+            <inheritdoc cref="P:BallisticSolutions.BsSolutions.BsSolution`2.ProjectileSpeed"/>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution3D`1.ProjectileDirection">
+            <inheritdoc cref="P:BallisticSolutions.BsSolutions.BsSolution`2.ProjectileDirection"/>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution3D`1.DistanceToTarget">
+            <inheritdoc cref="P:BallisticSolutions.BsSolutions.BsSolution`2.DistanceToTarget"/>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution3D`1.DirectionToTarget">
+            <inheritdoc cref="P:BallisticSolutions.BsSolutions.BsSolution`2.DirectionToTarget"/>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution3D`1.TargetSpeed">
+            <inheritdoc cref="P:BallisticSolutions.BsSolutions.BsSolution`2.TargetSpeed"/>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution3D`1.TargetDirection">
+            <inheritdoc cref="P:BallisticSolutions.BsSolutions.BsSolution`2.TargetDirection"/>
+        </member>
+        <member name="T:BallisticSolutions.BsSolutions.BsSolution3D">
+            <inheritdoc cref="T:BallisticSolutions.BsSolutions.BsSolution4D"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolutions.BsSolution3D.Best``1(System.Single,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolutions.BsSolution4D.Best``1(System.Single,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolutions.BsSolution3D.Best``1(Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolutions.BsSolution4D.Best``1(Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolutions.BsSolution3D.All``1(System.Single,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolutions.BsSolution4D.All``1(System.Single,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolutions.BsSolution3D.All``1(Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolutions.BsSolution4D.All``1(Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="T:BallisticSolutions.BsSolutions.BsSolution4D`1">
+            <summary>
+            Represents a ballistic solution.
+            </summary>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution4D`1.DistanceToPosition">
+            <inheritdoc cref="P:BallisticSolutions.BsSolutions.BsSolution`2.DistanceToPosition"/>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution4D`1.DirectionToPosition">
+            <inheritdoc cref="P:BallisticSolutions.BsSolutions.BsSolution`2.DirectionToPosition"/>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution4D`1.ProjectileSpeed">
+            <inheritdoc cref="P:BallisticSolutions.BsSolutions.BsSolution`2.ProjectileSpeed"/>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution4D`1.ProjectileDirection">
+            <inheritdoc cref="P:BallisticSolutions.BsSolutions.BsSolution`2.ProjectileDirection"/>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution4D`1.DistanceToTarget">
+            <inheritdoc cref="P:BallisticSolutions.BsSolutions.BsSolution`2.DistanceToTarget"/>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution4D`1.DirectionToTarget">
+            <inheritdoc cref="P:BallisticSolutions.BsSolutions.BsSolution`2.DirectionToTarget"/>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution4D`1.TargetSpeed">
+            <inheritdoc cref="P:BallisticSolutions.BsSolutions.BsSolution`2.TargetSpeed"/>
+        </member>
+        <member name="P:BallisticSolutions.BsSolutions.BsSolution4D`1.TargetDirection">
+            <inheritdoc cref="P:BallisticSolutions.BsSolutions.BsSolution`2.TargetDirection"/>
+        </member>
+        <member name="T:BallisticSolutions.BsSolutions.BsSolution4D">
+            <summary>
+            Provides factory methods for creating ballistic solutions.
+            </summary>
+        </member>
+        <member name="M:BallisticSolutions.BsSolutions.BsSolution4D.Best``1(System.Single,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Returns the solution for the earliest valid interception using projectile speed.
+            </summary>
+            <typeparam name="T">A floating-point numeric type (e.g., float, double) implementing <see cref="T:System.Numerics.IFloatingPointIeee754`1"/>.</typeparam>
+            <param name="projectileSpeed">The speed of the projectile.</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            The earliest valid solution. Returns <c>null</c> if no interception is possible.
+            </returns>
+        </member>
+        <member name="M:BallisticSolutions.BsSolutions.BsSolution4D.Best``1(Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Returns the solution for the earliest valid interception using projectile direction.
+            </summary>
+            <typeparam name="T">A floating-point numeric type (e.g., float, double) implementing <see cref="T:System.Numerics.IFloatingPointIeee754`1"/>.</typeparam>
+            <param name="projectileDirection">The direction of the projectile.</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            The earliest valid solution. Returns <c>null</c> if no interception is possible.
+            </returns>
+        </member>
+        <member name="M:BallisticSolutions.BsSolutions.BsSolution4D.All``1(System.Single,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Returns all solutions using projectile speed, sorted by interception time.
+            </summary>
+            <typeparam name="T">A floating-point numeric type (e.g., float, double) implementing <see cref="T:System.Numerics.IFloatingPointIeee754`1"/>.</typeparam>
+            <param name="projectileSpeed">The speed of the projectile.</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            All valid solutions sorted by interception time. Empty array if no interception is possible.
+            </returns>
+        </member>
+        <member name="M:BallisticSolutions.BsSolutions.BsSolution4D.All``1(Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Returns all solutions using projectile direction, sorted by interception time.
+            </summary>
+            <typeparam name="T">A floating-point numeric type (e.g., float, double) implementing <see cref="T:System.Numerics.IFloatingPointIeee754`1"/>.</typeparam>
+            <param name="projectileDirection">The direction of the projectile.</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            All valid solutions sorted by interception time. Empty array if no interception is possible.
+            </returns>
+        </member>
+        <member name="T:BallisticSolutions.BsSolvers.BsEquations4D">
+            <summary>
+            Provides ballistic equations.
+            </summary>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsEquations4D.Displacement``1(``0,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Computes displacement under constant acceleration.
+            </summary>
+            <typeparam name="T">A numeric type implementing <see cref="T:System.Numerics.INumber`1"/>.</typeparam>
+            <param name="time">Elapsed time.</param>
+            <param name="velocity">Initial velocity vector.</param>
+            <param name="acceleration">Constant acceleration vector.</param>
+            <returns>
+            The displacement vector after <paramref name="time"/> has elapsed.
+            </returns>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsEquations4D.Position``1(Godot.Vector4,``0,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Computes position after elapsed time under constant acceleration.
+            </summary>
+            <typeparam name="T">A numeric type implementing <see cref="T:System.Numerics.INumber`1"/>.</typeparam>
+            <param name="position">Initial position vector.</param>
+            <param name="time">Elapsed time.</param>
+            <param name="velocity">Initial velocity vector.</param>
+            <param name="acceleration">Constant acceleration vector.</param>
+            <returns>
+            The position vector after <paramref name="time"/> has elapsed.
+            </returns>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsEquations4D.Velocity``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Computes the firing velocity required to hit the target at a given interception time.
+            </summary>
+            <typeparam name="T">A numeric type implementing <see cref="T:System.Numerics.INumber`1"/>.</typeparam>
+            <param name="time">The time until interception (must be positive).</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            The required firing velocity vector. Returns <see cref="P:Godot.Vector4.Zero"/> if <paramref name="time"/> is zero and <paramref name="toTarget"/> is zero.
+            Returns a NaN vector if <paramref name="time"/> is negative, or if <paramref name="time"/> is zero and <paramref name="toTarget"/> is non-zero.
+            </returns>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsEquations4D.Time``1(System.Single,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Computes all possible interception times between a projectile and a moving target.
+            </summary>
+            <typeparam name="T">A floating-point numeric type (e.g., float, double) implementing <see cref="T:System.Numerics.IFloatingPointIeee754`1"/>.</typeparam>
+            <param name="projectileSpeed">The speed of the projectile.</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            A sorted array of all valid interception times (t ≥ 0). Empty if interception is impossible.
+            </returns>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsEquations4D.Time``1(Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Computes all possible interception times between a projectile and a moving target.
+            </summary>
+            <typeparam name="T">A floating-point numeric type (e.g., float, double) implementing <see cref="T:System.Numerics.IFloatingPointIeee754`1"/>.</typeparam>
+            <param name="projectileDirection">The direction of the projectile.</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            A sorted array of all valid interception times (t ≥ 0). Empty if interception is impossible.
+            </returns>
+        </member>
+        <member name="T:BallisticSolutions.BsSolvers.BsPosition.BsPosition2D">
+            <inheritdoc cref="T:BallisticSolutions.BsSolvers.BsPosition.BsPosition4D"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition2D.Displacement``1(``0,Godot.Vector2,Godot.Vector2)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition4D.Displacement``1(``0,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition2D.Position``1(Godot.Vector2,``0,Godot.Vector2,Godot.Vector2)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition4D.Position``1(Godot.Vector4,``0,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition2D.Best(System.Single,Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition4D.Best(System.Single,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition2D.Best(Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition4D.Best(Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition2D.All(System.Single,Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition4D.All(System.Single,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition2D.All(Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition4D.All(Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="T:BallisticSolutions.BsSolvers.BsPosition.BsPosition3D">
+            <inheritdoc cref="T:BallisticSolutions.BsSolvers.BsPosition.BsPosition4D"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition3D.Displacement``1(``0,Godot.Vector3,Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition4D.Displacement``1(``0,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition3D.Position``1(Godot.Vector3,``0,Godot.Vector3,Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition4D.Position``1(Godot.Vector4,``0,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition3D.Best(System.Single,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition4D.Best(System.Single,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition3D.Best(Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition4D.Best(Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition3D.All(System.Single,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition4D.All(System.Single,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition3D.All(Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition4D.All(Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="T:BallisticSolutions.BsSolvers.BsPosition.BsPosition4D">
+            <summary>
+            Provides methods for computing projectile positions, impact positions, and displacement calculations.
+            </summary>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition4D.Displacement``1(``0,Godot.Vector4,Godot.Vector4)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsEquations4D.Displacement``1(``0,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition4D.Position``1(Godot.Vector4,``0,Godot.Vector4,Godot.Vector4)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsEquations4D.Position``1(Godot.Vector4,``0,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition4D.Best(System.Single,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Computes the impact position of the earliest valid interception.
+            </summary>
+            <param name="projectileSpeed">The speed of the projectile.</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            The impact position vector. Returns `NaN` vector if interception is impossible.
+            </returns>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition4D.Best(Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Computes the impact position of the earliest valid interception.
+            </summary>
+            <param name="projectileDirection">The direction of the projectile.</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            The impact position vector. Returns `NaN` vector if interception is impossible.
+            </returns>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition4D.All(System.Single,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Computes all possible impact positions corresponding to valid interception times.
+            </summary>
+            <param name="projectileSpeed">The speed of the projectile.</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            An array of vectors representing all valid impact positions.
+            </returns>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsPosition.BsPosition4D.All(Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Computes all possible impact positions corresponding to valid interception times.
+            </summary>
+            <param name="projectileDirection">The direction of the projectile.</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            An array of vectors representing all valid impact positions.
+            </returns>
+        </member>
+        <member name="T:BallisticSolutions.BsSolvers.BsTime.BsTime2D">
+            <inheritdoc cref="T:BallisticSolutions.BsSolvers.BsTime.BsTime4D"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsTime.BsTime2D.Best``1(System.Single,Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsTime.BsTime4D.Best``1(System.Single,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsTime.BsTime2D.Best``1(Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsTime.BsTime4D.Best``1(Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsTime.BsTime2D.All``1(System.Single,Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsTime.BsTime4D.All``1(System.Single,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsTime.BsTime2D.All``1(Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsTime.BsTime4D.All``1(Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="T:BallisticSolutions.BsSolvers.BsTime.BsTime3D">
+            <inheritdoc cref="T:BallisticSolutions.BsSolvers.BsTime.BsTime4D"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsTime.BsTime3D.Best``1(System.Single,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsTime.BsTime4D.Best``1(System.Single,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsTime.BsTime3D.Best``1(Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsTime.BsTime4D.Best``1(Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsTime.BsTime3D.All``1(System.Single,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsTime.BsTime4D.All``1(System.Single,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsTime.BsTime3D.All``1(Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsTime.BsTime4D.All``1(Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="T:BallisticSolutions.BsSolvers.BsTime.BsTime4D">
+            <summary>
+            Provides methods for computing interception times between a projectile and a moving target.
+            </summary>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsTime.BsTime4D.Best``1(System.Single,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Computes the earliest positive interception time between a projectile and a moving target.
+            </summary>
+            <typeparam name="T">A floating-point numeric type (e.g., float, double) implementing <see cref="T:System.Numerics.IFloatingPointIeee754`1"/>.</typeparam>
+            <param name="projectileSpeed">The speed of the projectile.</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            The earliest interception time (t ≥ 0). Returns <see cref="P:System.Numerics.IFloatingPointIeee754`1.NaN"/> if no interception is possible.
+            </returns>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsTime.BsTime4D.Best``1(Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Computes the earliest positive interception time between a projectile and a moving target.
+            </summary>
+            <typeparam name="T">A floating-point numeric type (e.g., float, double) implementing <see cref="T:System.Numerics.IFloatingPointIeee754`1"/>.</typeparam>
+            <param name="projectileDirection">The direction of the projectile.</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            The earliest interception time (t ≥ 0). Returns <see cref="P:System.Numerics.IFloatingPointIeee754`1.NaN"/> if no interception is possible.
+            </returns>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsTime.BsTime4D.All``1(System.Single,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsEquations4D.Time``1(System.Single,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsTime.BsTime4D.All``1(Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsEquations4D.Time``1(Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="T:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity2D">
+            <inheritdoc cref="T:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity4D"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity2D.Velocity``1(``0,Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity4D.Velocity``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity2D.Best(System.Single,Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity4D.Best(System.Single,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity2D.Best(Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity4D.Best(Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity2D.All(System.Single,Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity4D.All(System.Single,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity2D.All(Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2,Godot.Vector2)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity4D.All(Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="T:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity3D">
+            <inheritdoc cref="T:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity4D"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity3D.Velocity``1(``0,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity4D.Velocity``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity3D.Best(System.Single,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity4D.Best(System.Single,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity3D.Best(Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity4D.Best(Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity3D.All(System.Single,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity4D.All(System.Single,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity3D.All(Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3,Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity4D.All(Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="T:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity4D">
+            <summary>
+            Provides methods for computing required firing velocities.
+            </summary>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity4D.Velocity``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <inheritdoc cref="M:BallisticSolutions.BsSolvers.BsEquations4D.Velocity``1(``0,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity4D.Best(System.Single,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Computes the firing velocity required for the earliest valid interception.
+            </summary>
+            <param name="projectileSpeed">The speed of the projectile.</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            The required firing velocity vector. Returns `NaN` vector if interception is impossible.
+            </returns>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity4D.Best(Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Computes the firing velocity required for the earliest valid interception.
+            </summary>
+            <param name="projectileDirection">The direction of the projectile.</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            The required firing velocity vector. Returns `NaN` vector if interception is impossible.
+            </returns>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity4D.All(System.Single,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Computes firing velocities for all valid interception times.
+            </summary>
+            <param name="projectileSpeed">The speed of the projectile.</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            An array of firing velocity vectors, one for each valid interception time.
+            </returns>
+        </member>
+        <member name="M:BallisticSolutions.BsSolvers.BsVelocity.BsVelocity4D.All(Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4,Godot.Vector4)">
+            <summary>
+            Computes firing velocities for all valid interception times.
+            </summary>
+            <param name="projectileDirection">The direction of the projectile.</param>
+            <param name="toTarget">The vector from the shooter to the target.</param>
+            <param name="targetVelocity">The velocity vector of the target.</param>
+            <param name="projectileAcceleration">The acceleration vector of the projectile.</param>
+            <param name="targetAcceleration">The acceleration vector of the target.</param>
+            <returns>
+            An array of firing velocity vectors, one for each valid interception time.
+            </returns>
+        </member>
+        <member name="T:BallisticSolutions.BsVectorExtensions.BsVector2Extensions">
+            <summary>
+            Extension methods for working with <see cref="T:Godot.Vector2"/>.
+            </summary>
+        </member>
+        <member name="M:BallisticSolutions.BsVectorExtensions.BsVector2Extensions.get_NaN">
+            <inheritdoc cref="P:BallisticSolutions.BsVectorExtensions.BsVector2Extensions.&lt;G&gt;$17F6B351FA10C43FA3AFE540217CFAB6.NaN"/>
+        </member>
+        <member name="M:BallisticSolutions.BsVectorExtensions.BsVector2Extensions.From(Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.BsVectorExtensions.BsVector2Extensions.&lt;G&gt;$17F6B351FA10C43FA3AFE540217CFAB6.From(Godot.Vector3)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsVectorExtensions.BsVector2Extensions.From(Godot.Vector4)">
+            <inheritdoc cref="M:BallisticSolutions.BsVectorExtensions.BsVector2Extensions.&lt;G&gt;$17F6B351FA10C43FA3AFE540217CFAB6.From(Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsVectorExtensions.BsVector2Extensions.ToVector3(Godot.Vector2,System.Single)">
+            <inheritdoc cref="M:BallisticSolutions.BsVectorExtensions.BsVector2Extensions.&lt;G&gt;$17F6B351FA10C43FA3AFE540217CFAB6.ToVector3(System.Single)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsVectorExtensions.BsVector2Extensions.ToVector4(Godot.Vector2,System.Single,System.Single)">
+            <inheritdoc cref="M:BallisticSolutions.BsVectorExtensions.BsVector2Extensions.&lt;G&gt;$17F6B351FA10C43FA3AFE540217CFAB6.ToVector4(System.Single,System.Single)"/>
+        </member>
+        <member name="P:BallisticSolutions.BsVectorExtensions.BsVector2Extensions.&lt;G&gt;$17F6B351FA10C43FA3AFE540217CFAB6.NaN">
+            <summary>
+            Gets a vector with NaN (Not a Number) values.
+            </summary>
+        </member>
+        <member name="M:BallisticSolutions.BsVectorExtensions.BsVector2Extensions.&lt;G&gt;$17F6B351FA10C43FA3AFE540217CFAB6.From(Godot.Vector3)">
+            <summary>
+            Creates a two-dimensional vector from a three-dimensional vector using only X and Y components.
+            </summary>
+            <param name="from">The source three-dimensional vector.</param>
+            <returns>A new two-dimensional vector with X and Y components.</returns>
+        </member>
+        <member name="M:BallisticSolutions.BsVectorExtensions.BsVector2Extensions.&lt;G&gt;$17F6B351FA10C43FA3AFE540217CFAB6.From(Godot.Vector4)">
+            <summary>
+            Creates a two-dimensional vector from a four-dimensional vector using only X and Y components.
+            </summary>
+            <param name="from">The source four-dimensional vector.</param>
+            <returns>A new two-dimensional vector with X and Y components.</returns>
+        </member>
+        <member name="M:BallisticSolutions.BsVectorExtensions.BsVector2Extensions.&lt;G&gt;$17F6B351FA10C43FA3AFE540217CFAB6.ToVector3(System.Single)">
+            <summary>
+            Converts the two-dimensional vector to a three-dimensional vector with a specified Z component.
+            </summary>
+            <param name="z">The Z component value (default is 0).</param>
+            <returns>A new three-dimensional vector.</returns>
+        </member>
+        <member name="M:BallisticSolutions.BsVectorExtensions.BsVector2Extensions.&lt;G&gt;$17F6B351FA10C43FA3AFE540217CFAB6.ToVector4(System.Single,System.Single)">
+            <summary>
+            Converts the two-dimensional vector to a four-dimensional vector with specified Z and W components.
+            </summary>
+            <param name="z">The Z component value (default is 0).</param>
+            <param name="w">The W component value (default is 0).</param>
+            <returns>A new four-dimensional vector.</returns>
+        </member>
+        <member name="T:BallisticSolutions.BsVectorExtensions.BsVector3Extensions">
+            <summary>
+            Extension methods for working with <see cref="T:Godot.Vector3"/>.
+            </summary>
+        </member>
+        <member name="M:BallisticSolutions.BsVectorExtensions.BsVector3Extensions.get_NaN">
+            <inheritdoc cref="P:BallisticSolutions.BsVectorExtensions.BsVector3Extensions.&lt;G&gt;$CF5DE90AD20A45B17EB862341A25E95A.NaN"/>
+        </member>
+        <member name="M:BallisticSolutions.BsVectorExtensions.BsVector3Extensions.From(Godot.Vector2,System.Single)">
+            <inheritdoc cref="M:BallisticSolutions.BsVectorExtensions.BsVector3Extensions.&lt;G&gt;$CF5DE90AD20A45B17EB862341A25E95A.From(Godot.Vector2,System.Single)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsVectorExtensions.BsVector3Extensions.From(Godot.Vector4)">
+            <inheritdoc cref="M:BallisticSolutions.BsVectorExtensions.BsVector3Extensions.&lt;G&gt;$CF5DE90AD20A45B17EB862341A25E95A.From(Godot.Vector4)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsVectorExtensions.BsVector3Extensions.ToVector2(Godot.Vector3)">
+            <inheritdoc cref="M:BallisticSolutions.BsVectorExtensions.BsVector3Extensions.&lt;G&gt;$CF5DE90AD20A45B17EB862341A25E95A.ToVector2"/>
+        </member>
+        <member name="M:BallisticSolutions.BsVectorExtensions.BsVector3Extensions.ToVector4(Godot.Vector3,System.Single)">
+            <inheritdoc cref="M:BallisticSolutions.BsVectorExtensions.BsVector3Extensions.&lt;G&gt;$CF5DE90AD20A45B17EB862341A25E95A.ToVector4(System.Single)"/>
+        </member>
+        <member name="P:BallisticSolutions.BsVectorExtensions.BsVector3Extensions.&lt;G&gt;$CF5DE90AD20A45B17EB862341A25E95A.NaN">
+            <summary>
+            Gets a vector with NaN (Not a Number) values.
+            </summary>
+        </member>
+        <member name="M:BallisticSolutions.BsVectorExtensions.BsVector3Extensions.&lt;G&gt;$CF5DE90AD20A45B17EB862341A25E95A.From(Godot.Vector2,System.Single)">
+            <summary>
+            Creates a three-dimensional vector from a two-dimensional vector with a specified Z component.
+            </summary>
+            <param name="from">The source two-dimensional vector.</param>
+            <param name="z">The Z component value (default is 0).</param>
+            <returns>A new three-dimensional vector.</returns>
+        </member>
+        <member name="M:BallisticSolutions.BsVectorExtensions.BsVector3Extensions.&lt;G&gt;$CF5DE90AD20A45B17EB862341A25E95A.From(Godot.Vector4)">
+            <summary>
+            Creates a three-dimensional vector from a four-dimensional vector using only X, Y, and Z components.
+            </summary>
+            <param name="from">The source four-dimensional vector.</param>
+            <returns>A new three-dimensional vector with X, Y, and Z components.</returns>
+        </member>
+        <member name="M:BallisticSolutions.BsVectorExtensions.BsVector3Extensions.&lt;G&gt;$CF5DE90AD20A45B17EB862341A25E95A.ToVector2">
+            <summary>
+            Converts the three-dimensional vector to a two-dimensional vector using only X and Y components.
+            </summary>
+            <returns>A new two-dimensional vector with X and Y components.</returns>
+        </member>
+        <member name="M:BallisticSolutions.BsVectorExtensions.BsVector3Extensions.&lt;G&gt;$CF5DE90AD20A45B17EB862341A25E95A.ToVector4(System.Single)">
+            <summary>
+            Converts the three-dimensional vector to a four-dimensional vector with a specified W component.
+            </summary>
+            <param name="w">The W component value (default is 0).</param>
+            <returns>A new four-dimensional vector.</returns>
+        </member>
+        <member name="T:BallisticSolutions.BsVectorExtensions.BsVector4Extensions">
+            <summary>
+            Extension methods for working with <see cref="T:Godot.Vector4"/>.
+            </summary>
+        </member>
+        <member name="M:BallisticSolutions.BsVectorExtensions.BsVector4Extensions.get_NaN">
+            <inheritdoc cref="P:BallisticSolutions.BsVectorExtensions.BsVector4Extensions.&lt;G&gt;$AE678B8E533BC7CAD05ED1C2F2CE3E18.NaN"/>
+        </member>
+        <member name="M:BallisticSolutions.BsVectorExtensions.BsVector4Extensions.From(Godot.Vector2,System.Single,System.Single)">
+            <inheritdoc cref="M:BallisticSolutions.BsVectorExtensions.BsVector4Extensions.&lt;G&gt;$AE678B8E533BC7CAD05ED1C2F2CE3E18.From(Godot.Vector2,System.Single,System.Single)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsVectorExtensions.BsVector4Extensions.From(Godot.Vector3,System.Single)">
+            <inheritdoc cref="M:BallisticSolutions.BsVectorExtensions.BsVector4Extensions.&lt;G&gt;$AE678B8E533BC7CAD05ED1C2F2CE3E18.From(Godot.Vector3,System.Single)"/>
+        </member>
+        <member name="M:BallisticSolutions.BsVectorExtensions.BsVector4Extensions.ToVector2(Godot.Vector4)">
+            <inheritdoc cref="M:BallisticSolutions.BsVectorExtensions.BsVector4Extensions.&lt;G&gt;$AE678B8E533BC7CAD05ED1C2F2CE3E18.ToVector2"/>
+        </member>
+        <member name="M:BallisticSolutions.BsVectorExtensions.BsVector4Extensions.ToVector3(Godot.Vector4)">
+            <inheritdoc cref="M:BallisticSolutions.BsVectorExtensions.BsVector4Extensions.&lt;G&gt;$AE678B8E533BC7CAD05ED1C2F2CE3E18.ToVector3"/>
+        </member>
+        <member name="P:BallisticSolutions.BsVectorExtensions.BsVector4Extensions.&lt;G&gt;$AE678B8E533BC7CAD05ED1C2F2CE3E18.NaN">
+            <summary>
+            Gets a vector with NaN (Not a Number) values.
+            </summary>
+        </member>
+        <member name="M:BallisticSolutions.BsVectorExtensions.BsVector4Extensions.&lt;G&gt;$AE678B8E533BC7CAD05ED1C2F2CE3E18.From(Godot.Vector2,System.Single,System.Single)">
+            <summary>
+            Creates a four-dimensional vector from a two-dimensional vector with specified Z and W components.
+            </summary>
+            <param name="from">The source two-dimensional vector.</param>
+            <param name="z">The Z component value (default is 0).</param>
+            <param name="w">The W component value (default is 0).</param>
+            <returns>A new four-dimensional vector.</returns>
+        </member>
+        <member name="M:BallisticSolutions.BsVectorExtensions.BsVector4Extensions.&lt;G&gt;$AE678B8E533BC7CAD05ED1C2F2CE3E18.From(Godot.Vector3,System.Single)">
+            <summary>
+            Creates a four-dimensional vector from a three-dimensional vector with a specified W component.
+            </summary>
+            <param name="from">The source three-dimensional vector.</param>
+            <param name="w">The W component value (default is 0).</param>
+            <returns>A new four-dimensional vector.</returns>
+        </member>
+        <member name="M:BallisticSolutions.BsVectorExtensions.BsVector4Extensions.&lt;G&gt;$AE678B8E533BC7CAD05ED1C2F2CE3E18.ToVector2">
+            <summary>
+            Converts the four-dimensional vector to a two-dimensional vector using only X and Y components.
+            </summary>
+            <returns>A new two-dimensional vector with X and Y components.</returns>
+        </member>
+        <member name="M:BallisticSolutions.BsVectorExtensions.BsVector4Extensions.&lt;G&gt;$AE678B8E533BC7CAD05ED1C2F2CE3E18.ToVector3">
+            <summary>
+            Converts the four-dimensional vector to a three-dimensional vector using only X, Y, and Z components.
+            </summary>
+            <returns>A new three-dimensional vector with X, Y, and Z components.</returns>
+        </member>
+    </members>
+</doc>
