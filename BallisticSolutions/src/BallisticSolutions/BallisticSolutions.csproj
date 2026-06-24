@@ -20,16 +20,20 @@
 
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
 
-    <Version>6.0.0</Version>
+    <Version>6.0.1</Version>
     <Title>BallisticSolutions</Title>
     <Authors>neclor</Authors>
     <Description>Ballistic solutions for moving targets: interception time, position, and firing velocity, accounting for projectile and target acceleration.</Description>
     <Copyright>neclor</Copyright>
+
     <PackageProjectUrl>https://github.com/neclor/ballistic-solutions</PackageProjectUrl>
+    <PackageIcon>icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/neclor/ballistic-solutions</RepositoryUrl>
     <PackageTags>godot godot4 godot-csharp ballistic</PackageTags>
+
     <AssemblyVersion>6.0.0</AssemblyVersion>
-    <FileVersion>6.0.0</FileVersion>
+    <FileVersion>6.0.1</FileVersion>
+
     <PackageReadmeFile>README_CSHARP.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
@@ -45,10 +49,11 @@
   <ItemGroup>
     <None Include="../../../README_CSHARP.md" Pack="true" PackagePath="/" />
     <None Include="../../../LICENSE" Pack="true" PackagePath="/" />
+    <None Include="../../../docs/icon.png" Pack="true" PackagePath="/" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="GodotSharp" Version="4.7.0" />
+    <PackageReference Include="GodotSharp" Version="*" />
     <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
   </ItemGroup>
 

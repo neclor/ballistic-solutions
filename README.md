@@ -1,6 +1,5 @@
 # Ballistic Solutions
 
-
 Ballistic solutions for moving targets: interception time, position, and firing velocity, accounting for projectile and target acceleration.
 
 ---
@@ -20,10 +19,9 @@ Ballistic solutions for moving targets: interception time, position, and firing 
 
 ## Download
 
-- [NuGet]()
+- [NuGet Package](https://www.nuget.org/packages/BallisticSolutions)
 - [Asset Store](https://store.godotengine.org/asset/neclor/ballistic-solutions/)
 - [GitHub](https://github.com/neclor/ballistic-solutions)
-- [Asset Library](https://godotengine.org/asset-library/asset/3010)
 
 ---
 
@@ -34,7 +32,7 @@ Ballistic solutions for moving targets: interception time, position, and firing 
     ```gdscript
     var to_target = target.global_position - global_position
     ```
-3. Call `BsVelocity?D.best_by_speed` to get initial projectile velocity.
+3. Call `BsVelocity*D.best_by_speed` to get initial projectile velocity.
 4. Instantiate your projectile and assign `velocity`.
 
 ---
