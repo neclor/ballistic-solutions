@@ -67,7 +67,7 @@ Add to your `.csproj`:
 
 ```csharp
 using Godot;
-using BallisticSolutions.BsSolvers.BsVelocity;
+using BallisticSolutions.Godot.BsSolvers.BsVelocity;
 
 // ...
 
