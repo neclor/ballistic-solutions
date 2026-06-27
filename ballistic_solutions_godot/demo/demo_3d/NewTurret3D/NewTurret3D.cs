@@ -1,4 +1,4 @@
-using BallisticSolutions.BsSolvers.BsVelocity;
+using BallisticSolutions.Godot.BsSolvers.BsVelocity;
 using Godot;
 
 namespace BallisticSolutions.Demo.Demo3D;

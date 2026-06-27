@@ -1,6 +1,14 @@
+#if GODOT
+using BallisticSolutions.Godot.BsSolvers;
+#else
 using BallisticSolutions.BsSolvers;
+#endif
 
+#if GODOT
+namespace BallisticSolutions.Godot.Tests;
+#else
 namespace BallisticSolutions.Tests;
+#endif
 
 #pragma warning disable CA1707
 public class BsEquations4DTests {

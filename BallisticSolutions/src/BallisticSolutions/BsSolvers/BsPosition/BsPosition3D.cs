@@ -1,6 +1,9 @@
 using System.Numerics;
-
+#if GODOT
+namespace BallisticSolutions.Godot.BsSolvers.BsPosition;
+#else
 namespace BallisticSolutions.BsSolvers.BsPosition;
+#endif
 
 /// <inheritdoc cref="BsPosition4D"/>
 public static class BsPosition3D {

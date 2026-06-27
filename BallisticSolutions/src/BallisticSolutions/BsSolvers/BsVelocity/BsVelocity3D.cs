@@ -1,6 +1,9 @@
 using System.Numerics;
-
+#if GODOT
+namespace BallisticSolutions.Godot.BsSolvers.BsVelocity;
+#else
 namespace BallisticSolutions.BsSolvers.BsVelocity;
+#endif
 
 /// <inheritdoc cref="BsVelocity4D"/>
 public static class BsVelocity3D {

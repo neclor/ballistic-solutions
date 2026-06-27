@@ -1,4 +1,8 @@
+#if GODOT
+namespace BallisticSolutions.Godot.BsVectorExtensions;
+#else
 namespace BallisticSolutions.BsVectorExtensions;
+#endif
 
 /// <summary>
 /// Extension methods for working with <see cref="Vector3"/>.

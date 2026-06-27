@@ -1,9 +1,19 @@
 using System.Numerics;
+#if GODOT
+using BallisticSolutions.Godot.BsSolvers.BsPosition;
+using BallisticSolutions.Godot.BsSolvers.BsTime;
+using BallisticSolutions.Godot.BsSolvers.BsVelocity;
+#else
 using BallisticSolutions.BsSolvers.BsPosition;
 using BallisticSolutions.BsSolvers.BsTime;
 using BallisticSolutions.BsSolvers.BsVelocity;
+#endif
 
+#if GODOT
+namespace BallisticSolutions.Godot.BsSolutions;
+#else
 namespace BallisticSolutions.BsSolutions;
+#endif
 
 /// <summary>
 /// Represents a ballistic solution.

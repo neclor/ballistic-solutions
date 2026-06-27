@@ -1,6 +1,6 @@
-using BallisticSolutions.BsSolvers.BsPosition;
-using BallisticSolutions.BsSolvers.BsTime;
-using BallisticSolutions.BsSolvers.BsVelocity;
+using BallisticSolutions.Godot.BsSolvers.BsPosition;
+using BallisticSolutions.Godot.BsSolvers.BsTime;
+using BallisticSolutions.Godot.BsSolvers.BsVelocity;
 using Godot;
 
 namespace BallisticSolutions.Demo.Demo2D;

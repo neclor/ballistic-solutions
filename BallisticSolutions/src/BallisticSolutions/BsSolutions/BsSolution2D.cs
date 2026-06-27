@@ -1,9 +1,19 @@
-using System.Numerics;
+#if GODOT
+using BallisticSolutions.Godot.BsSolvers.BsPosition;
+using BallisticSolutions.Godot.BsSolvers.BsTime;
+using BallisticSolutions.Godot.BsSolvers.BsVelocity;
+#else
 using BallisticSolutions.BsSolvers.BsPosition;
 using BallisticSolutions.BsSolvers.BsTime;
 using BallisticSolutions.BsSolvers.BsVelocity;
+#endif
+using System.Numerics;
 
+#if GODOT
+namespace BallisticSolutions.Godot.BsSolutions;
+#else
 namespace BallisticSolutions.BsSolutions;
+#endif
 
 /// <inheritdoc cref="BsSolution4D{T}"/>
 public sealed class BsSolution2D<T> : BsSolution<T, Vector2> where T : IFloatingPointIeee754<T> {

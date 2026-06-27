@@ -1,6 +1,9 @@
 using MathNet.Numerics;
-
+#if GODOT
+namespace BallisticSolutions.Godot.BsSolvers;
+#else
 namespace BallisticSolutions.BsSolvers;
+#endif
 
 internal static class RealQuarticEquationSolver {
 	private const double Epsilon = 1e-3;

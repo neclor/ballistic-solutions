@@ -20,7 +20,7 @@
 
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
 
-    <Version>6.0.3</Version>
+    <Version>6.1.0</Version>
     <Title>BallisticSolutions</Title>
     <Authors>neclor</Authors>
     <Description>Ballistic solutions for moving targets: interception time, position, and firing velocity, accounting for projectile and target acceleration.</Description>
@@ -31,8 +31,8 @@
     <RepositoryUrl>https://github.com/neclor/ballistic-solutions</RepositoryUrl>
     <PackageTags>ballistic</PackageTags>
 
-    <AssemblyVersion>6.0.0</AssemblyVersion>
-    <FileVersion>6.0.3</FileVersion>
+    <AssemblyVersion>6.1.0</AssemblyVersion>
+    <FileVersion>6.1.0</FileVersion>
 
     <PackageReadmeFile>README_CSHARP.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>

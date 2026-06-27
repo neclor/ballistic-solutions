@@ -36,5 +36,8 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add ballistic_solutions_godot/addons/BallisticSolutions.Godot/
           git add ballistic_solutions_godot/addons/ballistic_solutions/
-          git diff --cached --quiet || git commit -m "Update docs"
-          git push
+          if ! git diff --cached --quiet; then
+            git commit -m "Update docs"
+            git pull --rebase
+            git push
+          fi

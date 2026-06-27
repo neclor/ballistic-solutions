@@ -1,6 +1,9 @@
 using System.Numerics;
-
+#if GODOT
+namespace BallisticSolutions.Godot.BsSolvers.BsTime;
+#else
 namespace BallisticSolutions.BsSolvers.BsTime;
+#endif
 
 /// <inheritdoc cref="BsTime4D"/>
 public static class BsTime2D {
