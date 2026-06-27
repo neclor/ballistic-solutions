@@ -3,6 +3,5 @@
 
 # Only include the addons folder when downloading.
 /** export-ignore
-/ballistic_solutions_godot !export-ignore
-/ballistic_solutions_godot/addons !export-ignore
-/ballistic_solutions_godot/addons/** !export-ignore
+/addons !export-ignore
+/addons/** !export-ignore

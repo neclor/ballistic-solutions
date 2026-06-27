@@ -1,0 +1,40 @@
+name: Copy Addons
+
+on:
+  workflow_run:
+    workflows: [Copy DLL, Copy Docs]
+    branches: [main, dev]
+    types: [completed]
+  push:
+    branches: [main, dev]
+    paths:
+      - "ballistic_solutions_godot/addons/**"
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    name: Copy Addons
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' || github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.workflow_run.head_branch || github.ref_name }}
+
+      - name: Copy addons to root
+        run: rsync -a --delete ballistic_solutions_godot/addons/. addons/
+
+      - name: Commit
+        run: |
+          BRANCH="${{ github.event.workflow_run.head_branch || github.ref_name }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add addons/
+          if ! git diff --cached --quiet; then
+            git commit -m "Copy addons"
+            git fetch origin "$BRANCH"
+            git rebase origin/"$BRANCH"
+            git push origin HEAD:"$BRANCH"
+          fi
