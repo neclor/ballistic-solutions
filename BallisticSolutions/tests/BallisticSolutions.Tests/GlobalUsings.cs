@@ -1,4 +1,5 @@
 #if GODOT
+global using BallisticSolutions.Godot.BsVectorExtensions;
 global using Vector4 = Godot.Vector4;
 #else
 global using BallisticSolutions.BsVectorExtensions;

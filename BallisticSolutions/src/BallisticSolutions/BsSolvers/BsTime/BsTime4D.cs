@@ -1,6 +1,9 @@
 using System.Numerics;
-
+#if GODOT
+namespace BallisticSolutions.Godot.BsSolvers.BsTime;
+#else
 namespace BallisticSolutions.BsSolvers.BsTime;
+#endif
 
 /// <summary>
 /// Provides methods for computing interception times between a projectile and a moving target.

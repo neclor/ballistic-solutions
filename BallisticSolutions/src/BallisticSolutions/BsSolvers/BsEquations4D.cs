@@ -1,7 +1,15 @@
-using System.Numerics;
+#if GODOT
+using BallisticSolutions.Godot.BsUtils;
+#else
 using BallisticSolutions.BsUtils;
+#endif
+using System.Numerics;
 
+#if GODOT
+namespace BallisticSolutions.Godot.BsSolvers;
+#else
 namespace BallisticSolutions.BsSolvers;
+#endif
 
 /// <summary>
 /// Provides ballistic equations.

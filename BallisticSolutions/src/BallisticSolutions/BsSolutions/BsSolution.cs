@@ -1,6 +1,9 @@
 using System.Numerics;
-
+#if GODOT
+namespace BallisticSolutions.Godot.BsSolutions;
+#else
 namespace BallisticSolutions.BsSolutions;
+#endif
 
 /// <summary>
 /// Abstract base class for typed ballistic solutions.

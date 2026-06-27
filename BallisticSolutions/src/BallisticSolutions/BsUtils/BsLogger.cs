@@ -1,7 +1,10 @@
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
-
+#if GODOT
+namespace BallisticSolutions.Godot.BsUtils;
+#else
 namespace BallisticSolutions.BsUtils;
+#endif
 
 internal static class BsLogger {
 	private const string Library = "[BallisticSolutions]";

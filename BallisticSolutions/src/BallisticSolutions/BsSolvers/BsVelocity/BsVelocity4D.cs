@@ -1,7 +1,15 @@
 using System.Numerics;
+#if GODOT
+using BallisticSolutions.Godot.BsSolvers.BsTime;
+#else
 using BallisticSolutions.BsSolvers.BsTime;
+#endif
 
+#if GODOT
+namespace BallisticSolutions.Godot.BsSolvers.BsVelocity;
+#else
 namespace BallisticSolutions.BsSolvers.BsVelocity;
+#endif
 
 /// <summary>
 /// Provides methods for computing required firing velocities.

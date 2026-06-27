@@ -1,7 +1,15 @@
-using System.Numerics;
+#if GODOT
+using BallisticSolutions.Godot.BsSolvers.BsTime;
+#else
 using BallisticSolutions.BsSolvers.BsTime;
+#endif
+using System.Numerics;
 
+#if GODOT
+namespace BallisticSolutions.Godot.BsSolvers.BsPosition;
+#else
 namespace BallisticSolutions.BsSolvers.BsPosition;
+#endif
 
 /// <summary>
 /// Provides methods for computing projectile positions, impact positions, and displacement calculations.
