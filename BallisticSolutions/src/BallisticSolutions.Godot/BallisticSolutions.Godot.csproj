@@ -20,6 +20,7 @@
 
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
 
+    <PackageId>BallisticSolutions.Godot</PackageId>
     <Version>6.1.0</Version>
     <Title>BallisticSolutions.Godot</Title>
     <Authors>neclor</Authors>
