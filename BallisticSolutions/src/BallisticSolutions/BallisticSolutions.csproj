@@ -36,21 +36,20 @@
     <FileVersion>6.1.0</FileVersion>
 
     <PackageReadmeFile>README_CSHARP.md</PackageReadmeFile>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <Optimize>True</Optimize>
-  </PropertyGroup>
+  <ItemGroup>
+    <None Include="../../../README_CSHARP.md" Pack="true" PackagePath="/" />
+    <None Include="../../../docs/icon.png" Pack="true" PackagePath="/" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="../../../README_CSHARP.md" Pack="true" PackagePath="/" />
-    <None Include="../../../LICENSE" Pack="true" PackagePath="/" />
-    <None Include="../../../docs/icon.png" Pack="true" PackagePath="/" />
-  </ItemGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <Optimize>True</Optimize>
+  </PropertyGroup>
 
 </Project>

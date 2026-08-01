@@ -2,7 +2,7 @@ name: Copy Docs
 
 on:
   push:
-    branches: [main, dev]
+    branches: [main]
     paths:
       - "README.md"
       - "README_CSHARP.md"

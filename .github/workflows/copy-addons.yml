@@ -3,10 +3,10 @@ name: Copy Addons
 on:
   workflow_run:
     workflows: [Copy DLL, Copy Docs]
-    branches: [main, dev]
+    branches: [main]
     types: [completed]
   push:
-    branches: [main, dev]
+    branches: [main]
     paths:
       - "ballistic_solutions_godot/addons/**"
 
