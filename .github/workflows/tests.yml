@@ -6,7 +6,6 @@ on:
     paths:
       - "BallisticSolutions/**"
   pull_request:
-    branches: [main]
     paths:
       - "BallisticSolutions/**"
   workflow_dispatch:
