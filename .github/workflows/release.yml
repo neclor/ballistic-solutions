@@ -17,6 +17,8 @@ concurrency:
 
 permissions:
   contents: write
+  id-token: write
+  attestations: write
 
 jobs:
   release:
@@ -74,6 +76,11 @@ jobs:
         run: |
           set -euo pipefail
           zip -r "$GITHUB_WORKSPACE/addons-$TAG.zip" addons
+
+      - name: Attest release asset provenance
+        uses: actions/attest-build-provenance@v3
+        with:
+          subject-path: addons-${{ steps.tag.outputs.tag }}.zip
 
       - name: Publish release asset
         env:
