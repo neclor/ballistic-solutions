@@ -1,7 +1,2 @@
 # Auto detect text files and perform LF normalization
 * text=auto eol=lf
-
-# Only include the addons folder when downloading.
-/** export-ignore
-/addons !export-ignore
-/addons/** !export-ignore
