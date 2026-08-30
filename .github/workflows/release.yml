@@ -20,6 +20,9 @@ permissions:
   id-token: write
   attestations: write
 
+env:
+  ASSET_BASENAME: ballistic-solutions
+
 jobs:
   release:
     name: Publish release
@@ -61,7 +64,6 @@ jobs:
           csproj=BallisticSolutions/src/BallisticSolutions/BallisticSolutions.csproj
           check "$csproj" "$(grep -oPm1 '(?<=<Version>)[^<]+' "$csproj")"
 
-          # Addons shipped by this release; real_equation_solver is versioned separately.
           for addon in BallisticSolutions.Godot ballistic_solutions; do
             cfg="ballistic_solutions_godot/addons/$addon/plugin.cfg"
             check "$cfg" "$(grep -oPm1 '(?<=^version=")[^"]+' "$cfg")"
@@ -75,12 +77,12 @@ jobs:
           TAG: ${{ steps.tag.outputs.tag }}
         run: |
           set -euo pipefail
-          zip -r "$GITHUB_WORKSPACE/addons-$TAG.zip" addons
+          zip -r "$GITHUB_WORKSPACE/$ASSET_BASENAME-$TAG.zip" addons
 
       - name: Attest release asset provenance
         uses: actions/attest-build-provenance@v3
         with:
-          subject-path: addons-${{ steps.tag.outputs.tag }}.zip
+          subject-path: ${{ env.ASSET_BASENAME }}-${{ steps.tag.outputs.tag }}.zip
 
       - name: Publish release asset
         env:
@@ -93,4 +95,4 @@ jobs:
           # release already exists by then, so create is skipped.
           gh release view "$TAG" >/dev/null 2>&1 \
             || gh release create "$TAG" --title "$TAG" --generate-notes --draft
-          gh release upload "$TAG" "addons-$TAG.zip" --clobber
+          gh release upload "$TAG" "$ASSET_BASENAME-$TAG.zip" --clobber
