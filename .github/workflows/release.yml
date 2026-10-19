@@ -3,8 +3,6 @@ name: Release
 on:
   push:
     tags: ['[0-9]+.[0-9]+.[0-9]+']
-  release:
-    types: [published]
   workflow_dispatch:
     inputs:
       tag:
@@ -12,44 +10,42 @@ on:
         required: true
 
 concurrency:
-  group: release-${{ github.event.release.tag_name || inputs.tag || github.ref_name }}
+  group: release-${{ inputs.tag || github.ref_name }}
   cancel-in-progress: false
-
-permissions:
-  contents: write
-  id-token: write
-  attestations: write
 
 env:
   ASSET_BASENAME: ballistic-solutions
 
+permissions: {}
+
 jobs:
-  release:
-    name: Publish release
+  validate:
+    name: Validate tag
     runs-on: ubuntu-latest
     steps:
-      - name: Resolve tag
-        id: tag
+      - name: Check tag format
         env:
-          RELEASE_TAG: ${{ github.event.release.tag_name }}
-          INPUT_TAG: ${{ inputs.tag }}
+          TAG: ${{ inputs.tag || github.ref_name }}
         run: |
-          set -euo pipefail
-          case "$GITHUB_EVENT_NAME" in
-            push)              tag="$GITHUB_REF_NAME" ;;
-            release)           tag="$RELEASE_TAG" ;;
-            workflow_dispatch) tag="$INPUT_TAG" ;;
-            *) echo "::error::unexpected event '$GITHUB_EVENT_NAME'"; exit 1 ;;
-          esac
-          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          [[ "$TAG" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] \
+            || { echo "::error::'$TAG' is not a X.Y.Z tag"; exit 1; }
 
+  release:
+    name: Stage release
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+    steps:
       - uses: actions/checkout@v7
         with:
-          ref: ${{ steps.tag.outputs.tag }}
+          ref: ${{ inputs.tag || github.ref_name }}
 
       - name: Check tag matches every version string
         env:
-          TAG: ${{ steps.tag.outputs.tag }}
+          TAG: ${{ inputs.tag || github.ref_name }}
         run: |
           set -euo pipefail
           fail=0
@@ -74,7 +70,7 @@ jobs:
       - name: Package Godot addons
         working-directory: ballistic_solutions_godot
         env:
-          TAG: ${{ steps.tag.outputs.tag }}
+          TAG: ${{ inputs.tag || github.ref_name }}
         run: |
           set -euo pipefail
           zip -r "$GITHUB_WORKSPACE/$ASSET_BASENAME-$TAG.zip" addons
@@ -82,17 +78,16 @@ jobs:
       - name: Attest release asset provenance
         uses: actions/attest-build-provenance@v3
         with:
-          subject-path: ${{ env.ASSET_BASENAME }}-${{ steps.tag.outputs.tag }}.zip
+          subject-path: ${{ env.ASSET_BASENAME }}-${{ inputs.tag || github.ref_name }}.zip
 
-      - name: Publish release asset
+      - name: Stage draft release with addons
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAG: ${{ steps.tag.outputs.tag }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ inputs.tag || github.ref_name }}
         run: |
           set -euo pipefail
-          # Tag push / manual run: stage a draft as the approval gate.
-          # `release: published` only fires once the draft is published, and the
-          # release already exists by then, so create is skipped.
+          # Tag push stages a draft; publishing that draft is the gate
+          # (publish-nuget runs on `release: published`).
           gh release view "$TAG" >/dev/null 2>&1 \
             || gh release create "$TAG" --title "$TAG" --generate-notes --draft
           gh release upload "$TAG" "$ASSET_BASENAME-$TAG.zip" --clobber
