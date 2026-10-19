@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: Existing tag to (re)release
+        description: Tag to release (created from the selected branch if missing)
         required: true
 
 concurrency:
@@ -22,6 +22,8 @@ jobs:
   validate:
     name: Validate tag
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Check tag format
         env:
@@ -29,6 +31,15 @@ jobs:
         run: |
           [[ "$TAG" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] \
             || { echo "::error::'$TAG' is not a X.Y.Z tag"; exit 1; }
+
+      - name: Create tag if missing
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ inputs.tag || github.ref_name }}
+        run: |
+          gh api "repos/$GH_REPO/git/ref/tags/$TAG" >/dev/null 2>&1 \
+            || gh api "repos/$GH_REPO/git/refs" -f ref="refs/tags/$TAG" -f sha="$GITHUB_SHA" >/dev/null
 
   release:
     name: Stage release
@@ -76,7 +87,7 @@ jobs:
           zip -r "$GITHUB_WORKSPACE/$ASSET_BASENAME-$TAG.zip" addons
 
       - name: Attest release asset provenance
-        uses: actions/attest-build-provenance@v3
+        uses: actions/attest-build-provenance@v4
         with:
           subject-path: ${{ env.ASSET_BASENAME }}-${{ inputs.tag || github.ref_name }}.zip
 
