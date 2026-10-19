@@ -86,8 +86,6 @@ jobs:
           TAG: ${{ inputs.tag || github.ref_name }}
         run: |
           set -euo pipefail
-          # Tag push stages a draft; publishing that draft is the gate
-          # (publish-nuget runs on `release: published`).
           gh release view "$TAG" >/dev/null 2>&1 \
             || gh release create "$TAG" --title "$TAG" --generate-notes --draft
           gh release upload "$TAG" "$ASSET_BASENAME-$TAG.zip" --clobber
