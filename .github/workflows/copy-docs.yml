@@ -1,23 +1,20 @@
-name: Copy Docs
+name: Copy docs
 
 on:
   push:
     branches: [main]
-    paths:
-      - "README.md"
-      - "README_CSHARP.md"
-      - "README_GDSCRIPT.md"
-      - "LICENSE"
+    paths: [README.md, README_CSHARP.md, README_GDSCRIPT.md, LICENSE]
 
 permissions:
   contents: write
 
 jobs:
   copy-docs:
-    name: Copy Docs to Addons
+    name: Copy docs to addons
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - name: Checkout
+        uses: actions/checkout@v7
 
       - name: Copy docs to addons
         run: |
